@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web-to-PNG</title>
+    <style>
+        :root {
+            --bg: #0c0c0f;
+            --text: #f7f7f8;
+            --text-secondary: rgba(247, 247, 248, 0.75);
+            --accent-gold: #fbbf24;
+            --accent-cyan: #22d3ee;
+            --accent-purple: #a855f7;
+            --glow-gold: rgba(251, 191, 36, 0.4);
+            --glow-cyan: rgba(34, 211, 238, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: auto;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #card-container {
+            width: 100%;
+            height: auto;
+            padding: 0;
+            background: linear-gradient(160deg, #0c0c0f 0%, #151520 50%, #0f0f14 100%);
+            position: relative;
+            overflow: visible;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            padding: 72px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .content-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg,
+                    var(--accent-gold) 0%,
+                    var(--accent-purple) 50%,
+                    var(--accent-cyan) 100%);
+            z-index: 2;
+        }
+
+        /* 装饰光晕 */
+        #card-container::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            left: -150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--glow-gold), transparent 60%);
+            z-index: 0;
+        }
+
+        #card-container::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            bottom: -180px;
+            right: -100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--glow-cyan), transparent 60%);
+            z-index: 0;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+            max-width: 100%;
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--accent-cyan);
+        }
+
+        h3 {
+            font-size: 26px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--accent-gold);
+        }
+
+        p {
+            font-size: 22px;
+            line-height: 1.75;
+            color: var(--text-secondary);
+        }
+
+        ul,
+        ol {
+            padding-left: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 36px;
+            font-size: 20px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-cyan) 100%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        code {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.88em;
+            background: rgba(251, 191, 36, 0.15);
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: var(--accent-gold);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.5);
+            color: #e2e8f0;
+            padding: 28px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 16px;
+            line-height: 1.7;
+            backdrop-filter: blur(10px);
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* 水印样式 */
+        .watermark {
+            display: none;
+            position: absolute;
+            bottom: 32px;
+            right: 48px;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            z-index: 2;
+        }
+
+        .watermark.visible {
+            display: block;
+        }
+    </style>
+    <style>
+#card-container { width: 1200px; height: 630px; overflow: hidden; }
+.content-container { width: 100%; height: 100%; overflow: hidden; position: relative; }
+#card-container * { max-width: 100%; }
+#card-container h1,
+#card-container h2,
+#card-container h3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#card-container p,
+#card-container li,
+#card-container blockquote {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#card-container h1::first-letter {
+  font-size: 1em;
+}
+#card-container pre {
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+#card-container pre::after {
+  content: "…";
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  color: currentColor;
+  opacity: 0.6;
+}
+</style>
+</head>
+
+<body class="mode-fixed">
+    <section id="card-container" class="card">
+        <div class="content-container">
+            <main class="content">
+                <h1 id="web-to-png-%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97" tabindex="-1">Web-to-PNG 完整指南</h1>
+<p>将 Markdown、HTML 或网页 URL 渲染为高质量 PNG 图片。</p>
+<h2 id="%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7" tabindex="-1">核心特性</h2>
+<ul>
+<li><strong>5 种精美主题</strong>：Default、Sketch、Magazine、Bold、Poster</li>
+<li><strong>高度自适应</strong>：内容多长就截多长，永不截断</li>
+<li><strong>2x Retina 输出</strong>：清晰锐利，适合各种屏幕</li>
+<li><strong>可选水印</strong>：品牌标识轻松添加</li>
+</ul>
+<h2 id="%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B" tabindex="-1">使用示例</h2>
+<pre><code>node converter.js \
+  --input article.md \
+  --style bold \
+  --output card.png
+</code></pre>
+<h2 id="%E6%8A%80%E6%9C%AF%E6%A0%88" tabindex="-1">技术栈</h2>
+<p>本工具基于 Playwright 渲染引擎，支持完整的 CSS3 和现代 Web 特性。</p>
+<blockquote>
+<p>💡 <strong>提示</strong>：所有渲染均在本地完成，无需联网，数据安全有保障。</p>
+</blockquote>
+
+            </main>
+            <div class="watermark"></div>
+        </div>
+    </section>
+</body>
+
+</html>

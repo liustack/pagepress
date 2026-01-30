@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web-to-PNG</title>
+    <style>
+        :root {
+            --text: #fefefe;
+            --text-secondary: rgba(254, 254, 254, 0.85);
+            --accent-purple: #c084fc;
+            --accent-pink: #f472b6;
+            --accent-blue: #60a5fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: auto;
+        }
+
+        body {
+            background: #0f0f23;
+            color: var(--text);
+            font-family: "Outfit", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #card-container {
+            width: 100%;
+            height: auto;
+            padding: 0;
+            background: linear-gradient(135deg,
+                    #1a1a2e 0%,
+                    #16213e 25%,
+                    #0f3460 50%,
+                    #1a1a2e 75%,
+                    #0f0f23 100%);
+            background-image:
+                radial-gradient(2px 2px at 20% 15%, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 80% 25%, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 60%, rgba(255, 255, 255, 0.25), transparent),
+                radial-gradient(2px 2px at 30% 80%, rgba(255, 255, 255, 0.35), transparent),
+                radial-gradient(1px 1px at 70% 70%, rgba(255, 255, 255, 0.2), transparent),
+                radial-gradient(1px 1px at 15% 45%, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 85% 55%, rgba(255, 255, 255, 0.25), transparent);
+            position: relative;
+            overflow: visible;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            padding: 72px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* 多层光晕效果 */
+        #card-container::before {
+            content: "";
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            top: -300px;
+            right: -200px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                    rgba(192, 132, 252, 0.5) 0%,
+                    rgba(244, 114, 182, 0.3) 40%,
+                    transparent 70%);
+            filter: blur(40px);
+            z-index: 0;
+        }
+
+        #card-container::after {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            bottom: -250px;
+            left: -150px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                    rgba(96, 165, 250, 0.5) 0%,
+                    rgba(192, 132, 252, 0.3) 40%,
+                    transparent 70%);
+            filter: blur(50px);
+            z-index: 0;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 34px;
+            max-width: 100%;
+        }
+
+        h1 {
+            font-size: 58px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg,
+                    var(--text) 0%,
+                    var(--accent-purple) 50%,
+                    var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 34px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--accent-purple);
+        }
+
+        h3 {
+            font-size: 26px;
+            font-weight: 600;
+            line-height: 1.35;
+            color: var(--accent-pink);
+        }
+
+        p {
+            font-size: 22px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        ul,
+        ol {
+            padding-left: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 36px;
+            font-size: 20px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 16px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        code {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.88em;
+            background: rgba(192, 132, 252, 0.2);
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: var(--accent-purple);
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+
+        pre {
+            background: rgba(15, 15, 35, 0.7);
+            color: #e2e8f0;
+            padding: 28px;
+            border-radius: 16px;
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            font-size: 16px;
+            line-height: 1.7;
+            backdrop-filter: blur(10px);
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* 水印样式 */
+        .watermark {
+            display: none;
+            position: absolute;
+            bottom: 36px;
+            right: 52px;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            opacity: 0.45;
+            z-index: 2;
+        }
+
+        .watermark.visible {
+            display: block;
+        }
+    </style>
+    <style>
+#card-container { width: 1200px; height: 630px; overflow: hidden; }
+.content-container { width: 100%; height: 100%; overflow: hidden; position: relative; }
+#card-container * { max-width: 100%; }
+#card-container h1,
+#card-container h2,
+#card-container h3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#card-container p,
+#card-container li,
+#card-container blockquote {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#card-container h1::first-letter {
+  font-size: 1em;
+}
+#card-container pre {
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+#card-container pre::after {
+  content: "…";
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  color: currentColor;
+  opacity: 0.6;
+}
+</style>
+</head>
+
+<body class="mode-fixed">
+    <section id="card-container" class="card">
+        <div class="content-container">
+            <main class="content">
+                <h1 id="web-to-png-%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97" tabindex="-1">Web-to-PNG 完整指南</h1>
+<p>将 Markdown、HTML 或网页 URL 渲染为高质量 PNG 图片。</p>
+<h2 id="%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7" tabindex="-1">核心特性</h2>
+<ul>
+<li><strong>5 种精美主题</strong>：Default、Sketch、Magazine、Bold、Poster</li>
+<li><strong>高度自适应</strong>：内容多长就截多长，永不截断</li>
+<li><strong>2x Retina 输出</strong>：清晰锐利，适合各种屏幕</li>
+<li><strong>可选水印</strong>：品牌标识轻松添加</li>
+</ul>
+<h2 id="%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B" tabindex="-1">使用示例</h2>
+<pre><code>node converter.js \
+  --input article.md \
+  --style bold \
+  --output card.png
+</code></pre>
+<h2 id="%E6%8A%80%E6%9C%AF%E6%A0%88" tabindex="-1">技术栈</h2>
+<p>本工具基于 Playwright 渲染引擎，支持完整的 CSS3 和现代 Web 特性。</p>
+<blockquote>
+<p>💡 <strong>提示</strong>：所有渲染均在本地完成，无需联网，数据安全有保障。</p>
+</blockquote>
+
+            </main>
+            <div class="watermark"></div>
+        </div>
+    </section>
+</body>
+
+</html>

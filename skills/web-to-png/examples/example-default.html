@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{title}}</title>
+    <title>Web-to-PNG</title>
     <style>
         :root {
             --bg: #fafbfc;
@@ -195,16 +195,74 @@
             display: block;
         }
     </style>
-    {{styles}}
+    <style>
+#card-container { width: 1200px; height: 630px; overflow: hidden; }
+.content-container { width: 100%; height: 100%; overflow: hidden; position: relative; }
+#card-container * { max-width: 100%; }
+#card-container h1,
+#card-container h2,
+#card-container h3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#card-container p,
+#card-container li,
+#card-container blockquote {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#card-container h1::first-letter {
+  font-size: 1em;
+}
+#card-container pre {
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+#card-container pre::after {
+  content: "…";
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  color: currentColor;
+  opacity: 0.6;
+}
+</style>
 </head>
 
-<body class="{{modeClass}}">
+<body class="mode-fixed">
     <section id="card-container" class="card">
         <div class="content-container">
             <main class="content">
-                {{body}}
+                <h1 id="web-to-png-%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97" tabindex="-1">Web-to-PNG 完整指南</h1>
+<p>将 Markdown、HTML 或网页 URL 渲染为高质量 PNG 图片。</p>
+<h2 id="%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7" tabindex="-1">核心特性</h2>
+<ul>
+<li><strong>5 种精美主题</strong>：Default、Sketch、Magazine、Bold、Poster</li>
+<li><strong>高度自适应</strong>：内容多长就截多长，永不截断</li>
+<li><strong>2x Retina 输出</strong>：清晰锐利，适合各种屏幕</li>
+<li><strong>可选水印</strong>：品牌标识轻松添加</li>
+</ul>
+<h2 id="%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B" tabindex="-1">使用示例</h2>
+<pre><code>node converter.js \
+  --input article.md \
+  --style bold \
+  --output card.png
+</code></pre>
+<h2 id="%E6%8A%80%E6%9C%AF%E6%A0%88" tabindex="-1">技术栈</h2>
+<p>本工具基于 Playwright 渲染引擎，支持完整的 CSS3 和现代 Web 特性。</p>
+<blockquote>
+<p>💡 <strong>提示</strong>：所有渲染均在本地完成，无需联网，数据安全有保障。</p>
+</blockquote>
+
             </main>
-            <div class="watermark">{{watermark}}</div>
+            <div class="watermark"></div>
         </div>
     </section>
 </body>

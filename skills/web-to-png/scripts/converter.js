@@ -11,8 +11,12 @@ import anchor from "markdown-it-anchor";
 import toc from "markdown-it-toc-done-right";
 
 const __filename = fileURLToPath(import.meta.url);
-const ROOT = path.dirname(__filename);
+const SCRIPTS = path.dirname(__filename);
+const ROOT = path.dirname(SCRIPTS);
 const TEMPLATES = path.join(ROOT, "templates");
+
+const DEFAULT_WIDTH = 1080;
+const DEFAULT_VIEWPORT_HEIGHT = 800;
 
 const PRESETS = {
   og: { width: 1200, height: 630 },
@@ -36,14 +40,6 @@ function sha256(text) {
 function sanitizeHtml(html, allowScripts = false) {
   if (allowScripts) return html;
   return html.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "");
-}
-
-function textToMarkdown(text) {
-  return String(text)
-    .split(/\n{2,}/)
-    .map((block) => block.replace(/\n/g, " ").trim())
-    .filter(Boolean)
-    .join("\n\n");
 }
 
 function markdownToHtml(md) {
@@ -77,11 +73,21 @@ function markdownToHtml(md) {
   return mdIt.render(md);
 }
 
-function renderTemplate(title, bodyHtml, style, customCss) {
+function renderTemplate(title, bodyHtml, style, customCss, watermark, modeClass) {
   const templatePath = path.join(TEMPLATES, `${style}.html`);
   let html = readText(templatePath)
     .replace(/{{title}}/g, title)
-    .replace(/{{body}}/g, bodyHtml);
+    .replace(/{{body}}/g, bodyHtml)
+    .replace(/{{modeClass}}/g, modeClass || "");
+
+  // 处理水印
+  if (watermark) {
+    html = html.replace(/{{watermark}}/g, watermark);
+    // 显示水印元素
+    html = html.replace('class="watermark"', 'class="watermark visible"');
+  } else {
+    html = html.replace(/{{watermark}}/g, "");
+  }
 
   const customStyleBlock = customCss ? `<style>${customCss}</style>` : "";
   if (html.includes("{{styles}}")) {
@@ -93,23 +99,15 @@ function renderTemplate(title, bodyHtml, style, customCss) {
   return html;
 }
 
-function resolveViewport({ preset, width, height, clip }) {
-  if (width && height) return { width, height };
-  if (clip && clip.width && clip.height) {
-    return { width: Math.ceil(clip.width), height: Math.ceil(clip.height) };
+function resolveViewport({ preset }) {
+  if (preset) {
+    const size = PRESETS[preset];
+    if (!size) {
+      throw new Error(`不支持的 preset: ${preset}`);
+    }
+    return { width: size.width, height: size.height };
   }
-  const p = PRESETS[preset] || PRESETS.og;
-  return { width: p.width, height: p.height };
-}
-
-function parseClip(value) {
-  if (!value) return null;
-  const parts = value.split(",").map((v) => Number(v.trim()));
-  if (parts.length !== 4 || parts.some((n) => Number.isNaN(n))) {
-    throw new Error("--clip 格式应为 x,y,width,height");
-  }
-  const [x, y, width, height] = parts;
-  return { x, y, width, height };
+  return { width: DEFAULT_WIDTH, height: DEFAULT_VIEWPORT_HEIGHT };
 }
 
 async function renderPngWithPlaywright(
@@ -160,33 +158,37 @@ async function renderPngWithPlaywright(
 
   await page.evaluate("document.fonts && document.fonts.ready");
 
-  let mode = "card";
-  if (options.clip) {
-    await page.screenshot({ path: pngPath, type: "png", clip: options.clip });
-    mode = "clip";
-  } else if (options.fullPage) {
-    await page.screenshot({ path: pngPath, type: "png", fullPage: true });
-    mode = "fullPage";
-  } else {
-    const card = await page.$(".card");
-    if (card) {
-      await card.screenshot({ path: pngPath, type: "png" });
-      mode = "card";
-    } else {
-      const container = await page.$(".container");
-      if (container) {
-        await container.screenshot({ path: pngPath, type: "png" });
-        mode = "container";
-      } else {
-        await page.screenshot({ path: pngPath, type: "png", fullPage: true });
-        mode = "fullPage";
-      }
-    }
+  if (options.mode === "fixed" && options.presetSize) {
+    const { width, height } = options.presetSize;
+    const fixedCss = `
+#card-container { width: ${width}px; height: ${height}px; overflow: hidden; }
+#card-container * { max-width: 100%; }
+`;
+    await page.addStyleTag({ content: fixedCss });
   }
+
+  const card = await page.$("#card-container");
+  if (!card) {
+    await browser.close();
+    throw new Error("未找到 #card-container，无法截图。");
+  }
+
+  if (options.mode === "auto") {
+    const box = await card.boundingBox();
+    const height = Math.ceil(box?.height || 0);
+    if (!height) {
+      await browser.close();
+      throw new Error("无法获取 #card-container 高度。");
+    }
+    await page.setViewportSize({ width: viewport.width, height });
+  }
+
+  await card.screenshot({ path: pngPath, type: "png" });
+  const finalViewport = page.viewportSize() || viewport;
 
   const version = browser.version();
   await browser.close();
-  return { version, mode };
+  return { version, mode: options.mode, viewport: finalViewport };
 }
 
 export async function toPng({
@@ -194,43 +196,113 @@ export async function toPng({
   content,
   url,
   outputPath,
-  style = "card-clean",
+  style = "default",
   customCssPath,
   keepHtml = true,
   allowScripts = false,
   networkWhitelist,
+  watermark = null,
   options = {},
 }) {
-  if (!inputPath && !content && !url) {
-    throw new Error("必须提供 input_path/content/url 之一");
+  if (content) {
+    throw new Error("不支持 content，请使用 Markdown 文件或 HTML/URL。");
+  }
+
+  if (options.format === "text") {
+    throw new Error("不支持 text 格式，请使用 Markdown 文件或 HTML/URL。");
+  }
+
+  if (!inputPath && !url) {
+    throw new Error("必须提供 input_path 或 url 之一");
   }
 
   const waitUntil = options.wait_until || "networkidle";
   const timeoutMs = Number(options.timeout_ms || 30000);
-  const clip = options.clip || null;
-
   let rawContent = "";
   if (inputPath) rawContent = readText(inputPath);
-  if (content) rawContent = content;
 
   const customCss = customCssPath ? readText(customCssPath) : null;
 
   let html = "";
+  const presetSize = options.preset ? PRESETS[options.preset] : null;
+  const modeClass = options.preset ? "mode-fixed" : "mode-auto";
+  const modeCss = options.preset
+    ? `
+#card-container { width: ${presetSize.width}px; height: ${presetSize.height}px; overflow: hidden; }
+.content-container { width: 100%; height: 100%; overflow: hidden; position: relative; }
+#card-container * { max-width: 100%; }
+#card-container h1,
+#card-container h2,
+#card-container h3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#card-container p,
+#card-container li,
+#card-container blockquote {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#card-container h1::first-letter {
+  font-size: 1em;
+}
+#card-container pre {
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+#card-container pre::after {
+  content: "…";
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  color: currentColor;
+  opacity: 0.6;
+}
+`
+    : `
+#card-container { width: ${DEFAULT_WIDTH}px; height: auto; }
+.content-container { width: 100%; height: auto; overflow: visible; position: relative; }
+`;
+  const mergedCss = [modeCss, customCss].filter(Boolean).join("\n");
+
   if (url) {
     html = url;
   } else {
-    let normalized = rawContent;
-    if (options.format === "text") {
-      normalized = textToMarkdown(rawContent);
-    }
+    // 检查是否为完整 HTML 文档
+    const isFullHtml = options.format === "html" && /^\s*(<!DOCTYPE|<html)/i.test(rawContent);
 
-    if (options.format === "html") {
-      html = normalized;
+    if (isFullHtml) {
+      html = rawContent;
+      if (mergedCss) {
+        if (html.includes("</head>")) {
+          html = html.replace("</head>", `<style>${mergedCss}</style></head>`);
+        } else {
+          html = `<style>${mergedCss}</style>${html}`;
+        }
+      }
     } else {
-      html = markdownToHtml(normalized);
+      if (options.format === "html") {
+        html = rawContent;
+      } else {
+        html = markdownToHtml(rawContent);
+      }
+      html = sanitizeHtml(html, allowScripts);
+      html = renderTemplate(
+        options.title || "Web-to-PNG",
+        html,
+        style,
+        mergedCss,
+        watermark,
+        modeClass
+      );
     }
-    html = sanitizeHtml(html, allowScripts);
-    html = renderTemplate(options.title || "Web-to-PNG", html, style, customCss);
   }
 
   const outputPng = path.resolve(outputPath || "output.png");
@@ -241,14 +313,12 @@ export async function toPng({
   }
 
   const viewport = resolveViewport({
-    preset: options.preset || "og",
-    width: options.width,
-    height: options.height,
-    clip,
+    preset: options.preset || "auto",
   });
 
   let chromiumVersion = null;
   let screenshotMode = null;
+  let resultViewport = null;
 
   if (url) {
     const result = await renderPngWithPlaywright(
@@ -256,8 +326,8 @@ export async function toPng({
       outputPng,
       viewport,
       {
-        clip,
-        fullPage: options.full_page,
+        mode: options.preset ? "fixed" : "auto",
+        presetSize: options.preset ? PRESETS[options.preset] : null,
         deviceScaleFactor: options.device_scale_factor ?? 2,
       },
       waitUntil,
@@ -267,6 +337,7 @@ export async function toPng({
     );
     chromiumVersion = result?.version || null;
     screenshotMode = result?.mode || null;
+    resultViewport = result?.viewport || null;
   } else {
     fs.writeFileSync(outputHtml, html, "utf-8");
     const fileUrl = `file://${outputHtml}`;
@@ -275,8 +346,8 @@ export async function toPng({
       outputPng,
       viewport,
       {
-        clip,
-        fullPage: options.full_page,
+        mode: options.preset ? "fixed" : "auto",
+        presetSize: options.preset ? PRESETS[options.preset] : null,
         deviceScaleFactor: options.device_scale_factor ?? 2,
       },
       waitUntil,
@@ -286,6 +357,7 @@ export async function toPng({
     );
     chromiumVersion = result?.version || null;
     screenshotMode = result?.mode || null;
+    resultViewport = result?.viewport || null;
   }
 
   if (!chromiumVersion) {
@@ -299,9 +371,9 @@ export async function toPng({
   const meta = {
     engine: `chromium:${chromiumVersion}`,
     generatedAt: new Date().toISOString(),
-    preset: options.preset || "og",
-    width: viewport.width,
-    height: viewport.height,
+    preset: options.preset || null,
+    width: resultViewport?.width || viewport.width,
+    height: resultViewport?.height || viewport.height,
     deviceScaleFactor: options.device_scale_factor ?? 2,
     style,
     screenshotMode,
@@ -321,21 +393,17 @@ export async function toPng({
 function parseArgs(argv) {
   const args = {
     input: null,
-    content: null,
     url: null,
     output: null,
-    style: "card-clean",
+    style: "default",
     format: "markdown",
-    preset: "og",
-    width: null,
-    height: null,
+    preset: null,
     deviceScaleFactor: 2,
-    fullPage: false,
-    clip: null,
     noHtml: false,
     allowScripts: false,
     customCss: null,
     title: null,
+    watermark: null,
     allowNet: [],
     waitUntil: "networkidle",
     timeoutMs: 30000,
@@ -344,21 +412,26 @@ function parseArgs(argv) {
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i];
     if (a === "--input") args.input = argv[++i];
-    else if (a === "--content") args.content = argv[++i];
+    else if (a === "--content") {
+      throw new Error("不支持 --content，请使用 Markdown 文件或 HTML/URL。");
+    }
     else if (a === "--url") args.url = argv[++i];
     else if (a === "--output") args.output = argv[++i];
     else if (a === "--style") args.style = argv[++i];
     else if (a === "--format") args.format = argv[++i];
     else if (a === "--preset") args.preset = argv[++i];
-    else if (a === "--width") args.width = Number(argv[++i]);
-    else if (a === "--height") args.height = Number(argv[++i]);
+    else if (a === "--width" || a === "--height") {
+      throw new Error("不支持 --width/--height，请使用 --preset 或默认自适应高度。");
+    }
     else if (a === "--device-scale-factor") args.deviceScaleFactor = Number(argv[++i]);
-    else if (a === "--full-page") args.fullPage = true;
-    else if (a === "--clip") args.clip = parseClip(argv[++i]);
+    else if (a === "--full-page" || a === "--clip") {
+      throw new Error("不支持 --full-page/--clip，仅截图 #card-container。");
+    }
     else if (a === "--no-html") args.noHtml = true;
     else if (a === "--allow-scripts") args.allowScripts = true;
     else if (a === "--css") args.customCss = argv[++i];
     else if (a === "--title") args.title = argv[++i];
+    else if (a === "--watermark") args.watermark = argv[++i];
     else if (a === "--allow-net") args.allowNet.push(argv[++i]);
     else if (a === "--wait-until") args.waitUntil = argv[++i];
     else if (a === "--timeout-ms") args.timeoutMs = Number(argv[++i]);
@@ -372,12 +445,12 @@ function parseArgs(argv) {
     throw new Error("必须提供 --output");
   }
 
-  if (args.width && !args.height) {
-    throw new Error("提供 --width 时必须同时提供 --height");
+  if (!["markdown", "html"].includes(args.format)) {
+    throw new Error("不支持该格式，仅支持 markdown 或 html");
   }
 
-  if (!args.width && args.height) {
-    throw new Error("提供 --height 时必须同时提供 --width");
+  if (args.preset && !PRESETS[args.preset]) {
+    throw new Error(`不支持的 preset: ${args.preset}`);
   }
 
   return args;
@@ -389,20 +462,17 @@ function printHelp() {
 Usage:
   node converter.js --input <file> --output <file.png> [options]
   node converter.js --url <url> --output <file.png> [options]
-  node converter.js --content <text> --output <file.png> [options]
 
 Options:
-  --style <default|github|academic|sketch|magazine|card-clean|card-bold|card-poster>
-  --format <markdown|html|text>
-  --preset <og|square|story|portrait|banner>
-  --width <number> --height <number>
+  --style <default|sketch|magazine|bold|poster>
+  --format <markdown|html>
+  --preset <og|square|story|portrait|banner>   (不传则宽 1080，高度自适应)
   --device-scale-factor <number>
-  --full-page
-  --clip <x,y,width,height>
   --no-html
   --allow-scripts
   --css <path>
   --title <title>
+  --watermark <text>  (optional watermark text)
   --allow-net <prefix> (can be repeated)
   --wait-until <load|domcontentloaded|networkidle>
   --timeout-ms <number>
@@ -413,7 +483,6 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const result = await toPng({
     inputPath: args.input,
-    content: args.content,
     url: args.url,
     outputPath: args.output,
     style: args.style,
@@ -421,14 +490,11 @@ async function main() {
     keepHtml: !args.noHtml,
     allowScripts: args.allowScripts,
     networkWhitelist: args.allowNet,
+    watermark: args.watermark,
     options: {
       format: args.format,
       preset: args.preset,
-      width: args.width,
-      height: args.height,
       device_scale_factor: args.deviceScaleFactor,
-      full_page: args.fullPage,
-      clip: args.clip,
       title: args.title,
       wait_until: args.waitUntil,
       timeout_ms: args.timeoutMs,
