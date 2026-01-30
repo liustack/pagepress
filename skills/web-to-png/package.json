@@ -1,0 +1,16 @@
+{
+  "name": "web-to-png",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "smoke": "node scripts/smoke.js"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.0.0",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-toc-done-right": "^4.2.0",
+    "playwright": "^1.49.0"
+  }
+}
