@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>示例卡片</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      font-family: "Space Grotesk", "SF Pro Display", system-ui, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      box-sizing: border-box;
+      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.35), transparent 50%),
+        radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.35), transparent 55%);
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: 64px;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.5;
+      max-width: 70%;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="card">
+    <h1>Web-to-PNG</h1>
+    <p>把你的内容变成社交媒体分享卡片，一键导出高清 PNG。</p>
+  </section>
+</body>
+
+</html>
