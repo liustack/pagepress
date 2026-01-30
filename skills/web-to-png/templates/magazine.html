@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <style>
+        /* ===== VOGUE/WIRED 高端杂志风格 ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
+
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-500: #737373;
+            --gray-800: #262626;
+            --accent: #dc2626;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--black);
+            background: var(--white);
+            margin: 0;
+            font-weight: 300;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .magazine {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 正文内容 */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 50px;
+        }
+
+        /* 双栏布局 */
+        .columns {
+            column-count: 2;
+            column-gap: 60px;
+        }
+
+        /* ===== 标题系统 ===== */
+        h1 {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 5em;
+            font-weight: 400;
+            line-height: 0.9;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            margin: 0 0 0.3em;
+            column-span: all;
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 2.2em;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--black);
+            margin: 2em 0 0.8em;
+            column-span: all;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.5em;
+            font-weight: 600;
+            font-style: italic;
+            color: var(--gray-800);
+            margin: 1.8em 0 0.6em;
+        }
+
+        /* 副标题/导语 */
+        .lead {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.4em;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--gray-500);
+            margin-bottom: 2em;
+            column-span: all;
+        }
+
+        /* 段落 */
+        p {
+            margin: 0 0 1.2em;
+            text-align: justify;
+        }
+
+        /* 首字下沉 */
+        .content>p:first-of-type::first-letter,
+        h2+p::first-letter {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 5em;
+            float: left;
+            line-height: 0.75;
+            margin: 0.05em 0.08em 0 0;
+            color: var(--accent);
+        }
+
+        /* 强调 */
+        strong {
+            font-weight: 500;
+            color: var(--black);
+        }
+
+        em {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+        }
+
+        /* 链接 */
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== 引用 - 大字拉引 ===== */
+        blockquote {
+            column-span: all;
+            margin: 3em 0;
+            padding: 0;
+            border: none;
+            background: none;
+        }
+
+        blockquote p {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.4em;
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.3;
+            text-align: center;
+            color: var(--black);
+            margin: 0;
+            position: relative;
+        }
+
+        blockquote p::before,
+        blockquote p::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: 0.6em auto;
+        }
+
+        /* ===== 代码 ===== */
+        code {
+            font-family: 'JetBrains Mono', 'SF Mono', monospace;
+            font-size: 0.85em;
+            background: var(--gray-100);
+            padding: 0.15em 0.4em;
+            border-radius: 2px;
+        }
+
+        pre {
+            column-span: all;
+            font-family: 'JetBrains Mono', 'SF Mono', monospace;
+            font-size: 0.8em;
+            line-height: 1.7;
+            background: var(--black);
+            color: var(--gray-100);
+            padding: 32px 36px;
+            margin: 2.5em 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        pre::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* 语法高亮 - 暗色优雅 */
+        pre .comment,
+        pre .c,
+        pre .c1 {
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        pre .keyword,
+        pre .k,
+        pre .kd {
+            color: #f472b6;
+        }
+
+        pre .string,
+        pre .s,
+        pre .s1,
+        pre .s2 {
+            color: #a3e635;
+        }
+
+        pre .function,
+        pre .nf {
+            color: #60a5fa;
+        }
+
+        pre .number,
+        pre .mi,
+        pre .mf {
+            color: #fbbf24;
+        }
+
+        pre .class,
+        pre .nc {
+            color: #2dd4bf;
+        }
+
+        pre .operator,
+        pre .o {
+            color: #f472b6;
+        }
+
+        /* ===== 表格 ===== */
+        table {
+            column-span: all;
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2.5em 0;
+        }
+
+        th {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 0.9em;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 16px 20px;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        tr:hover td {
+            background: var(--gray-100);
+        }
+
+        /* ===== 列表 ===== */
+        ul,
+        ol {
+            margin: 1.2em 0;
+            padding-left: 1.2em;
+        }
+
+        li {
+            margin-bottom: 0.6em;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li::before {
+            content: '—';
+            color: var(--accent);
+            font-weight: 500;
+            margin-right: 0.5em;
+            margin-left: -1.2em;
+        }
+
+        /* ===== 分隔线 ===== */
+        hr {
+            column-span: all;
+            border: none;
+            height: 1px;
+            background: var(--black);
+            margin: 3em 0;
+            position: relative;
+        }
+
+        hr::before {
+            content: '●';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            padding: 0 20px;
+            color: var(--accent);
+            font-size: 0.6em;
+        }
+
+        /* ===== 图片 ===== */
+        figure {
+            column-span: all;
+            margin: 2.5em 0;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        figcaption {
+            font-size: 0.75em;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 12px;
+        }
+
+        /* ===== 打印 ===== */
+        @media print {
+            body {
+                background: white;
+            }
+
+            pre,
+            th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+
+            pre,
+            blockquote,
+            table,
+            figure {
+                page-break-inside: avoid;
+            }
+        }
+
+        .content.single-column {
+            column-count: 1;
+        }
+    </style>
+    {{styles}}
+</head>
+
+<body>
+    <main class="magazine">
+        <div class="content columns">
+            {{body}}
+        </div>
+    </main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}}</title>
+  <style>
+    :root {
+      --bg: #0e0f13;
+      --text: #f8f7f4;
+      --accent: #ffb703;
+      --accent-2: #8ecae6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Clash Display", "Bebas Neue", "Segoe UI", system-ui, sans-serif;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      padding: 72px 80px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255, 183, 3, 0.25), transparent 45%),
+        radial-gradient(circle at bottom right, rgba(142, 202, 230, 0.25), transparent 50%);
+      z-index: 0;
+    }
+
+    .badge {
+      position: relative;
+      z-index: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 80%;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 72px;
+      line-height: 0.98;
+      text-transform: uppercase;
+    }
+
+    h2,
+    h3 {
+      margin: 0;
+      font-size: 40px;
+      line-height: 1.1;
+      color: var(--accent-2);
+    }
+
+    p {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.5;
+      color: rgba(248, 247, 244, 0.8);
+      font-family: "Space Grotesk", "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      text-transform: none;
+    }
+
+    .footer {
+      position: relative;
+      z-index: 1;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(248, 247, 244, 0.6);
+    }
+  </style>
+  {{styles}}
+</head>
+
+<body>
+  <section class="card">
+    <div class="badge">Share Card</div>
+    <main class="content">
+      {{body}}
+    </main>
+    <div class="footer">{{title}}</div>
+  </section>
+</body>
+
+</html>
