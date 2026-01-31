@@ -1,308 +1,263 @@
 ---
 name: web-to-png
-description: "将 HTML/Markdown/URL 渲染为高质量 PNG（适合社交分享卡片）。"
+description: "Screenshot web pages, generate OG images, social cards, posters, infographics, and visual assets. Use when the user mentions 'screenshot', 'capture', 'OG image', 'social card', 'poster', 'infographic', 'cheat sheet', 'generate poster', or 'web to image'."
 ---
 
 # Web-to-PNG Skill
 
-将 HTML（本地或 URL）与 Markdown（本地）渲染为高质量 PNG。
+Render **HTML (local file) or URL** to high-quality PNG.
 
-- **只截图 `#card-container`**（找不到直接失败）
-- 支持固定尺寸预设 + 1080 宽度的自适应高度
-- 5 种精心设计的主题风格
-- 可选水印（默认不显示）
-
-## 依赖
-
-**Node.js（建议 18+）**
-
-在项目根目录安装依赖：
-
-```bash
-cd /path/to/web-printer
-npm install
-```
-
-**本技能需要的 npm 依赖包（必需）**：
-
-```bash
-npm i playwright markdown-it markdown-it-footnote markdown-it-anchor markdown-it-toc-done-right
-```
-
-**可选依赖（按需）**：
-
-- `Playwright Chromium`（截图渲染必须有浏览器可用）
-- 系统字体（影响最终视觉效果；未安装会回退系统字体）
-
-**推荐：全局安装 Playwright（避免重复下载）**：
-
-```bash
-npm i -g playwright
-playwright install chromium
-```
-
-**仅本项目安装（可选）**：
-
-```bash
-npx playwright install chromium
-```
-
-**复用 Playwright 浏览器缓存（避免重复下载）**：
-
-```bash
-# macOS 默认缓存目录
-export PLAYWRIGHT_BROWSERS_PATH=~/Library/Caches/ms-playwright
-
-# Linux 常见目录
-# export PLAYWRIGHT_BROWSERS_PATH=~/.cache/ms-playwright
-```
-
-可选：安装依赖时跳过浏览器下载，避免重复拉取（需在 `npm install` 前设置）：
-
-```bash
-export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
-```
-
-## 核心策略
+> This skill is for **AI Agents**. Human users only provide requirements; the AI Agent generates HTML, then calls this skill to capture screenshots.
 
 > [!IMPORTANT]
-> **AI Agent 使用指南**
->
-> 本 skill 有两种使用模式：
->
-> ### 模式一：Markdown 排版（有美化能力）
-> 若输入为 **Markdown（本地文件）**，可使用内置主题排版：
-> - `default` - 极简专业（默认）
-> - `sketch` - 手绘笔记风格
-> - `magazine` - 杂志排版风格
-> - `bold` - 深色醒目风格
-> - `poster` - 梦幻海报风格
->
-> ### 模式二：HTML/URL 截图（可控性最高）
-> 若输入为 **HTML 文件或 URL**：
-> - 建议由 Agent 自行完成排版与样式
-> - 本 skill 主要负责渲染与截图
+> **Temporary File Location**: When generating temporary HTML files, **ALWAYS write them to the system temp directory** (`/tmp` on macOS/Linux, or use `os.tmpdir()` in Node.js), **NOT the user's workspace**.
+> - **Filename pattern**: `web-to-png-<timestamp>.html`
+> - **Cleanup**: Delete temp files after screenshot is complete
+> - **Output PNG**: The final PNG output CAN be saved to the user's workspace (that's the deliverable)
+> 
+> This prevents polluting the user's project with intermediate files.
 
-**默认策略**：只截图 `#card-container`，未找到则返回失败。
+## Scenario Routing Table (For AI Agent)
 
-## 自定义 HTML 编写指南
+| Scenario | Trigger Phrases | Parameters | Layout Guidelines |
+|---|---|---|---|
+| **screenshot (default)** | "screenshot this page / capture the webpage" | **no preset** | Keep original layout; for real webpage screenshots |
+| **og-image** | "OG image / social preview / share card" | `--preset og` | 1200×630; safe margin ≥120px |
+| **post (social post)** | "social post / square image / daily share" | `--preset post` | 1080×1080; visual-first |
+| **infographic** | "cheat sheet / quick reference / data card" | `--preset infographic` | 1080×1350; high information density |
+| **poster** | "poster / vertical promo" | `--preset poster` | 1200×1500; minimal text, maximum visual |
+| **banner** | "header / cover image / hero" | `--preset banner` | 1600×900; horizontal layout |
+
+## Dependencies
 
 > [!IMPORTANT]
-> **AI Agent 编写自定义 HTML 时必须遵循以下规则**
->
-> ### 1. 尺寸设置
-> **固定尺寸**：`<html>` 和 `<body>` 必须设置固定宽高，与目标预设一致：
->
-> ```css
-> html, body { width: 1080px; height: 1920px; } /* story 预设 */
-> ```
->
-> | 预设 | 宽高 |
-> |------|------|
-> | `og` | 1200×630 |
-> | `square` | 1080×1080 |
-> | `story` | 1080×1920 |
-> | `portrait` | 1200×1500 |
-> | `banner` | 1600×900 |
->
-> **自适应高度模式（不传 preset）**：仅需设置 `width: 1080px; height: auto;`。
->
-> ### 2. 必须包含 `#card-container`
-> **推荐结构**：内容放入 `#card-container`，由渲染器截图：
-> ```css
-> #card-container { width: 1200px; height: 630px; overflow: hidden; }
-> .content-container {
->   padding: 60px;
->   display: flex;
->   flex-direction: column;
->   justify-content: center;  /* 垂直居中 */
->   gap: 40px;
-> }
-> ```
->
-> ### 3. 背景与装饰
-> - 背景渐变、光晕等效果应直接设置在 `body` 上
-> - 伪元素 `::before` / `::after` 可用于光晕特效
->
-> ### 4. 截图注意事项
-> - 必须包含 `#card-container`，否则截图失败
-> - 不支持 `--clip` / `--full-page`
->
-> ### 5. 完整示例
+> Install dependencies in **the skill's directory** (where this SKILL.md is located), NOT in the user's workspace.
+> 
+> `SKILL_DIR` = the directory containing this SKILL.md file
+
+**Required npm packages**:
+
+```bash
+cd $SKILL_DIR && npm i playwright
+```
+
+**Browser dependency**:
+
+```bash
+cd $SKILL_DIR && npx playwright install chromium
+```
+
+## Input & Output
+
+**Input (choose one)**
+- `--input <file.html>` (local HTML file)
+- `--url <https://...>` (remote URL)
+
+**Output**
+- `png` (required)
+- `meta.json` (optional, use `--meta`)
+
+## Screenshot Strategy
+
+### 1) Fixed Dimensions (with preset)
+- `viewport = preset`, `fullPage=false` (fixed crop)
+- Auto-injects:
+  ```css
+  html, body { width: <W>px; height: <H>px; overflow: hidden; margin: 0; padding: 0; }
+  ```
+
+> [!CAUTION]
+> **Technical Pitfall**: The script auto-injects `body { margin: 0; padding: 0; }`, which overrides any padding set directly on `body`!
+> **Solution**: Always use an inner container `#app-container` for padding, not `body`.
 > ```html
-> <!DOCTYPE html>
-> <html lang="zh-CN">
-> <head>
->   <style>
->     * { box-sizing: border-box; margin: 0; padding: 0; }
->     html, body { width: 1080px; height: 1920px; }
->     #card-container { width: 1200px; height: 630px; overflow: hidden; }
->     .content-container { padding: 60px; height: 100%; }
->     body {
->       background: linear-gradient(135deg, #667eea, #764ba2);
->       color: #fff;
->       padding: 60px;
->       display: flex;
->       flex-direction: column;
->       justify-content: center;
->       gap: 40px;
->     }
->   </style>
-> </head>
 > <body>
->   <section id="card-container">
->     <div class="content-container">
->       <h1>标题</h1>
->       <p>内容...</p>
->     </div>
->   </section>
+>   <div id="app-container">
+>     <!-- your content -->
+>   </div>
 > </body>
-> </html>
+> ```
+> ```css
+> #app-container { width: 100%; height: 100%; padding: 100px; }
 > ```
 
-## 输入方式
+### 2) Screenshot (default)
+- **Default behavior** (no preset)
+- Uses Playwright default viewport (1280×720) + `fullPage=true`
+- For "direct webpage screenshots"
 
-| 方式 | 美化能力 | 适用场景 | CLI 用法 |
-|------|----------|----------|----------|
-| **Markdown（本地）** | ✅ 主题排版 | 内容生成型 | `--input file.md --style bold` |
-| **HTML 文件（本地）** | ✅ 可选主题包裹 | Agent 自己排版 | `--input file.html --format html` |
-| **URL** | ❌ 纯渲染 | 直接截网页 | `--url https://example.com` |
+---
 
-**HTML/URL 必须包含 `#card-container`，否则截图失败。**
+## Preset Specifications & Design Guidelines (For AI Agent)
 
-**不支持纯文本输入**（如需文本请先整理为 Markdown 文件或 HTML）。  
+> These guidelines help **AI Agents** generate HTML. Reuse **brand assets from the user's workspace/project** (colors, fonts, logos, components, screenshots, illustrations) to maintain consistency.
 
-## 尺寸
+### og (1200×630) - Link Preview Image
 
-- **默认模式（无 preset）**：宽度 1080px，高度自适应  
-- **固定模式（有 preset）**：使用预设尺寸，内容超出会被隐藏并可显示省略号
+**Definition**: The first impression users get when a link appears in social feeds. Metadata attached to URLs.
 
-固定模式下会强制注入 `#card-container` 的尺寸与 `overflow: hidden`（对 HTML/URL 同样生效）。
+**Core Constraints**:
+- **Small-size readability**: Title must be legible at 400px width
+- **Brand recognition**: Use consistent brand colors, fonts, and logo
+- **Single focus**: Convey only one core message
+- **Safe zone**: Keep key content ≥ **120px** from edges
 
-**预设尺寸**：
-- `og` 1200×630  
-- `square` 1080×1080  
-- `story` 1080×1920  
-- `portrait` 1200×1500  
-- `banner` 1600×900  
+---
 
-## 输出
+### post (1080×1080) - Social Post
 
-- `pngPath`（必需）
-- `htmlPath`（默认保留，`--no-html` 可关闭）
-- `meta.json`（包含 Chromium 版本、尺寸、preset（auto/预设名）、输入摘要 hash、截图模式）
+**Definition**: Universal social media post. 1:1 ratio works on all major platforms (Instagram / Twitter / LinkedIn / WeChat).
 
-## 主题样式
+**Core Principle**: **Visual-first**
+- Main visual takes 70%+ of the canvas
+- Minimal text: Brand name + optional 1 line
+- User behavior: Instant attraction (1-2 seconds)
 
-| 主题 | 风格 | 适用场景 |
-|------|------|----------|
-| `default` | 极简专业，柔和渐变背景 | 技术分享、日常笔记 |
-| `sketch` | 手绘笔记，横线纸张效果 | 创意内容、学习笔记 |
-| `magazine` | 杂志排版，衬线字体 | 正式文章、长文推广 |
-| `bold` | 深色背景，金色青色光晕 | 产品发布、技术公告 |
-| `poster` | 梦幻海报，紫粉蓝渐变 | 社交分享、营销海报 |
+**Visual Rules**:
+- Main visual centered, size should be large
+- 100px Padding for breathing room
+- Brand logo optional
 
-## 水印
+**Use Cases**: Daily shares, product showcases, feature highlights
 
-水印**默认不显示**。调用者可通过 `--watermark` 参数添加：
+**vs Poster**:
+- Post (1:1): Most universal, for everyday content
+- Poster (4:5): Larger screen presence, for important announcements
 
-```bash
-# 添加水印
-node scripts/converter.js --input doc.md --style bold --watermark "Leon's Blog" --output out.png
+---
 
-# 无水印（默认）
-node scripts/converter.js --input doc.md --style bold --output out.png
+### infographic (1080×1350, 4:5) - Infographic / Cheat Sheet
+
+**Definition**: Structured visualization of complex information. Emphasizes **information value**; users will **actively read**.
+
+**Core Characteristics**:
+- **High information density**: Condense lots of useful info into one image
+- **Structured layout**: Use grids, sections, lists, numbers to guide reading
+- **Clear hierarchy**: Title > Subtitle > Body > Labels, with extreme font size contrast
+- **Moderate whitespace**: 100px+ Padding to avoid clutter
+
+**Use Cases**:
+- Cheat Sheets
+- Feature comparison tables
+- Step-by-step guides
+- Data summaries
+- API quick references
+
+**vs Poster**:
+- Poster is **minimal text, maximum visual** (instant impact)
+- Infographic is **structured information** (reading comprehension)
+
+---
+
+### poster (1200×1500, 4:5) - Visual Poster
+
+**Definition**: Portrait **visual-impact** image optimized for mobile feeds.
+
+**Core Principle**: **Minimal text, maximum visual**
+- Text: Only 1 Headline + 1 Tagline
+- Main visual takes 50%+ of the canvas
+- User behavior: Instant impact (1-3 seconds)
+
+**Visual Rules**:
+- Main visual centered, large size (400px+ recommended)
+- 120px+ Padding for breathing room
+- Brand logo at bottom corner
+
+**Use Cases**: Product launches, event posters, brand statements
+
+**Not suitable for**: Information-heavy content (use Infographic instead)
+
+---
+
+### banner (1600×900, 16:9) - Horizontal Cover
+
+**Definition**: Horizontal visual image for social media headers and blog covers.
+
+**Layout**: Horizontal composition, main visual centered or left-text-right-image
+**Copy**: 1 headline + optional subtitle
+**Use Cases**: Twitter/LinkedIn headers, blog covers, Newsletter banners
+
+---
+
+## Safe Margin Standards
+
+| Preset | Dimensions | Recommended Padding | Notes |
+|:---|:---|:---|:---|
+| **og** | 1200×630 | **120px** | Ensures thumbnail readability |
+| **post** | 1080×1080 | **100px** | Visual-first |
+| **infographic** | 1080×1350 | **100px** | High density needs whitespace |
+| **poster** | 1200×1500 | **120px** | Visual breathing room |
+| **banner** | 1600×900 | **centered max-width** | Use `max-width: 1200px` for content |
+
+---
+
+## HTML Template Structure
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1350">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1080px;
+      height: 1350px;
+      background: #000;
+    }
+    #app-container {
+      width: 100%;
+      height: 100%;
+      padding: 100px; /* Set safe margins here */
+    }
+  </style>
+</head>
+<body>
+  <div id="app-container">
+    <!-- your content -->
+  </div>
+</body>
+</html>
 ```
 
-## API（Node.js 示例）
+## CLI Usage
+
+```bash
+# OG Image (with auto-cleanup of temp file)
+node scripts/converter.js --input /tmp/web-to-png-og-1706745600.html --preset og --output ~/Desktop/og.png --auto-cleanup
+
+# Infographic
+node scripts/converter.js --input /tmp/web-to-png-info-1706745601.html --preset infographic --output ~/project/assets/cheatsheet.png --auto-cleanup
+
+# Poster
+node scripts/converter.js --input /tmp/web-to-png-poster-1706745602.html --preset poster --output ~/Desktop/poster.png --auto-cleanup
+
+# Screenshot from URL (no cleanup needed)
+node scripts/converter.js --url https://example.com --output page.png
+```
+
+**Optional Parameters**:
+- `--preset <og|post|infographic|poster|banner>`
+- `--auto-cleanup` (delete input file after processing)
+- `--meta [path]`
+- `--device-scale-factor <number>`
+- `--allow-scripts`
+- `--allow-net <prefix>`
+- `--wait-until <load|domcontentloaded|networkidle>`
+- `--timeout-ms <number>`
+
+## API (Node.js)
 
 ```js
 import { toPng } from "./scripts/converter.js";
 
 toPng({
-  inputPath: "examples/summary.md",
-  outputPath: "output.png",
-  style: "bold",
-  watermark: "Leon's Blog",  // 可选
+  inputPath: "/tmp/web-to-png-poster-1706745602.html",
+  outputPath: "~/Desktop/poster.png",
   options: {
-    preset: "og",
-    format: "markdown",
+    preset: "poster",
+    write_meta: false,
     device_scale_factor: 2
   }
 });
 ```
-
-## CLI 使用
-
-```bash
-# Markdown（默认主题）
-node scripts/converter.js --input doc.md --output out.png
-
-# 指定主题
-node scripts/converter.js --input doc.md --style poster --preset og --output out.png
-
-# 带水印
-node scripts/converter.js --input doc.md --style bold --watermark "My Brand" --output out.png
-
-# HTML 文件
-node scripts/converter.js --input page.html --format html --output out.png
-
-# 直接渲染 URL
-node scripts/converter.js --url https://example.com --preset banner --output out.png
-
-```
-
-**完整参数**：
-
-| 参数 | 说明 |
-|------|------|
-| `--input` | 输入文件路径（md/html） |
-| `--url` | 直接渲染 URL |
-| `--output` | 输出 PNG 路径（必需） |
-| `--style` | 主题：`default` / `sketch` / `magazine` / `bold` / `poster` |
-| `--format` | 输入格式：`markdown` / `html` |
-| `--preset` | 预设尺寸：`og` / `square` / `story` / `portrait` / `banner` |
-| `--device-scale-factor` | 像素密度（默认 2） |
-| `--no-html` | 不保留中间 HTML 文件 |
-| `--allow-scripts` | 允许执行脚本 |
-| `--css` | 追加自定义 CSS |
-| `--title` | HTML 标题 |
-| `--watermark` | 水印文字（默认不显示） |
-| `--allow-net` | 网络白名单前缀（可重复） |
-| `--wait-until` | `load`/`domcontentloaded`/`networkidle` |
-| `--timeout-ms` | 超时（毫秒） |
-
-## 目录结构
-
-```
-web-to-png/
-  SKILL.md
-  scripts/
-    converter.js   # 核心转换器
-  templates/
-    default.html
-    sketch.html
-    magazine.html
-    bold.html
-    poster.html
-  examples/
-    demo.md
-    example-*.png
-```
-
-## 渲染引擎
-
-- Playwright + Chromium
-- PNG 使用 `page.screenshot` 导出
-- 支持 viewport / deviceScaleFactor
-
-## 一致性保障
-
-- 相同输入 + 主题 + Chromium 版本 ⇒ 输出稳定
-- 打印前等待：`document.fonts.ready` + `waitUntil(networkidle)`
-- 默认剥离 `<script>`（除非显式 `--allow-scripts`）
-
-## 安全
-
-- 可配置网络访问白名单（`--allow-net`）
-- 默认禁用脚本执行

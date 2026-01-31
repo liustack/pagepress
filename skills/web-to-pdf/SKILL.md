@@ -1,6 +1,6 @@
 ---
 name: web-to-pdf
-description: "将 HTML/Markdown/URL 打印为高质量 PDF。Markdown 输入可使用内置主题美化，HTML/URL 为纯打印。"
+description: "打印网页、导出 PDF、生成文档报告。当用户提到「导出 PDF」「打印成 PDF」「生成报告」「转成文档」「保存为 PDF」「打印网页」时使用。支持 Markdown 美化排版。"
 ---
 
 # Web-to-PDF Skill
@@ -12,13 +12,6 @@ description: "将 HTML/Markdown/URL 打印为高质量 PDF。Markdown 输入可�
 
 ## 依赖
 
-**Node.js（建议 18+）**  
-在项目根目录安装依赖：
-
-```bash
-cd /path/to/web-printer
-npm install
-```
 
 **本技能需要的 npm 依赖包（必需）**：
 
@@ -104,11 +97,11 @@ export MERMAID_CLI=/path/to/mmdc
 方式2：原始内容 → [Agent 美化为 HTML] → [Web-to-PDF 打印] → PDF
 ```
 
-## 输入方式
+## 输入方式示例
 
 | 方式 | 美化能力 | 适用场景 | CLI 用法 |
 |------|----------|----------|----------|
-| **Markdown** | ✅ 5 种主题 | Agent 整理内容为 Markdown | `--input file.md --style magazine` |
+| **Markdown** | ✅ 5 种主题 | Agent 整理内容为 Markdown | `--input file.md --style default` |
 | **HTML 文件** | ❌ 仅打印 | Agent 已完成 HTML 排版 | `--input file.html --format html` |
 | **URL** | ❌ 仅打印 | 打印网页或本地 HTML | `--url file:///path/to/file.html` |
 
