@@ -17,7 +17,7 @@ const PRESETS = {
 
 function readText(filePath) {
   if (!fs.existsSync(filePath)) {
-    throw new Error(`找不到文件: ${filePath}`);
+    throw new Error(`File not found: ${filePath}`);
   }
   return fs.readFileSync(filePath, "utf-8");
 }
@@ -30,7 +30,7 @@ export function resolveCaptureOptions(preset) {
   if (preset) {
     const size = PRESETS[preset];
     if (!size) {
-      throw new Error(`不支持的 preset: ${preset}`);
+      throw new Error(`Unsupported preset: ${preset}`);
     }
     return {
       viewport: { width: size.width, height: size.height },
@@ -47,16 +47,16 @@ export function resolveCaptureOptions(preset) {
 
 export function normalizeInput({ inputPath, url, content, format }) {
   if (content) {
-    throw new Error("不支持 content，请使用 HTML 文件或 URL。");
+    throw new Error("Content input not supported. Please use HTML file or URL.");
   }
   if (format && format !== "html") {
-    throw new Error("仅支持 html 格式。请使用 HTML 文件或 URL。");
+    throw new Error("Only HTML format is supported. Please use HTML file or URL.");
   }
   if (!inputPath && !url) {
-    throw new Error("必须提供 input 或 url 之一");
+    throw new Error("Must provide either input or url");
   }
   if (inputPath && url) {
-    throw new Error("不能同时使用 input 和 url，请二选一");
+    throw new Error("Cannot use both input and url. Please choose one");
   }
   return { inputPath, url };
 }
@@ -149,7 +149,7 @@ export async function toPng({
   normalizeInput({ inputPath, url, content, format: options.format });
 
   if (!outputPath) {
-    throw new Error("必须提供 outputPath");
+    throw new Error("outputPath is required");
   }
 
   const waitUntil = options.wait_until || "networkidle";
@@ -174,7 +174,7 @@ export async function toPng({
   });
 
   if (!result?.version) {
-    throw new Error("无法渲染 PNG。请安装 Playwright 并执行 playwright install chromium。");
+    throw new Error("Cannot render PNG. Please install Playwright and run: playwright install chromium");
   }
 
   const meta = {
@@ -239,9 +239,9 @@ function parseArgs(argv) {
     else if (a === "--timeout-ms") args.timeoutMs = Number(argv[++i]);
     else if (a === "--auto-cleanup") args.autoCleanup = true;
     else if (["--content", "--format", "--style", "--watermark", "--css"].includes(a)) {
-      throw new Error("该参数已移除，仅支持 HTML 文件或 URL 输入。");
+      throw new Error("This parameter has been removed. Only HTML file or URL input is supported.");
     } else if (["--width", "--height", "--clip", "--full-page"].includes(a)) {
-      throw new Error("不支持该参数，请使用 --preset 或默认长图模式。");
+      throw new Error("This parameter is not supported. Please use --preset or default long-image mode.");
     } else if (a === "--help" || a === "-h") {
       printHelp();
       process.exit(0);
@@ -249,13 +249,13 @@ function parseArgs(argv) {
   }
 
   if (!args.output) {
-    throw new Error("必须提供 --output");
+    throw new Error("--output is required");
   }
 
   normalizeInput({ inputPath: args.input, url: args.url });
 
   if (args.preset && args.preset !== "infographic" && !PRESETS[args.preset]) {
-    throw new Error(`不支持的 preset: ${args.preset}`);
+    throw new Error(`Unsupported preset: ${args.preset}`);
   }
 
   return args;

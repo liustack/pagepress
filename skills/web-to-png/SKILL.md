@@ -10,13 +10,20 @@ Render **HTML (local file) or URL** to high-quality PNG.
 > This skill is for **AI Agents**. Human users only provide requirements; the AI Agent generates HTML, then calls this skill to capture screenshots.
 
 > [!IMPORTANT]
-> **Temporary File Location**: When generating temporary HTML files, **ALWAYS write them to a dedicated subdirectory** (`/tmp/web-to-png/` on macOS/Linux), **NOT the user's workspace**.
-> - **Directory**: `/tmp/web-to-png/` (create if not exists)
-> - **Filename pattern**: `<timestamp>.html`
-> - **Cleanup**: Delete temp files after screenshot is complete
-> - **Output PNG**: The final PNG output CAN be saved to the user's workspace (that's the deliverable)
+> **File Location Strategy**
 > 
-> This prevents polluting the user's project with intermediate files.
+> **First use in a workspace**: Ask the user where to save generated files. Store the answer as `$ASSETS_DIR`.
+> - If user specifies a path → `$ASSETS_DIR = {workspace}/{user-specified-path}`
+> - If user has no preference → `$ASSETS_DIR = {workspace}/assets/` (default)
+> 
+> **Note**: `$ASSETS_DIR` is always **relative to the workspace root**, never an absolute path outside the workspace.
+> 
+> **Subsequent uses**: Reuse `$ASSETS_DIR` for all generated files in this workspace.
+> 
+> | File Type | Location | Notes |
+> |-----------|----------|-------|
+> | **Output PNG** | `$ASSETS_DIR/` | Final deliverable |
+> | **Temp HTML** | `$ASSETS_DIR/` | Use `--auto-cleanup` to delete after conversion |
 
 ## Scenario Routing Table (For AI Agent)
 
@@ -228,16 +235,16 @@ cd $SKILL_DIR && pnpm exec playwright install chromium
 
 ```bash
 # OG Image (with auto-cleanup of temp file)
-node scripts/converter.js --input /tmp/web-to-png/og-1706745600.html --preset og --output ~/Desktop/og.png --auto-cleanup
+node scripts/converter.js --input ./assets/og.html --preset og --output ./assets/og.png --auto-cleanup
 
 # Infographic
-node scripts/converter.js --input /tmp/web-to-png/info-1706745601.html --preset infographic --output ~/project/assets/cheatsheet.png --auto-cleanup
+node scripts/converter.js --input ./assets/info.html --preset infographic --output ./assets/cheatsheet.png --auto-cleanup
 
 # Poster
-node scripts/converter.js --input /tmp/web-to-png/poster-1706745602.html --preset poster --output ~/Desktop/poster.png --auto-cleanup
+node scripts/converter.js --input ./assets/poster.html --preset poster --output ./assets/poster.png --auto-cleanup
 
 # Screenshot from URL (no cleanup needed)
-node scripts/converter.js --url https://example.com --output page.png
+node scripts/converter.js --url https://example.com --output ./assets/page.png
 ```
 
 **Optional Parameters**:
@@ -256,7 +263,7 @@ node scripts/converter.js --url https://example.com --output page.png
 import { toPng } from "./scripts/converter.js";
 
 toPng({
-  inputPath: "/tmp/web-to-png/poster-1706745602.html",
+  inputPath: "./assets/poster.html",
   outputPath: "~/Desktop/poster.png",
   options: {
     preset: "poster",

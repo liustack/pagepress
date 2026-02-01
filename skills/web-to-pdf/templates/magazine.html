@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
     <style>
-        /* ===== VOGUE/WIRED 高端杂志风格 ===== */
+        /* ===== VOGUE/WIRED Premium Magazine Style ===== */
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
 
         :root {
@@ -41,20 +41,20 @@
             padding: 0;
         }
 
-        /* 正文内容 */
+        /* Body Content */
         .content {
             max-width: 880px;
             margin: 0 auto;
             padding: 84px 72px;
         }
 
-        /* 双栏布局 */
+        /* Two-column Layout */
         .columns {
             column-count: 2;
             column-gap: 72px;
         }
 
-        /* ===== 标题系统 ===== */
+        /* ===== Heading System ===== */
         h1 {
             font-family: 'Bebas Neue', Impact, sans-serif;
             font-size: 5em;
@@ -98,7 +98,7 @@
             margin: 1.8em 0 0.6em;
         }
 
-        /* 副标题/导语 */
+        /* Subtitle/Lead */
         .lead {
             font-family: 'Cormorant Garamond', Georgia, serif;
             font-size: 1.4em;
@@ -109,13 +109,13 @@
             column-span: all;
         }
 
-        /* 段落 */
+        /* Paragraph */
         p {
             margin: 0 0 1.2em;
             text-align: justify;
         }
 
-        /* 首字下沉 */
+        /* Drop Cap */
         .content>p:first-of-type::first-letter,
         h2+p::first-letter {
             font-family: 'Bebas Neue', Impact, sans-serif;
@@ -126,7 +126,7 @@
             color: var(--accent);
         }
 
-        /* 强调 */
+        /* Emphasis */
         strong {
             font-weight: 500;
             color: var(--black);
@@ -137,7 +137,7 @@
             font-style: italic;
         }
 
-        /* 链接 */
+        /* Links */
         a {
             color: var(--accent);
             text-decoration: none;
@@ -147,7 +147,7 @@
             text-decoration: underline;
         }
 
-        /* ===== 引用 - 大字拉引 ===== */
+        /* ===== Blockquote - Pull Quote ===== */
         blockquote {
             column-span: all;
             margin: 3em 0;
@@ -178,7 +178,7 @@
             margin: 0.6em auto;
         }
 
-        /* ===== 代码 ===== */
+        /* ===== Code ===== */
         code {
             font-family: 'JetBrains Mono', 'SF Mono', monospace;
             font-size: 0.85em;
@@ -216,7 +216,7 @@
             color: inherit;
         }
 
-        /* 语法高亮 - 暗色优雅 */
+        /* Syntax Highlighting - Dark Elegant */
         pre .comment,
         pre .c,
         pre .c1 {
@@ -258,7 +258,7 @@
             color: #f472b6;
         }
 
-        /* ===== 表格 ===== */
+        /* ===== Table ===== */
         table {
             column-span: all;
             width: 100%;
@@ -287,7 +287,7 @@
             background: var(--gray-100);
         }
 
-        /* ===== 列表 ===== */
+        /* ===== Lists ===== */
         ul,
         ol {
             margin: 1.2em 0;
@@ -310,7 +310,7 @@
             margin-left: -1.2em;
         }
 
-        /* ===== 分隔线 ===== */
+        /* ===== Divider ===== */
         hr {
             column-span: all;
             border: none;
@@ -332,7 +332,7 @@
             font-size: 0.6em;
         }
 
-        /* ===== 图片 ===== */
+        /* ===== Images ===== */
         figure {
             column-span: all;
             margin: 2.5em 0;
@@ -352,7 +352,7 @@
             margin-top: 12px;
         }
 
-        /* ===== 打印 ===== */
+        /* ===== Print ===== */
         @media print {
             body {
                 background: white;

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
     <style>
-        /* ===== 趣味手绘/Doodle 风格 ===== */
+        /* ===== Fun Hand-drawn/Doodle Style ===== */
         @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&family=Indie+Flower&display=swap');
 
         :root {
@@ -50,7 +50,7 @@
             position: relative;
         }
 
-        /* 笔记本装订孔 */
+        /* Notebook Binding Holes */
         .notebook::before {
             content: '○ ○ ○ ○ ○ ○ ○ ○ ○ ○';
             position: absolute;
@@ -62,7 +62,7 @@
             font-size: 12px;
         }
 
-        /* 装订线 - 黑色 */
+        /* Binding Line - Black */
         .notebook::after {
             content: '';
             position: absolute;
@@ -74,7 +74,7 @@
             opacity: 0.3;
         }
 
-        /* ===== 标题 - 涂鸦风 ===== */
+        /* ===== Headings - Doodle Style ===== */
         h1,
         h2,
         h3 {
@@ -109,7 +109,7 @@
             font-size: 1.4em;
         }
 
-        /* 强调 - 荧光笔效果 */
+        /* Emphasis - Highlighter Effect */
         strong {
             background: linear-gradient(180deg, transparent 50%, var(--highlighter) 50%);
             font-weight: 700;
@@ -121,14 +121,14 @@
             border-bottom: 2px dotted var(--ink-light);
         }
 
-        /* 链接 */
+        /* Links */
         a {
             color: var(--marker-blue);
             text-decoration: none;
             border-bottom: 2px dashed var(--marker-blue);
         }
 
-        /* ===== 列表 - 趣味符号 ===== */
+        /* ===== Lists - Fun Symbols ===== */
         ul {
             list-style: none;
             padding-left: 1.8em;
@@ -174,7 +174,7 @@
             font-weight: 700;
         }
 
-        /* ===== 代码 - 黑板/彩色粉笔风 ===== */
+        /* ===== Code - Chalkboard/Colored Chalk Style ===== */
         code {
             font-family: 'Courier New', monospace;
             font-size: 0.85em;
@@ -202,7 +202,7 @@
             position: relative;
         }
 
-        /* 黑板标签 */
+        /* Chalkboard Label */
         pre::before {
             content: '🖍️ CHALKBOARD';
             position: absolute;
@@ -224,7 +224,7 @@
             box-shadow: none;
         }
 
-        /* 语法高亮 - 彩色粉笔 */
+        /* Syntax Highlighting - Colored Chalk */
         pre .comment,
         pre .c,
         pre .c1,
@@ -304,7 +304,7 @@
             color: #74b9ff;
         }
 
-        /* ===== 引用 - 便签纸 ===== */
+        /* ===== Blockquote - Sticky Note ===== */
         blockquote {
             margin: 1.8em 0;
             padding: 20px 25px;
@@ -332,7 +332,7 @@
             color: var(--ink);
         }
 
-        /* ===== 表格 - 便签贴纸风格 ===== */
+        /* ===== Table - Sticky Sticker Style ===== */
         table {
             width: 100%;
             border-collapse: separate;
@@ -366,7 +366,7 @@
             box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
         }
 
-        /* 彩色贴纸行 */
+        /* Colored Sticker Rows */
         tr:nth-child(odd) td:nth-child(1) {
             background: #ffe4e1;
             transform: rotate(-0.5deg);
@@ -397,7 +397,7 @@
             transform: rotate(0.2deg);
         }
 
-        /* 胶带装饰 */
+        /* Tape Decoration */
         th::before {
             content: '';
             position: absolute;
@@ -410,7 +410,7 @@
             border-radius: 1px;
         }
 
-        /* ===== 分隔线 ===== */
+        /* ===== Divider ===== */
         hr {
             border: none;
             height: 30px;
@@ -424,7 +424,7 @@
             font-size: 1.2em;
         }
 
-        /* ===== 图片 ===== */
+        /* ===== Images ===== */
         img {
             max-width: 100%;
             border: 4px solid #fff;
@@ -432,7 +432,7 @@
             transform: rotate(-2deg);
         }
 
-        /* ===== 打印 ===== */
+        /* ===== Print ===== */
         @media print {
             body {
                 background: var(--paper);

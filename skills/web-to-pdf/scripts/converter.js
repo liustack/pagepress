@@ -20,7 +20,7 @@ const TEMPLATES = path.join(ROOT, "templates");
 
 function readText(filePath) {
   if (!fs.existsSync(filePath)) {
-    throw new Error(`找不到文件: ${filePath}`);
+    throw new Error(`File not found: ${filePath}`);
   }
   return fs.readFileSync(filePath, "utf-8");
 }
@@ -77,7 +77,7 @@ function renderMermaidCli(code, theme, mermaidCli) {
     execFileSync(mermaidCli, args, { stdio: "ignore" });
     svg = fs.readFileSync(outPath, "utf-8");
   } catch (err) {
-    throw new Error("Mermaid CLI 渲染失败，请检查 mmdc 是否可用。");
+    throw new Error("Mermaid CLI rendering failed. Please check if mmdc is available.");
   } finally {
     try {
       fs.rmSync(tmpDir, { recursive: true, force: true });
@@ -94,9 +94,9 @@ function renderMermaidBlocks(md, style, mermaidEnabled, mermaidCli) {
   const cli = findMermaidCli(mermaidCli);
   if (!cli) {
     throw new Error(
-      "检测到 Mermaid 代码块，但未找到 Mermaid CLI（mmdc）。" +
-      "请先安装：npm i -g @mermaid-js/mermaid-cli，" +
-      "或设置环境变量 MERMAID_CLI 指向可执行文件。"
+      "Mermaid code blocks detected, but Mermaid CLI (mmdc) not found. " +
+      "Please install: npm i -g @mermaid-js/mermaid-cli, " +
+      "or set MERMAID_CLI environment variable to the executable path."
     );
   }
 
@@ -166,7 +166,7 @@ function renderTemplate(title, bodyHtml, style, customCss) {
     html = html.replace("</head>", `${customStyleBlock}</head>`);
   }
 
-  // 注入 highlight.js 样式（根据主题选择亮色或暗色）
+  // Inject highlight.js styles (choose light or dark based on theme)
   const isDarkTheme = ["sketch", "magazine"].includes(style);
 
   const hljsLightStyle = `
@@ -348,7 +348,7 @@ export async function toPdf({
   options = {},
 }) {
   if (!inputPath && !content && !url) {
-    throw new Error("必须提供 input_path/content/url 之一");
+    throw new Error("Must provide one of input_path/content/url");
   }
 
   const waitUntil = options.wait_until || "networkidle";
@@ -406,7 +406,7 @@ export async function toPdf({
   }
 
   if (!chromiumVersion) {
-    throw new Error("无法渲染 PDF。请安装 Playwright（推荐）");
+    throw new Error("Cannot render PDF. Please install Playwright (recommended)");
   }
 
   if (!keepHtml && fs.existsSync(outputHtml)) {
@@ -461,7 +461,7 @@ function parseArgs(argv) {
   }
 
   if (!args.output) {
-    throw new Error("必须提供 --output");
+    throw new Error("--output is required");
   }
 
   return args;
