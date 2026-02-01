@@ -37,3 +37,4 @@ bun.lock
 .venv
 .wrangler
 test-output
+.agent/
