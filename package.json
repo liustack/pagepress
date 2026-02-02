@@ -54,15 +54,15 @@
     "commander": "^13.1.0",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
-    "marked": "^15.0.6",
+    "marked": "^15.0.12",
     "marked-highlight": "^2.2.3",
     "mermaid": "^11.12.2",
-    "playwright": "^1.50.1"
+    "playwright": "^1.58.1"
   },
   "devDependencies": {
-    "@types/node": "^22.13.1",
-    "typescript": "^5.7.3",
-    "vite": "^6.1.0",
-    "vite-plugin-node": "^5.0.0"
+    "@types/node": "^22.19.7",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1",
+    "vite-plugin-node": "^5.0.1"
   }
 }
