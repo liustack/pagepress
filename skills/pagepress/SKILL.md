@@ -65,6 +65,12 @@ pagepress snap -i input.html -o output.png --preset og
 - Remember the answer as `$ASSETS_DIR` for the session.
 - If the user does not reply or accepts the default, use `${workspaceRoot}/assets` (workspace root `assets/`).
 
+### Temporary HTML Cleanup (AI Agent Guidance)
+
+- If the AI Agent generates temporary HTML for rendering, place it under `$ASSETS_DIR/tmp`.
+- After a successful render, delete only the temporary HTML it generated.
+- If the user asks to keep inputs for debugging or reuse, keep the file and report its path.
+
 ### Scenario Routing Table (AI Agent Decision Guide)
 
 | Scenario | Trigger Phrases | Parameters | Layout Guidelines |
