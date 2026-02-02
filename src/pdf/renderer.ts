@@ -86,7 +86,12 @@ export async function render(options: Options): Promise<Result> {
     let htmlContent: string;
     let hasMermaid = false;
 
-    if (options.input.endsWith('.md')) {
+    if (options.input.startsWith('http')) {
+        if (safeMode) {
+            throw new Error('Safe mode does not allow remote URL inputs.');
+        }
+        htmlContent = '';
+    } else if (options.input.endsWith('.md')) {
         const raw = fs.readFileSync(inputPath, 'utf-8');
         const { data: frontmatter, content } = matter(raw);
 
@@ -162,11 +167,6 @@ export async function render(options: Options): Promise<Result> {
 
     } else if (options.input.endsWith('.html')) {
         htmlContent = fs.readFileSync(inputPath, 'utf-8');
-    } else if (options.input.startsWith('http')) {
-        if (safeMode) {
-            throw new Error('Safe mode does not allow remote URL inputs.');
-        }
-        htmlContent = '';
     } else {
         throw new Error(`Unsupported input format: ${options.input}`);
     }
