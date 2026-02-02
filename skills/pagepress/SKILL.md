@@ -57,7 +57,7 @@ PagePress provides two PDF generation modes:
 pagepress snap -i input.html -o output.png --preset og
 ```
 
-> PNG output requires a `#card-container` element. Rendering fails if it is missing.
+> PNG output requires a `#container` element. Rendering fails if it is missing.
 
 ### Assets Directory (AI Agent Guidance)
 

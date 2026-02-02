@@ -120,13 +120,13 @@ export async function render(options: Options): Promise<Result> {
 
         await page.waitForTimeout(500);
 
-        const cardContainer = await page.$('#card-container');
+        const cardContainer = await page.$('#container');
         if (!cardContainer) {
-            throw new Error('Missing #card-container element. PNG output requires a #card-container.');
+            throw new Error('Missing #container element. PNG output requires a #container.');
         }
         const box = await cardContainer.boundingBox();
         if (!box || box.width <= 0 || box.height <= 0) {
-            throw new Error('Invalid #card-container size. Ensure it has a positive width and height.');
+            throw new Error('Invalid #container size. Ensure it has a positive width and height.');
         }
 
         const outputPath = path.resolve(options.output);

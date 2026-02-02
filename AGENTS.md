@@ -5,7 +5,7 @@ Provide the `pagepress` CLI tool to render Markdown / HTML / URL into consistent
 
 ## Technical Approach
 - **Playwright + Chromium** as the rendering and export engine
-- **PNG**: use `page.screenshot`, capture only `#card-container` (fail if missing)
+- **PNG**: use `page.screenshot`, capture only `#container` (fail if missing)
 - **PDF**: use the browser print engine (`Page.printToPDF`), with `-webkit-print-color-adjust: exact`
 - **Theme design**: emphasize whitespace and breathing room; avoid cramped layout
 
