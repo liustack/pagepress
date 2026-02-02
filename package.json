@@ -1,14 +1,60 @@
 {
-  "name": "web-printer",
-  "version": "1.0.0",
-  "description": "Web printing toolkit with modular skills",
+  "name": "pagepress",
+  "version": "0.1.0",
+  "description": "CLI tool to convert web pages and Markdown to PDF and images",
   "type": "module",
-  "private": true,
+  "bin": {
+    "pagepress": "./dist/main.js"
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build"
+  },
+  "files": [
+    "dist",
+    "src/print/templates"
+  ],
   "keywords": [
     "pdf",
     "screenshot",
-    "web-printer"
+    "html-to-pdf",
+    "html-to-image",
+    "markdown-to-pdf",
+    "cli",
+    "playwright",
+    "mermaid"
   ],
   "author": "Leon Liu",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liustack/pagepress.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liustack/pagepress/issues"
+  },
+  "homepage": "https://github.com/liustack/pagepress#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@fontsource/bebas-neue": "^5.2.7",
+    "@fontsource/cormorant-garamond": "^5.2.11",
+    "@fontsource/inter": "^5.2.8",
+    "commander": "^13.1.0",
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.11.1",
+    "marked": "^15.0.6",
+    "marked-highlight": "^2.2.3",
+    "mermaid": "^11.12.2",
+    "playwright": "^1.50.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vite-plugin-node": "^5.0.0"
+  }
 }

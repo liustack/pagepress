@@ -1,116 +1,81 @@
-# Web Printer
+# PagePress
 
-[中文文档](README_CN.md)
+一套专为 **AI Agent** 设计的 Web 内容渲染工具集（CLI），可将 HTML、Markdown、URL 转换为高质量的 **PDF** 或 **PNG** 图像。
 
-A web content rendering toolkit designed for **AI Agents**, converting HTML, Markdown, and URLs to high-quality **PDF** or **PNG** images.
+## ✨ 特性
 
-## ✨ Features
+- **统一 CLI**：一个工具 (`pagepress`) 搞定 PDF 和 Image 生成
+- **AI Agent 友好**：包含详细的 SKILL.md 指南，支持场景路由
+- **多种输入**：支持本地 HTML、Markdown 文件或远程 URL
+- **丰富模板**：
+  - **PDF**: Apple 风格、GitHub 风格、杂志排版 (Magazine)
+  - **Image**: OG 卡片、信息图、海报、横幅
+- **一致性保障**：确定性渲染、字体等待、网络空闲检测、代码高亮
 
-- **Dual Skill Architecture**: Independent `web-to-pdf` and `web-to-png` converters
-- **Multiple Inputs**: Supports local HTML, Markdown files, or remote URLs
-- **Rich Themes**: PDF supports 5 beautiful Markdown themes (Apple style, GitHub, Academic, Sketch, Magazine)
-- **Flexible Output**: OG cards, posters, long screenshots, A4 documents, and more presets
-- **Consistency Guaranteed**: Deterministic rendering, font waiting, network idle detection
-- **Smart Storage**: Asks for output directory on first use, defaults to `{workspace}/assets/`
-
-## 📦 Installation
-
-### 🤖 AI Agent Installation
-
-Provide the following GitHub URLs to your AI Agent, and it will automatically download and install:
-
-| Skill | GitHub URL |
-|-------|------------|
-| **web-to-pdf** | `https://github.com/leonmakes/web-printer/tree/main/skills/web-to-pdf` |
-| **web-to-png** | `https://github.com/leonmakes/web-printer/tree/main/skills/web-to-png` |
-
-### 🔧 Manual Installation
+## 📦 安装
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/leonmakes/web-printer.git
+# 全局安装
+npm install -g pagepress
 
-# 2. Copy skill to your AI Agent's skills directory
-#    Example for Claude Code:
-cp -r web-printer/skills/web-to-pdf ~/.claude/skills/
-cp -r web-printer/skills/web-to-png ~/.claude/skills/
-
-# 3. Enter skill directory and install dependencies
-cd ~/.claude/skills/web-to-png
-pnpm install
-
-# 4. Install browser (Playwright)
-pnpm exec playwright install chromium
+# 安装浏览器（Playwright）
+npx playwright install chromium
 ```
 
-> **Skills directory reference for other AI Agents**:
-> - Claude Code: `~/.claude/skills/`
-> - Gemini CLI / Antigravity: `~/.gemini/antigravity/skills/`
-> - Other Agents: Please refer to their documentation
-
-Each skill directory contains an independent `SKILL.md` documentation file. See each skill's usage guide for details.
-
-## 🛠️ Skills Overview
-
-### [web-to-pdf](skills/web-to-pdf/SKILL.md)
-
-Convert HTML/Markdown/URL to PDF documents.
+或者直接使用 `npx`:
 
 ```bash
-# Markdown (auto-beautified)
-node skills/web-to-pdf/scripts/converter.js \
-  --input doc.md --style magazine --output out.pdf
-
-# HTML (print as-is)
-node skills/web-to-pdf/scripts/converter.js \
-  --input page.html --format html --output out.pdf
+npx pagepress <command> [options]
 ```
 
-**Supported themes**: `default` (Apple) | `github` | `academic` | `magazine`
+## 🚀 使用指南
 
----
+### 1. 生成 PDF
 
-### [web-to-png](skills/web-to-png/SKILL.md)
-
-Render HTML/URL to PNG images, ideal for social sharing cards, posters, and long screenshots.
+将 HTML/Markdown 转换为 PDF 文档。支持自动目录生成和代码高亮。
 
 ```bash
-# OG Card (1200×630)
-node skills/web-to-png/scripts/converter.js \
-  --input card.html --preset og --output og.png
+# Markdown 转 PDF（使用 Apple 风格模板）
+pagepress print -i document.md -o output.pdf --template default
 
-# Screenshot (default)
-node skills/web-to-png/scripts/converter.js \
-  --url https://example.com --output page.png
+# 本地 HTML 文件转 PDF
+pagepress print -i page.html -o output.pdf
 
-# Infographic (width 1080, height auto)
-node skills/web-to-png/scripts/converter.js \
-  --url https://example.com --preset infographic --output long.png
+# 网页打印（原样打印）
+pagepress print -i https://example.com -o webpage.pdf
 ```
 
-**Supported presets**: `og` | `post` | `infographic` | `poster` | `banner`
+**支持的模板**：
+- `default` - Apple 风格，简洁优雅
+- `github` - GitHub 风格
+- `magazine` - VOGUE/WIRED 杂志排版
 
-Optional: Use `--meta` to output corresponding `meta.json`.
+### 2. 生成图像
 
-## 📁 Directory Structure
+将 HTML/URL 渲染为 PNG 图像，适合社交分享卡片、海报、长图截屏。
 
+```bash
+# 生成 OG 卡片（1200×630）
+pagepress snap -i card.html -o og.png --preset og
+
+# 生成信息长图
+pagepress snap -i stats.html -o infographic.png --preset infographic
+
+# 网页截图
+pagepress snap -i https://example.com -o screenshot.png
 ```
-web-printer/
-├── skills/
-│   ├── web-to-pdf/        # PDF conversion skill
-│   │   ├── SKILL.md       # Skill documentation
-│   │   ├── scripts/       # Conversion scripts
-│   │   ├── templates/     # Markdown theme templates
-│   │   └── examples/      # Example files
-│   │
-│   └── web-to-png/        # PNG conversion skill
-│       ├── SKILL.md       # Skill documentation
-│       ├── scripts/       # Conversion scripts
-│       └── examples/      # Example files
-│
-├── package.json
-└── README.md
-```
+
+**支持的预设**：
+- `og` (1200×630) - 社交卡片
+- `infographic` (1080×1350) - 信息图
+- `poster` (1200×1500) - 海报
+- `banner` (1600×900) - 横幅
+
+## 🤖 AI Agent 集成
+
+本项目包含详细的 [SKILL.md](skills/pagepress/SKILL.md)，旨在帮助 AI Agent（如 Claude, ChatGPT）理解如何使用此工具。
+
+Agent 可以根据用户的自然语言指令（如“生成一张海报”、“把这个文档转成 PDF”）自动选择合适的命令和参数。
 
 ## 📄 License
 
