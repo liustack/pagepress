@@ -5,115 +5,115 @@ description: "Print web pages, export PDF, generate document reports, screenshot
 
 # PagePress
 
-将 HTML/Markdown 转换为 PDF 文档或 PNG 图像的 CLI 工具。
+CLI tool to convert HTML/Markdown into PDF documents or PNG images.
 
-## 安装
+## Installation
 
 ```bash
 npm install -g pagepress
 npx playwright install chromium
 ```
 
-## PDF 输出
+## PDF Output
 
 ```bash
 pagepress print -i input.md -o output.pdf --template default
 ```
 
-### 核心策略 (Core Strategy)
+### Core Strategy
 
-PagePress 提供两种 PDF 生成模式：
-1. **Markdown 格式化** (Beautification): 输入 Markdown，使用内置模板 (default/github/magazine) 进行排版美化。
-2. **HTML/URL 打印** (Print As-is): 输入 HTML 或 URL，直接打印，不添加额外样式。Agent 应先完成 HTML 布局。
+PagePress provides two PDF generation modes:
+1. **Markdown Beautification**: input Markdown and use built-in templates (default/github/magazine) for layout and styling.
+2. **HTML/URL Print As-is**: input HTML or a URL and print directly without extra styles. The Agent should finish the HTML layout first.
 
-### 场景路由表 (PDF)
+### Scenario Routing Table (PDF)
 
-| 场景 | 触发词 (Trigger Phrases) | 输入方法 | 模板/选项 |
+| Scenario | Trigger Phrases | Input Method | Template/Options |
 |---|---|---|---|
-| **Markdown 转文档** | "export PDF", "generate report", "save as PDF", "convert to document" | `-i file.md` | `--template default` (或其他模板) |
-| **网页打印** | "print web page", "print to PDF", "save page as PDF" | `-i https://...` | 默认 (无模板) |
-| **HTML 打印** | "print HTML", "render HTML to PDF" | `-i file.html` | 默认 (无模板) |
+| **Markdown to document** | "export PDF", "generate report", "save as PDF", "convert to document" | `-i file.md` | `--template default` (or other templates) |
+| **Web page print** | "print web page", "print to PDF", "save page as PDF" | `-i https://...` | Default (no template) |
+| **HTML print** | "print HTML", "render HTML to PDF" | `-i file.html` | Default (no template) |
 
-**支持的模板 (Markdown Only)**:
-- `default` - Apple 风格，简洁优雅
-- `github` - GitHub 风格
-- `magazine` - VOGUE/WIRED 杂志排版
+**Supported templates (Markdown only)**:
+- `default` - Apple style, clean and elegant
+- `github` - GitHub style
+- `magazine` - VOGUE/WIRED magazine layout
 
-**选项**:
-- `-i, --input <path>` - 输入 Markdown 或 HTML 文件
-- `-o, --output <path>` - 输出 PDF 路径
-- `-t, --template <name>` - 模板 (默认: default)
-- `--no-toc` - 禁用目录
+**Options**:
+- `-i, --input <path>` - input Markdown or HTML file
+- `-o, --output <path>` - output PDF path
+- `-t, --template <name>` - template (default: default)
+- `--no-toc` - disable table of contents
 
-## 图像输出
+## Image Output
 
 ```bash
 pagepress snap -i input.html -o output.png --preset og
 ```
 
-### 场景路由表 (AI Agent 决策指南)
+### Scenario Routing Table (AI Agent Decision Guide)
 
-| 场景 | 触发词 (Trigger Phrases) | 参数参数 | 布局准则 |
+| Scenario | Trigger Phrases | Parameters | Layout Guidelines |
 |---|---|---|---|
-| **screenshot (默认)** | "screenshot this page", "capture the webpage", "截图" | **无 preset** | 保持原网页布局 |
-| **og (社交卡片)** | "OG image", "social preview", "share card", "链接预览图" | `--preset og` | 1200×630; 安全边距 ≥120px |
-| **infographic (信息图)** | "cheat sheet", "quick reference", "data card", "信息图", "长图" | `--preset infographic` | 1080×1350; 高信息密度 |
-| **poster (海报)** | "poster", "vertical promo", "event poster", "海报" | `--preset poster` | 1200×1500; 极简文字，极致视觉 |
-| **banner (横幅)** | "header", "cover image", "hero", "横幅", "封面" | `--preset banner` | 1600×900; 横向布局 |
+| **screenshot (default)** | "screenshot this page", "capture the webpage", "take a screenshot" | **no preset** | Preserve the original web layout |
+| **og (social card)** | "OG image", "social preview", "share card", "link preview" | `--preset og` | 1200x630; safe margin >=120px |
+| **infographic** | "cheat sheet", "quick reference", "data card", "infographic", "long-form image" | `--preset infographic` | 1080x1350; high information density |
+| **poster** | "poster", "vertical promo", "event poster", "promo poster" | `--preset poster` | 1200x1500; minimal text, strong visual impact |
+| **banner** | "header", "cover image", "hero", "banner", "cover" | `--preset banner` | 1600x900; horizontal layout |
 
-### 预设规格与设计指南 (AI Agent 参考)
+### Preset Specs and Design Guidelines (AI Agent Reference)
 
-> 这些指南帮助 AI Agent 生成高质量的 HTML。请复用用户项目的品牌资产（颜色、字体、Logo）。
+> These guidelines help the AI Agent generate high-quality HTML. Reuse the user's brand assets (colors, fonts, logo).
 
-#### 1. og (1200×630) - 链接预览图
-- **场景**: 社交媒体分享链接时的预览图。
-- **核心原则**:
-  - **小尺寸可读性**: 标题在 400px 宽度下必须清晰可见
-  - **单一焦点**: 只传达一个核心信息
-  - **安全区**: 内容保持距边缘 **120px** 以上
+#### 1. og (1200x630) - Link Preview Image
+- **Scenario**: Preview image when sharing links on social media.
+- **Core principles**:
+  - **Small-size readability**: the headline must be clearly legible at 400px width
+  - **Single focus**: convey only one core message
+  - **Safe area**: keep content at least **120px** from the edges
 
-#### 3. infographic (1080×1350) - 信息图/作弊表
-- **场景**: 结构化的复杂信息展示，甚至代码片段。
-- **核心原则**: **高信息密度**
-  - **结构化**: 使用网格、分块、列表、序号
-  - **层级分明**: 标题 > 副标题 > 正文 > 标注
-  - **适度留白**: **100px+** 边距避免拥挤
+#### 3. infographic (1080x1350) - Infographic/Cheat Sheet
+- **Scenario**: Structured presentation of complex information, even code snippets.
+- **Core principle**: **High information density**
+  - **Structured**: use grids, blocks, lists, numbering
+  - **Clear hierarchy**: title > subtitle > body > annotation
+  - **Moderate whitespace**: **100px+** margins to avoid crowding
 
-#### 4. poster (1200×1500) - 海报
-- **场景**: 移动端竖屏视觉冲击图（活动、发布会）。
-- **核心原则**: **极少文字，极致视觉**
-  - 文字：仅 1 个主标题 + 1 个副标题
-  - 主视觉占 50%+
-  - **120px+** 边距
+#### 4. poster (1200x1500) - Poster
+- **Scenario**: Vertical mobile visual impact (events, launches).
+- **Core principle**: **Minimal text, maximum visual**
+  - Text: only 1 main title + 1 subtitle
+  - Main visual occupies 50%+
+  - **120px+** margins
 
-#### 5. banner (1600×900) - 横幅
-- **场景**: 博客封面、Twitter/LinkedIn 顶部背景。
-- **布局**: 横向构图，内容居中或左文右图。
+#### 5. banner (1600x900) - Banner
+- **Scenario**: Blog covers, Twitter/LinkedIn header backgrounds.
+- **Layout**: horizontal composition, content centered or left-text-right-image.
 
-### 选项
-- `-i, --input <path>` - 输入 HTML 文件或 URL
-- `-o, --output <path>` - 输出 PNG 路径
-- `--preset <name>` - 预设: `og`, `infographic`, `poster`, `banner`
-- `--width <px>` - 自定义宽度
-- `--height <px>` - 自定义高度
-- `--scale <n>` - 设备缩放比 (默认: 2)
-- `--auto-cleanup` - 转换后自动删除输入文件
+### Options
+- `-i, --input <path>` - input HTML file or URL
+- `-o, --output <path>` - output PNG path
+- `--preset <name>` - preset: `og`, `infographic`, `poster`, `banner`
+- `--width <px>` - custom width
+- `--height <px>` - custom height
+- `--scale <n>` - device scale factor (default: 2)
+- `--auto-cleanup` - delete input file after conversion
 
-## 图像设计指南
+## Image Design Guidelines
 
 > [!CAUTION]
-> **禁止交互元素** — 生成的是**静态视觉资产**，不是网页。
+> **No interactive elements** — the output is a **static visual asset**, not a web page.
 >
-> **禁止使用**: 导航菜单、按钮、链接、表单、汉堡图标等暗示可点击的元素。
+> **Do not use**: navigation menus, buttons, links, forms, hamburger icons, or any elements that imply clickability.
 >
-> **应该使用**: 标题、标语、装饰图形、图标、统计数据、品牌标识。
+> **Should use**: titles, taglines, decorative graphics, icons, statistics, brand marks.
 
-## 示例
+## Examples
 
 ```bash
-# 生成 OG 图像
+# Generate an OG image
 pagepress snap -i card.html -o og.png --preset og
 
-# 生成 PDF 报告
+# Generate a PDF report
 pagepress print -i report.md -o report.pdf --template github
 ```

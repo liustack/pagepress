@@ -1,6 +1,6 @@
 /**
- * 本地字体 CSS 注入模块
- * 使用 Fontsource npm 包替代 Google Fonts CDN
+ * Local font CSS injection module
+ * Uses Fontsource npm packages instead of Google Fonts CDN
  */
 
 import { createRequire } from 'module';
@@ -9,7 +9,7 @@ import * as path from 'path';
 
 const require = createRequire(import.meta.url);
 
-// Magazine 模板使用的字体
+// Fonts used by the magazine template
 const MAGAZINE_FONTS = [
     '@fontsource/bebas-neue/400.css',
     '@fontsource/cormorant-garamond/400.css',
@@ -21,11 +21,11 @@ const MAGAZINE_FONTS = [
 ];
 
 /**
- * 获取指定模板的字体 CSS（含内联的 woff2 base64）
+ * Get font CSS for the specified template (with inline woff2 base64)
  */
 export function getFontCSS(template: string): string {
     if (template !== 'magazine') {
-        return ''; // 其他模板使用系统字体
+        return ''; // Other templates use system fonts
     }
 
     const cssChunks: string[] = [];
@@ -35,7 +35,7 @@ export function getFontCSS(template: string): string {
             const cssFilePath = require.resolve(fontPath);
             let css = fs.readFileSync(cssFilePath, 'utf-8');
 
-            // 将相对路径的 woff2 文件转为 base64 内联
+            // Convert relative woff2 paths to inline base64
             const cssDir = path.dirname(cssFilePath);
             css = css.replace(/url\(\.\/files\/([^)]+)\)/g, (match, filename) => {
                 const fontFilePath = path.join(cssDir, 'files', filename);

@@ -1,81 +1,81 @@
 # PagePress
 
-一套专为 **AI Agent** 设计的 Web 内容渲染工具集（CLI），可将 HTML、Markdown、URL 转换为高质量的 **PDF** 或 **PNG** 图像。
+A web content rendering toolkit (CLI) designed for **AI Agents**, converting HTML, Markdown, and URLs into high-quality **PDF** or **PNG** images.
 
-## ✨ 特性
+## ✨ Features
 
-- **统一 CLI**：一个工具 (`pagepress`) 搞定 PDF 和 Image 生成
-- **AI Agent 友好**：包含详细的 SKILL.md 指南，支持场景路由
-- **多种输入**：支持本地 HTML、Markdown 文件或远程 URL
-- **丰富模板**：
-  - **PDF**: Apple 风格、GitHub 风格、杂志排版 (Magazine)
-  - **Image**: OG 卡片、信息图、海报、横幅
-- **一致性保障**：确定性渲染、字体等待、网络空闲检测、代码高亮
+- **Unified CLI**: One tool (`pagepress`) for both PDF and image generation
+- **AI Agent friendly**: Includes a detailed SKILL.md guide with scenario routing
+- **Multiple inputs**: Local HTML, Markdown files, or remote URLs
+- **Rich templates**:
+  - **PDF**: Apple style, GitHub style, magazine layout (Magazine)
+  - **Image**: OG cards, infographics, posters, banners
+- **Consistency guarantees**: Deterministic rendering, font waiting, network idle detection, syntax highlighting
 
-## 📦 安装
+## 📦 Installation
 
 ```bash
-# 全局安装
+# Global install
 npm install -g pagepress
 
-# 安装浏览器（Playwright）
+# Install browsers (Playwright)
 npx playwright install chromium
 ```
 
-或者直接使用 `npx`:
+Or use `npx` directly:
 
 ```bash
 npx pagepress <command> [options]
 ```
 
-## 🚀 使用指南
+## 🚀 Usage
 
-### 1. 生成 PDF
+### 1. Generate PDF
 
-将 HTML/Markdown 转换为 PDF 文档。支持自动目录生成和代码高亮。
+Convert HTML/Markdown into PDF documents. Supports automatic table of contents generation and syntax highlighting.
 
 ```bash
-# Markdown 转 PDF（使用 Apple 风格模板）
+# Markdown to PDF (Apple style template)
 pagepress print -i document.md -o output.pdf --template default
 
-# 本地 HTML 文件转 PDF
+# Local HTML file to PDF
 pagepress print -i page.html -o output.pdf
 
-# 网页打印（原样打印）
+# Print a web page (print as-is)
 pagepress print -i https://example.com -o webpage.pdf
 ```
 
-**支持的模板**：
-- `default` - Apple 风格，简洁优雅
-- `github` - GitHub 风格
-- `magazine` - VOGUE/WIRED 杂志排版
+**Supported templates**:
+- `default` - Apple style, clean and elegant
+- `github` - GitHub style
+- `magazine` - VOGUE/WIRED magazine layout
 
-### 2. 生成图像
+### 2. Generate Images
 
-将 HTML/URL 渲染为 PNG 图像，适合社交分享卡片、海报、长图截屏。
+Render HTML/URLs into PNG images, suitable for social share cards, posters, and long screenshots.
 
 ```bash
-# 生成 OG 卡片（1200×630）
+# Generate an OG card (1200x630)
 pagepress snap -i card.html -o og.png --preset og
 
-# 生成信息长图
+# Generate a long infographic
 pagepress snap -i stats.html -o infographic.png --preset infographic
 
-# 网页截图
+# Webpage screenshot
 pagepress snap -i https://example.com -o screenshot.png
 ```
 
-**支持的预设**：
-- `og` (1200×630) - 社交卡片
-- `infographic` (1080×1350) - 信息图
-- `poster` (1200×1500) - 海报
-- `banner` (1600×900) - 横幅
+**Supported presets**:
+- `og` (1200x630) - Social card
+- `infographic` (1080x1350) - Infographic
+- `poster` (1200x1500) - Poster
+- `banner` (1600x900) - Banner
 
-## 🤖 AI Agent 集成
+## 🤖 AI Agent Integration
 
-本项目包含详细的 [SKILL.md](skills/pagepress/SKILL.md)，旨在帮助 AI Agent（如 Claude, ChatGPT）理解如何使用此工具。
+This project includes a detailed [SKILL.md](skills/pagepress/SKILL.md) to help AI Agents (such as Claude, ChatGPT) understand how to use this tool.
 
-Agent 可以根据用户的自然语言指令（如“生成一张海报”、“把这个文档转成 PDF”）自动选择合适的命令和参数。
+Agents can automatically choose the appropriate commands and parameters based on natural language instructions (for example, "generate a poster" or "convert this document to PDF").
 
 ## 📄 License
 
