@@ -2,6 +2,8 @@
 
 A web content rendering toolkit (CLI) designed for **AI Agents**, converting HTML, Markdown, and URLs into high-quality **PDF** or **PNG** images.
 
+中文说明请见：[README.zh-CN.md](README.zh-CN.md)
+
 ## ✨ Features
 
 - **Unified CLI**: One tool (`pagepress`) for both PDF and image generation
@@ -10,6 +12,7 @@ A web content rendering toolkit (CLI) designed for **AI Agents**, converting HTM
 - **Rich templates**:
   - **PDF**: Apple style, GitHub style, magazine layout (Magazine)
   - **Image**: OG cards, infographics, posters, banners
+- **Brand-aware visuals**: OG / poster / banner outputs are generated based on workspace visual & brand assets (commonly in `assets/`, `public/`, `src/assets/`)
 - **Consistency guarantees**: Deterministic rendering, font waiting, network idle detection, syntax highlighting
 
 ## 📦 Installation
@@ -53,6 +56,21 @@ pagepress pdf -i https://example.com -o webpage.pdf
 ### 2. Generate Images
 
 Render HTML/URLs into PNG images, suitable for social share cards, posters, and long screenshots.
+
+For OG cards, posters, and banners, the visuals should be generated based on workspace brand assets (logo, colors, fonts, imagery), commonly located in `assets/`, `public/`, or `src/assets/`.
+
+**Recommended brand assets layout**:
+
+```text
+assets/
+  brand/
+    logo.svg
+    palette.json
+    fonts/
+      YourBrand-Regular.woff2
+    imagery/
+      hero.jpg
+```
 
 ```bash
 # Generate an OG card (1200x630)

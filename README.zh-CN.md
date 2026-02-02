@@ -10,6 +10,7 @@
 - **丰富模板**：
   - **PDF**: Apple 风格、GitHub 风格、杂志排版 (Magazine)
   - **Image**: OG 卡片、信息图、海报、横幅
+- **品牌一致性**：OG/海报/横幅会基于工作区的视觉与品牌资源生成（常见于 `assets/`、`public/`、`src/assets/`）
 - **一致性保障**：确定性渲染、字体等待、网络空闲检测、代码高亮
 
 ## 📦 安装
@@ -53,6 +54,21 @@ pagepress pdf -i https://example.com -o webpage.pdf
 ### 2. 生成图像
 
 将 HTML/URL 渲染为 PNG 图像，适合社交分享卡片、海报、长图截屏。
+
+对于 OG 卡片、海报、横幅，视觉应基于工作区的品牌资源（logo、颜色、字体、素材）生成，常见目录包括 `assets/`、`public/`、`src/assets/`。
+
+**品牌资源目录建议**：
+
+```text
+assets/
+  brand/
+    logo.svg
+    palette.json
+    fonts/
+      YourBrand-Regular.woff2
+    imagery/
+      hero.jpg
+```
 
 ```bash
 # 生成 OG 卡片（1200×630）

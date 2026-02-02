@@ -66,6 +66,13 @@ pagepress shot -i input.html -o output.png --preset og
 - Remember the answer as `$ASSETS_DIR` for the session.
 - If the user does not reply or accepts the default, use `${workspaceRoot}/assets` (workspace root `assets/`).
 
+### Workspace Visual & Brand Resources (AI Agent Guidance)
+
+- For OG cards, posters, and banners, **always** base the design on workspace visual/brand resources.
+- Check the workspace for existing assets such as logos, color tokens, fonts, and brand imagery (commonly in `assets/`, `public/`, `src/assets/`, `docs/`, or any `brand/`-named folders).
+- Also inspect project stylesheets and font usage (e.g., `*.css`, `*.scss`, `*.tailwind.css`) to infer the color palette and visual style when explicit brand assets are incomplete.
+- If no brand resources are available, ask the user to provide them (logo, palette, font preference) before generating visuals.
+
 ### Temporary HTML Cleanup (AI Agent Guidance)
 
 - If the AI Agent generates temporary HTML for rendering, use the system temporary directory:
