@@ -43,6 +43,8 @@ PagePress provides two PDF generation modes:
 - `-i, --input <path>` - input Markdown or HTML file
 - `-o, --output <path>` - output PDF path
 - `-t, --template <name>` - template (default: default)
+- `--wait-until <state>` - navigation waitUntil: load, domcontentloaded, networkidle
+- `--timeout <ms>` - navigation timeout in milliseconds
 - `--safe` - disable external network requests and JavaScript execution
 
 **Safe mode notes** (applies to print and snap):
@@ -103,10 +105,12 @@ pagepress snap -i input.html -o output.png --preset og
 ### Options
 - `-i, --input <path>` - input HTML file or URL
 - `-o, --output <path>` - output PNG path
-- `--preset <name>` - preset: `og`, `infographic`, `poster`, `banner`
+- `-p, --preset <name>` - preset: `og`, `infographic`, `poster`, `banner`
 - `--width <px>` - custom width
 - `--height <px>` - custom height
 - `--scale <n>` - device scale factor (default: 2)
+- `--wait-until <state>` - navigation waitUntil: load, domcontentloaded, networkidle
+- `--timeout <ms>` - navigation timeout in milliseconds
 - `--safe` - disable external network requests and JavaScript execution
 
 ## Image Design Guidelines

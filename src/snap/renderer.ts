@@ -3,6 +3,26 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { getPreset } from './presets.ts';
 
+type WaitUntilState = 'load' | 'domcontentloaded' | 'networkidle';
+
+const WAIT_UNTIL_STATES = new Set<WaitUntilState>(['load', 'domcontentloaded', 'networkidle']);
+
+function normalizeWaitUntil(value?: string): WaitUntilState {
+    if (!value) return 'networkidle';
+    if (WAIT_UNTIL_STATES.has(value as WaitUntilState)) {
+        return value as WaitUntilState;
+    }
+    throw new Error(`Invalid waitUntil: ${value}. Allowed: load, domcontentloaded, networkidle.`);
+}
+
+function normalizeTimeout(value?: number): number {
+    if (value === undefined) return 30000;
+    if (!Number.isFinite(value) || value < 0) {
+        throw new Error('Invalid timeout. Use a non-negative number of milliseconds.');
+    }
+    return value;
+}
+
 export interface Options {
     input: string;
     output: string;
@@ -11,6 +31,8 @@ export interface Options {
     height?: number;
     scale?: number;
     safe?: boolean;
+    waitUntil?: string;
+    timeout?: number;
 }
 
 export interface Result {
@@ -30,6 +52,8 @@ export async function render(options: Options): Promise<Result> {
     const height = options.height ?? preset.height;
     const scale = options.scale ?? 2;
     const safeMode = options.safe ?? false;
+    const waitUntil = normalizeWaitUntil(options.waitUntil);
+    const timeout = normalizeTimeout(options.timeout);
 
     let browser: Browser | null = null;
 
@@ -56,10 +80,10 @@ export async function render(options: Options): Promise<Result> {
             if (safeMode) {
                 throw new Error('Safe mode does not allow remote URL inputs.');
             }
-            await page.goto(options.input, { waitUntil: 'networkidle' });
+            await page.goto(options.input, { waitUntil, timeout });
         } else if (fs.existsSync(inputPath)) {
             const content = fs.readFileSync(inputPath, 'utf-8');
-            await page.setContent(content, { waitUntil: 'networkidle' });
+            await page.setContent(content, { waitUntil, timeout });
         } else {
             throw new Error(`Input not found: ${options.input}`);
         }

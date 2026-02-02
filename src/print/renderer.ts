@@ -14,6 +14,26 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const require = createRequire(import.meta.url);
 
+type WaitUntilState = 'load' | 'domcontentloaded' | 'networkidle';
+
+const WAIT_UNTIL_STATES = new Set<WaitUntilState>(['load', 'domcontentloaded', 'networkidle']);
+
+function normalizeWaitUntil(value?: string): WaitUntilState {
+    if (!value) return 'networkidle';
+    if (WAIT_UNTIL_STATES.has(value as WaitUntilState)) {
+        return value as WaitUntilState;
+    }
+    throw new Error(`Invalid waitUntil: ${value}. Allowed: load, domcontentloaded, networkidle.`);
+}
+
+function normalizeTimeout(value?: number): number {
+    if (value === undefined) return 30000;
+    if (!Number.isFinite(value) || value < 0) {
+        throw new Error('Invalid timeout. Use a non-negative number of milliseconds.');
+    }
+    return value;
+}
+
 // Find templates directory - try multiple possible locations
 function findTemplatesDir(): string {
     const candidates = [
@@ -37,6 +57,8 @@ export interface Options {
     output: string;
     template?: string;
     safe?: boolean;
+    waitUntil?: string;
+    timeout?: number;
 }
 
 export interface Result {
@@ -51,6 +73,8 @@ export interface Result {
 export async function render(options: Options): Promise<Result> {
     const template = getTemplate(options.template ?? 'default');
     const safeMode = options.safe ?? false;
+    const waitUntil = normalizeWaitUntil(options.waitUntil);
+    const timeout = normalizeTimeout(options.timeout);
     const templatesDir = findTemplatesDir();
     const templatePath = path.join(templatesDir, template.file);
 
@@ -164,9 +188,9 @@ export async function render(options: Options): Promise<Result> {
         const page = await context.newPage();
 
         if (options.input.startsWith('http')) {
-            await page.goto(options.input, { waitUntil: 'networkidle' });
+            await page.goto(options.input, { waitUntil, timeout });
         } else {
-            await page.setContent(htmlContent, { waitUntil: 'networkidle' });
+            await page.setContent(htmlContent, { waitUntil, timeout });
         }
 
         // Inject local fonts for magazine template
