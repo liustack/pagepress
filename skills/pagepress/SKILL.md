@@ -43,7 +43,6 @@ PagePress provides two PDF generation modes:
 - `-i, --input <path>` - input Markdown or HTML file
 - `-o, --output <path>` - output PDF path
 - `-t, --template <name>` - template (default: default)
-- `--no-toc` - disable table of contents
 
 ## Image Output
 

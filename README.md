@@ -32,7 +32,7 @@ npx pagepress <command> [options]
 
 ### 1. Generate PDF
 
-Convert HTML/Markdown into PDF documents. Supports automatic table of contents generation and syntax highlighting.
+Convert HTML/Markdown into PDF documents. Supports syntax highlighting.
 
 ```bash
 # Markdown to PDF (Apple style template)

@@ -36,7 +36,6 @@ export interface Options {
     input: string;
     output: string;
     template?: string;
-    toc?: boolean;
 }
 
 export interface Result {

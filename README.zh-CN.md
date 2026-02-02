@@ -32,7 +32,7 @@ npx pagepress <command> [options]
 
 ### 1. 生成 PDF
 
-将 HTML/Markdown 转换为 PDF 文档。支持自动目录生成和代码高亮。
+将 HTML/Markdown 转换为 PDF 文档。支持代码高亮。
 
 ```bash
 # Markdown 转 PDF（使用 Apple 风格模板）

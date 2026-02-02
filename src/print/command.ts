@@ -6,14 +6,12 @@ export const command = new Command('print')
     .requiredOption('-i, --input <path>', 'Input file path or URL')
     .requiredOption('-o, --output <path>', 'Output PDF file path')
     .option('-t, --template <name>', 'PDF template (default, github, magazine)', 'default')
-    .option('--no-toc', 'Disable table of contents')
     .action(async (options) => {
         try {
             const result = await render({
                 input: options.input,
                 output: options.output,
                 template: options.template,
-                toc: options.toc,
             });
             console.log(JSON.stringify(result, null, 2));
         } catch (error) {
