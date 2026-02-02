@@ -16,7 +16,7 @@
 
 ```bash
 # 全局安装
-npm install -g pagepress
+npm install -g @liustack/pagepress
 
 # 安装浏览器（Playwright）
 npx playwright install chromium
@@ -25,7 +25,7 @@ npx playwright install chromium
 或者直接使用 `npx`:
 
 ```bash
-npx pagepress <command> [options]
+npx @liustack/pagepress <command> [options]
 ```
 
 ## 🚀 使用指南

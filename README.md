@@ -16,7 +16,7 @@ A web content rendering toolkit (CLI) designed for **AI Agents**, converting HTM
 
 ```bash
 # Global install
-npm install -g pagepress
+npm install -g @liustack/pagepress
 
 # Install browsers (Playwright)
 npx playwright install chromium
@@ -25,7 +25,7 @@ npx playwright install chromium
 Or use `npx` directly:
 
 ```bash
-npx pagepress <command> [options]
+npx @liustack/pagepress <command> [options]
 ```
 
 ## 🚀 Usage

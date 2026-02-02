@@ -1,5 +1,5 @@
 {
-  "name": "pagepress",
+  "name": "@liustack/pagepress",
   "version": "0.1.0",
   "description": "CLI tool to convert web pages and Markdown to PDF and images",
   "type": "module",
