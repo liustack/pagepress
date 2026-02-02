@@ -6,6 +6,10 @@ import { getPreset } from './presets.ts';
 type WaitUntilState = 'load' | 'domcontentloaded' | 'networkidle';
 
 const WAIT_UNTIL_STATES = new Set<WaitUntilState>(['load', 'domcontentloaded', 'networkidle']);
+const MIN_DIMENSION = 100;
+const MAX_DIMENSION = 5000;
+const MIN_SCALE = 1;
+const MAX_SCALE = 4;
 
 function normalizeWaitUntil(value?: string): WaitUntilState {
     if (!value) return 'networkidle';
@@ -21,6 +25,15 @@ function normalizeTimeout(value?: number): number {
         throw new Error('Invalid timeout. Use a non-negative number of milliseconds.');
     }
     return value;
+}
+
+function validateRange(name: string, value: number, min: number, max: number): void {
+    if (!Number.isFinite(value)) {
+        throw new Error(`${name} must be a finite number.`);
+    }
+    if (value < min || value > max) {
+        throw new Error(`${name} must be between ${min} and ${max}. Received: ${value}.`);
+    }
 }
 
 export interface Options {
@@ -54,6 +67,10 @@ export async function render(options: Options): Promise<Result> {
     const safeMode = options.safe ?? false;
     const waitUntil = normalizeWaitUntil(options.waitUntil);
     const timeout = normalizeTimeout(options.timeout);
+
+    validateRange('Width', width, MIN_DIMENSION, MAX_DIMENSION);
+    validateRange('Height', height, MIN_DIMENSION, MAX_DIMENSION);
+    validateRange('Scale', scale, MIN_SCALE, MAX_SCALE);
 
     let browser: Browser | null = null;
 
@@ -103,11 +120,20 @@ export async function render(options: Options): Promise<Result> {
 
         await page.waitForTimeout(500);
 
+        const cardContainer = await page.$('#card-container');
+        if (!cardContainer) {
+            throw new Error('Missing #card-container element. PNG output requires a #card-container.');
+        }
+        const box = await cardContainer.boundingBox();
+        if (!box || box.width <= 0 || box.height <= 0) {
+            throw new Error('Invalid #card-container size. Ensure it has a positive width and height.');
+        }
+
         const outputPath = path.resolve(options.output);
         await page.screenshot({
             path: outputPath,
             type: 'png',
-            clip: { x: 0, y: 0, width, height },
+            clip: { x: box.x, y: box.y, width: box.width, height: box.height },
         });
 
         return {
