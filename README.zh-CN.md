@@ -87,6 +87,18 @@ pagepress shot -i https://example.com -o screenshot.png
 - `poster` (1200×1500) - 海报
 - `banner` (1600×900) - 横幅
 
+## 🖼️ 示例
+
+### 图像预设
+
+| OG 卡片 (1200×630) | 信息图 (1080×1350) |
+|:---:|:---:|
+| ![OG 卡片](docs/images/shot-og.png) | ![信息图](docs/images/shot-infographic.png) |
+
+| 海报 (1200×1500) | 横幅 (1600×900) |
+|:---:|:---:|
+| ![海报](docs/images/shot-poster.png) | ![横幅](docs/images/shot-banner.png) |
+
 ## 🤖 AI Agent 集成
 
 本项目包含详细的 [SKILL.md](skills/pagepress/SKILL.md)，旨在帮助 AI Agent（如 Claude, ChatGPT）理解如何使用此工具。

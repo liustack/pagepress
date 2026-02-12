@@ -89,6 +89,18 @@ pagepress shot -i https://example.com -o screenshot.png
 - `poster` (1200x1500) - Poster
 - `banner` (1600x900) - Banner
 
+## 🖼️ Examples
+
+### Image Presets
+
+| OG Card (1200×630) | Infographic (1080×1350) |
+|:---:|:---:|
+| ![OG Card](docs/images/shot-og.png) | ![Infographic](docs/images/shot-infographic.png) |
+
+| Poster (1200×1500) | Banner (1600×900) |
+|:---:|:---:|
+| ![Poster](docs/images/shot-poster.png) | ![Banner](docs/images/shot-banner.png) |
+
 ## 🤖 AI Agent Integration
 
 This project includes a detailed [SKILL.md](skills/pagepress/SKILL.md) to help AI Agents (such as Claude, ChatGPT) understand how to use this tool.
