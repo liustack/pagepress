@@ -19,7 +19,7 @@ npx playwright install chromium
 > [!IMPORTANT]
 > **Read before generating any visual asset (PNG).** These references are mandatory, not optional.
 
-- **references/color-theory.md** — Color palette selection, 60-30-10 rule, 4-hue limit, harmony methods, ready-to-use palettes. **Always apply**, regardless of whether brand colors exist.
+- **references/color-theory.md** — Color theory rules (60-30-10 ratio, 4-hue limit, harmony methods) **always apply** to every design. Ready-to-use palettes are provided as **fallback only** — use them when no workspace brand colors exist. When brand colors exist, use them as the starting palette and apply the color theory rules on top.
 - **references/design-principles.md** — Typography scale, visual hierarchy, Gestalt principles, Japanese aesthetics, Apple HIG. Apply to every layout decision.
 
 ## Usage
