@@ -3,167 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=900, height=383">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Caveat:wght@500&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 <style>
-/* Elegant Ink: warm parchment + terracotta accent, editorial feel */
-/* Palette: #F7F3EE dominant / #2C2C2C text / #C0785A terracotta / #8B7355 muted gold */
+/* Midnight Luxe: dark charcoal + warm gold accent, sophisticated depth */
+/* Palette: #1A1A1E dominant / #2A2A30 secondary / #C9A96E gold / #F0E8D8 text */
 /* Center safe zone 383x383 — all critical content inside */
 *{margin:0;padding:0;box-sizing:border-box}
 #container{
   width:900px;height:383px;
-  background:#F7F3EE;
+  background:#1A1A1E;
   font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Inter,sans-serif;
   position:relative;overflow:hidden;
   display:flex;align-items:center;
   justify-content:center;
 }
 
-/* subtle warm gradient overlay */
+/* warm radial glow for depth */
 #container::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(192,120,90,.05) 0%,transparent 40%,rgba(139,115,85,.03) 100%);
+  content:'';position:absolute;
+  width:600px;height:600px;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(201,169,110,.06) 0%,transparent 65%);
   pointer-events:none;
 }
 
-/* center safe zone content */
+/* subtle noise texture overlay */
+#container::after{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+
+/* center safe zone content — minimal */
 .safe{
-  width:440px;
+  width:400px;
   text-align:center;
   position:relative;z-index:2;
   display:flex;flex-direction:column;
   align-items:center;
 }
 
-.top-label{
-  font-size:10px;font-weight:600;
-  letter-spacing:2.5px;text-transform:uppercase;
-  color:#C0785A;
-  margin-bottom:18px;
-  font-family:Inter,-apple-system,sans-serif;
-}
-
 h1{
-  font-family:'Playfair Display',Georgia,'Noto Serif SC',serif;
-  font-size:56px;font-weight:700;
-  color:#2C2C2C;line-height:1.1;
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:60px;font-weight:700;
+  color:#F0E8D8;line-height:1.1;
   letter-spacing:-1px;
-  margin-bottom:6px;
+  margin-bottom:12px;
 }
-h1 .page{
-  font-style:italic;
-}
-h1 .press{
-  font-style:normal;
-  color:#C0785A;
-}
-
-/* handwritten tagline */
-.tagline{
-  font-family:'Caveat',cursive;
-  font-size:22px;font-weight:500;
-  color:#8B7355;
-  margin-bottom:18px;
-  letter-spacing:.5px;
-}
+h1 .page{font-style:italic}
+h1 .press{font-style:normal;color:#C9A96E}
 
 .sub{
-  font-family:'Ma Shan Zheng','STKaiti','KaiTi',cursive;
-  font-size:16px;font-weight:400;
-  color:rgba(44,44,44,.5);
-  line-height:1.7;
-  max-width:340px;
-  margin-bottom:20px;
+  font-family:'Ma Shan Zheng','STKaiti',cursive;
+  font-size:18px;font-weight:400;
+  color:rgba(240,232,216,.35);
+  line-height:1.6;
 }
 
-/* feature row */
-.features{
-  display:flex;gap:20px;
-  align-items:center;
-}
-.feat{
-  display:flex;align-items:center;gap:6px;
-}
-.feat-dot{
-  width:8px;height:8px;border-radius:50%;
-  flex-shrink:0;
-}
-.feat-dot.a{background:#C0785A}
-.feat-dot.b{background:#8B7355}
-.feat-dot.c{background:#2C2C2C}
-.feat-text{
-  font-family:'ZCOOL XiaoWei','Ma Shan Zheng',serif;
-  font-size:13px;font-weight:400;
-  color:rgba(44,44,44,.55);
+/* thin gold separator above subtitle */
+.sep{
+  width:40px;height:1px;
+  background:linear-gradient(90deg,transparent,#C9A96E,transparent);
+  margin-bottom:14px;
+  opacity:.4;
 }
 
-/* SVG art layers — decorative, can be cropped */
+/* SVG art layers — decorative, visible on dark bg */
 .art{position:absolute;z-index:1;pointer-events:none}
 </style>
 </head>
 <body>
 <div id="container">
 
-  <!-- Left art: abstract document pages fanning out -->
-  <svg class="art" style="left:-10px;top:30px" width="260" height="320" viewBox="0 0 260 320" fill="none">
-    <g opacity=".06">
-      <rect x="60" y="40" width="120" height="160" rx="8" stroke="#2C2C2C" stroke-width="2" transform="rotate(-12 120 120)"/>
-      <rect x="70" y="35" width="120" height="160" rx="8" stroke="#2C2C2C" stroke-width="2" transform="rotate(-6 130 115)"/>
-      <rect x="80" y="30" width="120" height="160" rx="8" fill="#F7F3EE" stroke="#2C2C2C" stroke-width="2"/>
-      <line x1="100" y1="70" x2="170" y2="70" stroke="#C0785A" stroke-width="3" stroke-linecap="round"/>
-      <line x1="100" y1="90" x2="180" y2="90" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
-      <line x1="100" y1="105" x2="165" y2="105" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
-      <line x1="100" y1="120" x2="175" y2="120" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
-      <line x1="100" y1="135" x2="140" y2="135" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
-    </g>
-    <circle cx="40" cy="260" r="20" fill="none" stroke="#C0785A" stroke-width="1.5" opacity=".08"/>
-    <circle cx="55" cy="280" r="8" fill="#C0785A" opacity=".06"/>
-    <g opacity=".05">
-      <path d="M160 240 L220 240" stroke="#8B7355" stroke-width="2" stroke-linecap="round"/>
-      <path d="M212 234 L222 240 L212 246" stroke="#8B7355" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
+  <!-- Left art: stacked document pages + quill pen — gold on dark -->
+  <svg class="art" style="left:15px;top:10px" width="270" height="360" viewBox="0 0 270 360" fill="none">
+    <!-- stacked pages fanning -->
+    <rect x="60" y="50" width="120" height="160" rx="6" stroke="#C9A96E" stroke-width="1" opacity=".12" transform="rotate(-10 120 130)"/>
+    <rect x="70" y="45" width="120" height="160" rx="6" stroke="#C9A96E" stroke-width="1" opacity=".16" transform="rotate(-5 130 125)"/>
+    <rect x="80" y="40" width="120" height="160" rx="6" stroke="#C9A96E" stroke-width="1.5" opacity=".2" fill="rgba(201,169,110,.03)"/>
+    <!-- text lines on front page -->
+    <line x1="100" y1="78" x2="160" y2="78" stroke="#C9A96E" stroke-width="2" stroke-linecap="round" opacity=".3"/>
+    <line x1="100" y1="98" x2="178" y2="98" stroke="#F0E8D8" stroke-width="1" stroke-linecap="round" opacity=".1"/>
+    <line x1="100" y1="113" x2="165" y2="113" stroke="#F0E8D8" stroke-width="1" stroke-linecap="round" opacity=".1"/>
+    <line x1="100" y1="128" x2="175" y2="128" stroke="#F0E8D8" stroke-width="1" stroke-linecap="round" opacity=".1"/>
+    <line x1="100" y1="143" x2="140" y2="143" stroke="#F0E8D8" stroke-width="1" stroke-linecap="round" opacity=".1"/>
+    <!-- quill pen -->
+    <path d="M185 210 L205 60 Q208 46 200 48 L194 54 L185 210" stroke="#C9A96E" stroke-width="1.2" opacity=".18" fill="rgba(201,169,110,.04)"/>
+    <!-- ink dot -->
+    <circle cx="185" cy="215" r="4" fill="#C9A96E" opacity=".15"/>
+    <!-- scattered geometric accents -->
+    <circle cx="40" cy="270" r="18" stroke="#C9A96E" stroke-width=".8" opacity=".1" fill="none"/>
+    <circle cx="55" cy="295" r="6" fill="#C9A96E" opacity=".06"/>
+    <!-- small diamond -->
+    <path d="M30 320 L38 312 L46 320 L38 328 Z" stroke="#C9A96E" stroke-width=".8" opacity=".1" fill="none"/>
   </svg>
 
-  <!-- Right art: abstract image/camera frame + geometric shapes -->
-  <svg class="art" style="right:-10px;top:20px" width="260" height="340" viewBox="0 0 260 340" fill="none">
-    <g opacity=".06">
-      <rect x="60" y="60" width="150" height="110" rx="10" stroke="#2C2C2C" stroke-width="2"/>
-      <circle cx="170" cy="95" r="12" stroke="#C0785A" stroke-width="1.5"/>
-      <path d="M60 150 L105 100 L135 130 L160 95 L210 150" stroke="#8B7355" stroke-width="2" stroke-linejoin="round"/>
-      <circle cx="135" cy="210" r="24" stroke="#2C2C2C" stroke-width="2"/>
-      <circle cx="135" cy="210" r="10" stroke="#2C2C2C" stroke-width="1.5"/>
-      <line x1="135" y1="186" x2="135" y2="196" stroke="#2C2C2C" stroke-width="1.5"/>
-      <line x1="135" y1="224" x2="135" y2="234" stroke="#2C2C2C" stroke-width="1.5"/>
-      <line x1="111" y1="210" x2="121" y2="210" stroke="#2C2C2C" stroke-width="1.5"/>
-      <line x1="149" y1="210" x2="159" y2="210" stroke="#2C2C2C" stroke-width="1.5"/>
-    </g>
-    <circle cx="200" cy="50" r="4" fill="#C0785A" opacity=".07"/>
-    <circle cx="220" cy="70" r="2.5" fill="#8B7355" opacity=".06"/>
-    <circle cx="50" cy="280" r="3" fill="#C0785A" opacity=".06"/>
-    <g opacity=".05">
-      <path d="M80 290 L92 278 L104 290 L92 302 Z" stroke="#8B7355" stroke-width="1.5"/>
-      <path d="M180 270 L188 262 L196 270 L188 278 Z" stroke="#C0785A" stroke-width="1.5"/>
-    </g>
+  <!-- Right art: image frame + camera lens — gold on dark -->
+  <svg class="art" style="right:15px;top:8px" width="270" height="360" viewBox="0 0 270 360" fill="none">
+    <!-- polaroid-style frame -->
+    <rect x="55" y="45" width="160" height="125" rx="8" stroke="#C9A96E" stroke-width="1.5" opacity=".18"/>
+    <rect x="55" y="170" width="160" height="30" rx="0" stroke="#C9A96E" stroke-width="1" opacity=".12"/>
+    <!-- mountain scene inside frame -->
+    <path d="M60 150 L105 90 L140 125 L175 75 L215 150" stroke="#C9A96E" stroke-width="1.5" stroke-linejoin="round" opacity=".2"/>
+    <!-- sun -->
+    <circle cx="185" cy="75" r="16" stroke="#C9A96E" stroke-width="1.2" opacity=".2" fill="none"/>
+    <circle cx="185" cy="75" r="5" fill="#C9A96E" opacity=".12"/>
+    <!-- camera aperture below -->
+    <circle cx="135" cy="260" r="32" stroke="#C9A96E" stroke-width="1.5" opacity=".15"/>
+    <circle cx="135" cy="260" r="14" stroke="#C9A96E" stroke-width="1" opacity=".12"/>
+    <circle cx="135" cy="260" r="5" fill="#C9A96E" opacity=".08"/>
+    <!-- aperture blade hints -->
+    <line x1="135" y1="228" x2="135" y2="238" stroke="#C9A96E" stroke-width=".8" opacity=".12"/>
+    <line x1="135" y1="282" x2="135" y2="292" stroke="#C9A96E" stroke-width=".8" opacity=".12"/>
+    <line x1="103" y1="260" x2="113" y2="260" stroke="#C9A96E" stroke-width=".8" opacity=".12"/>
+    <line x1="157" y1="260" x2="167" y2="260" stroke="#C9A96E" stroke-width=".8" opacity=".12"/>
+    <!-- scattered diamonds -->
+    <path d="M60 310 L72 298 L84 310 L72 322 Z" stroke="#C9A96E" stroke-width=".8" opacity=".1" fill="none"/>
+    <path d="M200 305 L208 297 L216 305 L208 313 Z" stroke="#C9A96E" stroke-width=".8" opacity=".1" fill="none"/>
+    <!-- accent dots -->
+    <circle cx="220" cy="40" r="3" fill="#C9A96E" opacity=".12"/>
+    <circle cx="40" cy="310" r="2.5" fill="#C9A96E" opacity=".08"/>
+  </svg>
+
+  <!-- Top thin gold line -->
+  <svg class="art" style="top:30px;left:50%;transform:translateX(-50%)" width="200" height="2" viewBox="0 0 200 2" fill="none">
+    <line x1="0" y1="1" x2="200" y2="1" stroke="#C9A96E" stroke-width="1" opacity=".15"/>
+  </svg>
+  <!-- Bottom thin gold line -->
+  <svg class="art" style="bottom:30px;left:50%;transform:translateX(-50%)" width="200" height="2" viewBox="0 0 200 2" fill="none">
+    <line x1="0" y1="1" x2="200" y2="1" stroke="#C9A96E" stroke-width="1" opacity=".15"/>
   </svg>
 
   <div class="safe">
-    <div class="top-label">Open Source CLI</div>
     <h1><span class="page">Page</span><span class="press">Press</span></h1>
-    <div class="tagline">Documents & Images, beautifully crafted.</div>
-    <p class="sub">将 Markdown 和 HTML 转换为精美的 PDF 与 PNG</p>
-    <div class="features">
-      <div class="feat">
-        <div class="feat-dot a"></div>
-        <div class="feat-text">3 套模板</div>
-      </div>
-      <div class="feat">
-        <div class="feat-dot b"></div>
-        <div class="feat-text">8 种预设</div>
-      </div>
-      <div class="feat">
-        <div class="feat-dot c"></div>
-        <div class="feat-text">Retina 2x</div>
-      </div>
-    </div>
+    <div class="sep"></div>
+    <p class="sub">文档与图片，一行命令，精美呈现</p>
   </div>
 </div>
 </body>

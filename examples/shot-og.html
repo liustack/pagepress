@@ -18,19 +18,19 @@
   justify-content:space-between;
 }
 
-/* subtle radial glow — cosmic depth */
+/* radial glow — cosmic depth */
 #container::before{
   content:'';position:absolute;
   width:700px;height:700px;
   top:-200px;right:-150px;
-  background:radial-gradient(circle,rgba(122,61,226,.15) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(122,61,226,.18) 0%,transparent 70%);
   pointer-events:none;
 }
 #container::after{
   content:'';position:absolute;
   width:500px;height:500px;
   bottom:-150px;left:-100px;
-  background:radial-gradient(circle,rgba(168,133,255,.08) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(168,133,255,.1) 0%,transparent 70%);
   pointer-events:none;
 }
 
@@ -113,14 +113,39 @@ h1 em{font-style:normal;color:#A885FF}
 </head>
 <body>
 <div id="container">
-  <!-- decorative: constellation dots + arc lines -->
-  <svg class="art" style="top:0;right:0" width="500" height="300" viewBox="0 0 500 300" fill="none">
-    <circle cx="380" cy="60" r="2" fill="#A885FF" opacity=".15"/>
-    <circle cx="420" cy="90" r="1.5" fill="#A885FF" opacity=".1"/>
-    <circle cx="350" cy="120" r="1" fill="#7A3DE2" opacity=".2"/>
-    <circle cx="450" cy="140" r="2.5" fill="#A885FF" opacity=".08"/>
-    <path d="M380 60 L420 90 L350 120" stroke="#7A3DE2" stroke-width=".5" opacity=".08"/>
-    <path d="M100 280 Q250 240 480 260" stroke="#A885FF" stroke-width=".8" opacity=".05" fill="none"/>
+  <!-- decorative: large geometric ring + constellation grid — VISIBLE -->
+  <svg class="art" style="top:-60px;right:-60px" width="520" height="520" viewBox="0 0 520 520" fill="none">
+    <!-- large outer ring -->
+    <circle cx="260" cy="260" r="220" stroke="#7A3DE2" stroke-width="1.5" opacity=".2"/>
+    <!-- inner ring -->
+    <circle cx="260" cy="260" r="170" stroke="#A885FF" stroke-width="1" opacity=".15"/>
+    <!-- innermost ring -->
+    <circle cx="260" cy="260" r="110" stroke="#7A3DE2" stroke-width=".8" opacity=".1"/>
+    <!-- cross-hair radial lines -->
+    <line x1="260" y1="40" x2="260" y2="140" stroke="#A885FF" stroke-width="1" opacity=".18"/>
+    <line x1="40" y1="260" x2="140" y2="260" stroke="#A885FF" stroke-width="1" opacity=".18"/>
+    <line x1="400" y1="120" x2="340" y2="180" stroke="#7A3DE2" stroke-width="1" opacity=".2"/>
+    <line x1="120" y1="400" x2="180" y2="340" stroke="#7A3DE2" stroke-width=".8" opacity=".14"/>
+    <!-- bright dots at intersections -->
+    <circle cx="260" cy="40" r="4" fill="#A885FF" opacity=".35"/>
+    <circle cx="40" cy="260" r="3.5" fill="#7A3DE2" opacity=".25"/>
+    <circle cx="400" cy="120" r="3" fill="#A885FF" opacity=".4"/>
+    <circle cx="440" cy="320" r="5" fill="#7A3DE2" opacity=".12"/>
+    <circle cx="120" cy="400" r="3" fill="#A885FF" opacity=".2"/>
+    <!-- scattered star dots -->
+    <circle cx="350" cy="60" r="2" fill="#A885FF" opacity=".3"/>
+    <circle cx="480" cy="200" r="2.5" fill="#7A3DE2" opacity=".2"/>
+    <circle cx="160" cy="80" r="1.5" fill="#A885FF" opacity=".25"/>
+  </svg>
+  <!-- bottom-left: flowing wave curves -->
+  <svg class="art" style="bottom:-20px;left:-20px" width="500" height="250" viewBox="0 0 500 250" fill="none">
+    <path d="M0 200 Q120 100 250 150 Q380 200 500 80" stroke="#A885FF" stroke-width="1.5" opacity=".15" fill="none"/>
+    <path d="M0 230 Q140 130 280 170 Q420 210 500 120" stroke="#7A3DE2" stroke-width="1" opacity=".1" fill="none"/>
+    <path d="M0 170 Q80 120 160 140 Q240 160 320 100" stroke="#A885FF" stroke-width=".6" opacity=".08" fill="none"/>
+    <!-- wave dots -->
+    <circle cx="250" cy="150" r="3" fill="#A885FF" opacity=".2"/>
+    <circle cx="120" cy="160" r="2" fill="#7A3DE2" opacity=".15"/>
+    <circle cx="400" cy="110" r="2.5" fill="#A885FF" opacity=".18"/>
   </svg>
 
   <div class="top">

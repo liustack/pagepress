@@ -94,17 +94,28 @@ h1 em{font-style:normal;color:#C0B283}
 </head>
 <body>
 <div id="container">
-  <!-- decorative: thin golden ratio line + scattered leaf-like curves -->
-  <svg class="art" style="left:120px;right:120px;top:45%;width:calc(100% - 240px)" height="2" viewBox="0 0 1360 2" preserveAspectRatio="none" fill="none">
-    <line x1="0" y1="1" x2="1360" y2="1" stroke="url(#lg)" stroke-width="1"/>
-    <defs><linearGradient id="lg"><stop offset="0%" stop-color="#C0B283" stop-opacity=".2"/><stop offset="50%" stop-color="#C0B283" stop-opacity=".06"/><stop offset="100%" stop-color="#C0B283" stop-opacity="0"/></linearGradient></defs>
+  <!-- decorative: golden divider line at golden ratio -->
+  <svg class="art" style="left:120px;top:45%;width:calc(100% - 240px)" height="2" viewBox="0 0 1360 2" preserveAspectRatio="none" fill="none">
+    <line x1="0" y1="1" x2="1360" y2="1" stroke="#C0B283" stroke-width="1" opacity=".12"/>
   </svg>
-  <!-- top-right decorative arcs -->
-  <svg class="art" style="top:60px;right:80px" width="200" height="200" viewBox="0 0 200 200" fill="none">
-    <path d="M180 20 Q120 40 100 100" stroke="#C0B283" stroke-width=".6" opacity=".08" fill="none"/>
-    <path d="M160 10 Q100 50 90 120" stroke="#2A3A2E" stroke-width=".8" opacity=".1" fill="none"/>
-    <circle cx="180" cy="20" r="2" fill="#C0B283" opacity=".1"/>
-    <circle cx="100" cy="100" r="1.5" fill="#C0B283" opacity=".06"/>
+  <!-- top-right: large abstract leaf/branch illustration -->
+  <svg class="art" style="top:40px;right:60px" width="400" height="400" viewBox="0 0 400 400" fill="none">
+    <!-- organic branch curves -->
+    <path d="M380 20 Q300 80 260 200 Q240 280 280 380" stroke="#C0B283" stroke-width="1.5" opacity=".08" fill="none"/>
+    <path d="M360 40 Q280 120 260 240" stroke="#C0B283" stroke-width=".8" opacity=".06" fill="none"/>
+    <!-- leaf shapes along the branch -->
+    <ellipse cx="320" cy="80" rx="30" ry="12" transform="rotate(-30 320 80)" stroke="#2A3A2E" stroke-width="1" opacity=".06" fill="none"/>
+    <ellipse cx="280" cy="160" rx="25" ry="10" transform="rotate(-20 280 160)" stroke="#C0B283" stroke-width=".8" opacity=".05" fill="none"/>
+    <ellipse cx="260" cy="260" rx="20" ry="8" transform="rotate(-10 260 260)" stroke="#2A3A2E" stroke-width=".8" opacity=".05" fill="none"/>
+    <!-- dots -->
+    <circle cx="380" cy="20" r="3" fill="#C0B283" opacity=".12"/>
+    <circle cx="260" cy="200" r="2" fill="#C0B283" opacity=".08"/>
+    <circle cx="280" cy="380" r="4" fill="#2A3A2E" opacity=".05"/>
+  </svg>
+  <!-- bottom-left: subtle geometric diamond pattern -->
+  <svg class="art" style="bottom:80px;left:80px" width="200" height="200" viewBox="0 0 200 200" fill="none">
+    <path d="M100 20 L180 100 L100 180 L20 100 Z" stroke="#C0B283" stroke-width=".8" opacity=".06" fill="none"/>
+    <path d="M100 50 L150 100 L100 150 L50 100 Z" stroke="#C0B283" stroke-width=".5" opacity=".04" fill="none"/>
   </svg>
 
   <div class="top">
