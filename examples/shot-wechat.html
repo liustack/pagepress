@@ -4,123 +4,160 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=900, height=383">
 <style>
-/* Luminous Tech: neon on dark, complementary harmony */
-/* Palette: #101014 dominant / #8A00FF secondary / #00E8FF accent / #3B3B3D neutral */
+/* Elegant Ink: warm parchment + terracotta accent, editorial feel */
+/* Palette: #F7F3EE dominant / #2C2C2C text / #C0785A terracotta / #8B7355 muted gold */
 /* Center safe zone 383x383 — all critical content inside */
 *{margin:0;padding:0;box-sizing:border-box}
 #container{
   width:900px;height:383px;
-  background:#101014;
+  background:#F7F3EE;
   font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Inter,sans-serif;
   position:relative;overflow:hidden;
   display:flex;align-items:center;
   justify-content:center;
 }
 
-/* ambient glow — center focal point */
+/* subtle warm gradient overlay */
 #container::before{
-  content:'';position:absolute;
-  width:500px;height:500px;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  background:radial-gradient(circle,rgba(138,0,255,.1) 0%,rgba(0,232,255,.04) 40%,transparent 70%);
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,120,90,.05) 0%,transparent 40%,rgba(139,115,85,.03) 100%);
   pointer-events:none;
 }
 
-/* side decorative strips — can be cropped safely */
-.side-left,.side-right{
-  position:absolute;top:0;bottom:0;width:200px;z-index:0;
-}
-.side-left{
-  left:0;
-  background:linear-gradient(90deg,rgba(138,0,255,.06),transparent);
-}
-.side-right{
-  right:0;
-  background:linear-gradient(270deg,rgba(0,232,255,.06),transparent);
-}
-
-/* thin grid lines — subtle tech feel */
-.grid-h,.grid-v{
-  position:absolute;
-  background:rgba(255,255,255,.02);
-}
-.grid-h{width:100%;height:1px;top:50%}
-.grid-v{height:100%;width:1px;left:50%}
-
 /* center safe zone content */
 .safe{
-  width:383px;
+  width:420px;
   text-align:center;
-  position:relative;z-index:1;
+  position:relative;z-index:2;
   display:flex;flex-direction:column;
   align-items:center;
 }
 
-.logo{
-  font-size:13px;font-weight:500;
-  color:rgba(255,255,255,.2);
-  letter-spacing:1px;
-  margin-bottom:24px;
+.badge{
+  font-size:10px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  color:#C0785A;
+  background:rgba(192,120,90,.08);
+  border:1px solid rgba(192,120,90,.15);
+  padding:4px 14px;border-radius:20px;
+  margin-bottom:20px;
 }
 
 h1{
-  font-size:56px;font-weight:700;
-  color:#fff;line-height:1.1;
-  letter-spacing:-2px;
-  margin-bottom:12px;
+  font-size:48px;font-weight:700;
+  color:#2C2C2C;line-height:1.15;
+  letter-spacing:-1.5px;
+  margin-bottom:10px;
 }
 h1 em{
   font-style:normal;
-  background:linear-gradient(135deg,#8A00FF,#00E8FF);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
+  color:#C0785A;
 }
 
 .sub{
-  font-size:16px;font-weight:400;
-  color:rgba(255,255,255,.35);
+  font-size:14px;font-weight:400;
+  color:rgba(44,44,44,.45);
   line-height:1.6;
-  max-width:320px;
-  margin-bottom:24px;
+  max-width:340px;
+  margin-bottom:22px;
 }
 
-/* pills */
-.pills{
-  display:flex;gap:8px;flex-wrap:wrap;
-  justify-content:center;
+/* feature row */
+.features{
+  display:flex;gap:20px;
+  align-items:center;
 }
-.pill{
-  font-size:11px;font-weight:500;
-  color:rgba(255,255,255,.5);
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.06);
-  padding:5px 12px;border-radius:20px;
+.feat{
+  display:flex;align-items:center;gap:6px;
 }
-.pill.accent{
-  color:#00E8FF;
-  background:rgba(0,232,255,.06);
-  border-color:rgba(0,232,255,.15);
+.feat-dot{
+  width:8px;height:8px;border-radius:50%;
+  flex-shrink:0;
 }
+.feat-dot.a{background:#C0785A}
+.feat-dot.b{background:#8B7355}
+.feat-dot.c{background:#2C2C2C}
+.feat-text{
+  font-size:12px;font-weight:500;
+  color:rgba(44,44,44,.6);
+}
+
+/* SVG art layers — decorative, can be cropped */
+.art{position:absolute;z-index:1;pointer-events:none}
 </style>
 </head>
 <body>
 <div id="container">
-  <div class="side-left"></div>
-  <div class="side-right"></div>
-  <div class="grid-h"></div>
-  <div class="grid-v"></div>
+
+  <!-- Left art: abstract document pages fanning out -->
+  <svg class="art" style="left:-10px;top:30px" width="260" height="320" viewBox="0 0 260 320" fill="none">
+    <!-- stacked pages, rotated -->
+    <g opacity=".06">
+      <rect x="60" y="40" width="120" height="160" rx="8" stroke="#2C2C2C" stroke-width="2" transform="rotate(-12 120 120)"/>
+      <rect x="70" y="35" width="120" height="160" rx="8" stroke="#2C2C2C" stroke-width="2" transform="rotate(-6 130 115)"/>
+      <rect x="80" y="30" width="120" height="160" rx="8" fill="#F7F3EE" stroke="#2C2C2C" stroke-width="2"/>
+      <!-- text lines on front page -->
+      <line x1="100" y1="70" x2="170" y2="70" stroke="#C0785A" stroke-width="3" stroke-linecap="round"/>
+      <line x1="100" y1="90" x2="180" y2="90" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
+      <line x1="100" y1="105" x2="165" y2="105" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
+      <line x1="100" y1="120" x2="175" y2="120" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
+      <line x1="100" y1="135" x2="140" y2="135" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <!-- floating circles -->
+    <circle cx="40" cy="260" r="20" fill="none" stroke="#C0785A" stroke-width="1.5" opacity=".08"/>
+    <circle cx="55" cy="280" r="8" fill="#C0785A" opacity=".06"/>
+    <!-- arrow pointing right -->
+    <g opacity=".05">
+      <path d="M160 240 L220 240" stroke="#8B7355" stroke-width="2" stroke-linecap="round"/>
+      <path d="M212 234 L222 240 L212 246" stroke="#8B7355" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </svg>
+
+  <!-- Right art: abstract image/camera frame + geometric shapes -->
+  <svg class="art" style="right:-10px;top:20px" width="260" height="340" viewBox="0 0 260 340" fill="none">
+    <!-- image frame with mountain/sun scene -->
+    <g opacity=".06">
+      <rect x="60" y="60" width="150" height="110" rx="10" stroke="#2C2C2C" stroke-width="2"/>
+      <!-- sun -->
+      <circle cx="170" cy="95" r="12" stroke="#C0785A" stroke-width="1.5"/>
+      <!-- mountains -->
+      <path d="M60 150 L105 100 L135 130 L160 95 L210 150" stroke="#8B7355" stroke-width="2" stroke-linejoin="round"/>
+      <!-- camera aperture icon below -->
+      <circle cx="135" cy="210" r="24" stroke="#2C2C2C" stroke-width="2"/>
+      <circle cx="135" cy="210" r="10" stroke="#2C2C2C" stroke-width="1.5"/>
+      <line x1="135" y1="186" x2="135" y2="196" stroke="#2C2C2C" stroke-width="1.5"/>
+      <line x1="135" y1="224" x2="135" y2="234" stroke="#2C2C2C" stroke-width="1.5"/>
+      <line x1="111" y1="210" x2="121" y2="210" stroke="#2C2C2C" stroke-width="1.5"/>
+      <line x1="149" y1="210" x2="159" y2="210" stroke="#2C2C2C" stroke-width="1.5"/>
+    </g>
+    <!-- scattered dots -->
+    <circle cx="200" cy="50" r="4" fill="#C0785A" opacity=".07"/>
+    <circle cx="220" cy="70" r="2.5" fill="#8B7355" opacity=".06"/>
+    <circle cx="50" cy="280" r="3" fill="#C0785A" opacity=".06"/>
+    <!-- diamond shapes -->
+    <g opacity=".05">
+      <path d="M80 290 L92 278 L104 290 L92 302 Z" stroke="#8B7355" stroke-width="1.5"/>
+      <path d="M180 270 L188 262 L196 270 L188 278 Z" stroke="#C0785A" stroke-width="1.5"/>
+    </g>
+  </svg>
 
   <div class="safe">
-    <div class="logo">PAGEPRESS</div>
-    <h1>Markdown 转<br><em>PDF & 图片</em></h1>
-    <p class="sub">开源 CLI · AI Agent 友好<br>三套模板 · 八种图片预设</p>
-    <div class="pills">
-      <div class="pill accent">PDF</div>
-      <div class="pill accent">OG 卡片</div>
-      <div class="pill">海报</div>
-      <div class="pill">横幅</div>
-      <div class="pill">信息图</div>
+    <div class="badge">Open Source CLI</div>
+    <h1>Page<em>Press</em></h1>
+    <p class="sub">一个命令行工具，将 Markdown 和 HTML<br>转换为精美的 PDF 文档与 PNG 图片</p>
+    <div class="features">
+      <div class="feat">
+        <div class="feat-dot a"></div>
+        <div class="feat-text">3 套模板</div>
+      </div>
+      <div class="feat">
+        <div class="feat-dot b"></div>
+        <div class="feat-text">8 种预设</div>
+      </div>
+      <div class="feat">
+        <div class="feat-dot c"></div>
+        <div class="feat-text">Retina 2x</div>
+      </div>
     </div>
   </div>
 </div>

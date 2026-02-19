@@ -4,46 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080, height=1350">
 <style>
-/* Arctic Frost: minimal crisp, monochromatic + single accent */
-/* Palette: #F0EEE9 dominant / #819FA7 secondary / #0A1A3C accent / #5B6E74 text */
+/* Claude Warm: warm cream + terracotta accent, clean and friendly */
+/* Palette: #FFF8F3 dominant / #E8734A accent / #1A1A1A text / #6B6B6B secondary text */
 /* F-pattern, high info density, Gestalt proximity grouping */
 *{margin:0;padding:0;box-sizing:border-box}
 #container{
   width:1080px;height:1350px;
-  background:#F0EEE9;
+  background:#FFF8F3;
   padding:80px;
   font-family:Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
-  color:#0A1A3C;
+  color:#1A1A1A;
 }
 
 .header{
   display:flex;justify-content:space-between;align-items:center;
   margin-bottom:48px;padding-bottom:24px;
-  border-bottom:2px solid #0A1A3C;
+  border-bottom:2px solid #1A1A1A;
 }
 .logo{font-size:20px;font-weight:600;letter-spacing:-.5px}
-.logo em{font-style:normal;color:#819FA7}
-.ver{font-size:12px;font-weight:500;color:#5B6E74;letter-spacing:.5px}
+.logo em{font-style:normal;color:#E8734A}
+.ver{font-size:12px;font-weight:500;color:#6B6B6B;letter-spacing:.5px}
 
 h1{
   font-size:38px;font-weight:600;
   letter-spacing:-1px;line-height:1.2;margin-bottom:8px;
 }
 .subtitle{
-  font-size:15px;color:#5B6E74;
+  font-size:15px;color:#6B6B6B;
   line-height:1.5;margin-bottom:44px;
 }
 .section-label{
   font-size:11px;font-weight:600;
   letter-spacing:1.5px;text-transform:uppercase;
-  color:#819FA7;margin-bottom:16px;
+  color:#E8734A;margin-bottom:16px;
 }
 
 /* command cards */
 .commands{display:flex;flex-direction:column;gap:10px;margin-bottom:40px}
 .cmd{
-  background:rgba(10,26,60,.03);
-  border:1px solid rgba(10,26,60,.08);
+  background:rgba(232,115,74,.04);
+  border:1px solid rgba(232,115,74,.12);
   border-radius:12px;padding:20px 24px;
   display:flex;align-items:center;gap:16px;
 }
@@ -52,59 +52,59 @@ h1{
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
 }
-.cmd-dot.pdf{background:#0A1A3C}
-.cmd-dot.shot{background:#819FA7}
+.cmd-dot.pdf{background:#1A1A1A}
+.cmd-dot.shot{background:#E8734A}
 .cmd-name{font-size:15px;font-weight:600;margin-bottom:2px}
-.cmd-desc{font-size:13px;color:#5B6E74}
+.cmd-desc{font-size:13px;color:#6B6B6B}
 .cmd-code{
   margin-left:auto;
   font-family:'SF Mono',ui-monospace,monospace;
-  font-size:11px;color:#819FA7;
-  background:rgba(129,159,167,.1);
+  font-size:11px;color:#E8734A;
+  background:rgba(232,115,74,.08);
   padding:6px 12px;border-radius:6px;white-space:nowrap;
 }
 
 /* presets grid — 2x4 to show all 8 */
 .presets{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:40px}
 .preset{
-  background:rgba(10,26,60,.03);
-  border:1px solid rgba(10,26,60,.06);
+  background:rgba(26,26,26,.02);
+  border:1px solid rgba(26,26,26,.06);
   border-radius:12px;padding:16px 18px;
 }
 .preset-name{font-size:14px;font-weight:600;margin-bottom:2px}
 .preset-size{
   font-family:'SF Mono',ui-monospace,monospace;
-  font-size:10px;color:#5B6E74;margin-bottom:6px;
+  font-size:10px;color:#6B6B6B;margin-bottom:6px;
 }
-.preset-desc{font-size:11px;color:#5B6E74;line-height:1.5}
+.preset-desc{font-size:11px;color:#6B6B6B;line-height:1.5}
 
 /* stats bar */
 .stats{display:flex;gap:10px;margin-bottom:40px}
 .stat{
   flex:1;
-  background:#0A1A3C;color:#F0EEE9;
+  background:#1A1A1A;color:#FFF8F3;
   border-radius:12px;padding:20px;text-align:center;
 }
-.stat-val{font-size:26px;font-weight:600;margin-bottom:4px;color:#819FA7}
+.stat-val{font-size:26px;font-weight:600;margin-bottom:4px;color:#E8734A}
 .stat-label{
   font-size:10px;font-weight:600;
   letter-spacing:1px;text-transform:uppercase;
-  color:rgba(240,238,233,.4);
+  color:rgba(255,248,243,.4);
 }
 
 .footer{
-  padding-top:24px;border-top:1.5px solid rgba(10,26,60,.1);
+  padding-top:24px;border-top:1.5px solid rgba(26,26,26,.1);
   display:flex;justify-content:space-between;align-items:center;
 }
-.footer-text{font-size:12px;color:#5B6E74}
-.footer-link{font-size:12px;color:#819FA7;font-weight:500}
+.footer-text{font-size:12px;color:#6B6B6B}
+.footer-link{font-size:12px;color:#E8734A;font-weight:500}
 </style>
 </head>
 <body>
 <div id="container">
   <div class="header">
     <div class="logo">Page<em>Press</em></div>
-    <div class="ver">v0.4.0</div>
+    <div class="ver">v0.5.0</div>
   </div>
 
   <h1>CLI Quick Reference</h1>
@@ -114,7 +114,7 @@ h1{
   <div class="commands">
     <div class="cmd">
       <div class="cmd-dot pdf">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="1" width="12" height="16" rx="2" stroke="#F0EEE9" stroke-width="1.5"/><path d="M6 7h4M6 10h6M6 13h3" stroke="#F0EEE9" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="1" width="12" height="16" rx="2" stroke="#FFF8F3" stroke-width="1.5"/><path d="M6 7h4M6 10h6M6 13h3" stroke="#FFF8F3" stroke-width="1.2" stroke-linecap="round"/></svg>
       </div>
       <div>
         <div class="cmd-name">pdf</div>
@@ -124,7 +124,7 @@ h1{
     </div>
     <div class="cmd">
       <div class="cmd-dot shot">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#F0EEE9" stroke-width="1.5"/><circle cx="10" cy="10" r="3" stroke="#F0EEE9" stroke-width="1.5"/></svg>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#FFF8F3" stroke-width="1.5"/><circle cx="10" cy="10" r="3" stroke="#FFF8F3" stroke-width="1.5"/></svg>
       </div>
       <div>
         <div class="cmd-name">shot</div>
