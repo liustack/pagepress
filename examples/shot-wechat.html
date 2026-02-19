@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=900, height=383">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Caveat:wght@500&display=swap" rel="stylesheet">
 <style>
 /* Elegant Ink: warm parchment + terracotta accent, editorial feel */
 /* Palette: #F7F3EE dominant / #2C2C2C text / #C0785A terracotta / #8B7355 muted gold */
@@ -26,7 +27,7 @@
 
 /* center safe zone content */
 .safe{
-  width:420px;
+  width:440px;
   text-align:center;
   position:relative;z-index:2;
   display:flex;flex-direction:column;
@@ -35,31 +36,45 @@
 
 .badge{
   font-size:10px;font-weight:600;
-  letter-spacing:2px;text-transform:uppercase;
+  letter-spacing:2.5px;text-transform:uppercase;
   color:#C0785A;
   background:rgba(192,120,90,.08);
   border:1px solid rgba(192,120,90,.15);
   padding:4px 14px;border-radius:20px;
-  margin-bottom:20px;
+  margin-bottom:18px;
+  font-family:Inter,-apple-system,sans-serif;
 }
 
 h1{
-  font-size:48px;font-weight:700;
-  color:#2C2C2C;line-height:1.15;
-  letter-spacing:-1.5px;
-  margin-bottom:10px;
+  font-family:'Playfair Display',Georgia,'Noto Serif SC',serif;
+  font-size:56px;font-weight:700;
+  color:#2C2C2C;line-height:1.1;
+  letter-spacing:-1px;
+  margin-bottom:6px;
 }
-h1 em{
+h1 .page{
+  font-style:italic;
+}
+h1 .press{
   font-style:normal;
   color:#C0785A;
 }
 
+/* handwritten tagline */
+.tagline{
+  font-family:'Caveat',cursive;
+  font-size:22px;font-weight:500;
+  color:#8B7355;
+  margin-bottom:18px;
+  letter-spacing:.5px;
+}
+
 .sub{
-  font-size:14px;font-weight:400;
-  color:rgba(44,44,44,.45);
+  font-size:13px;font-weight:400;
+  color:rgba(44,44,44,.4);
   line-height:1.6;
   max-width:340px;
-  margin-bottom:22px;
+  margin-bottom:20px;
 }
 
 /* feature row */
@@ -78,8 +93,9 @@ h1 em{
 .feat-dot.b{background:#8B7355}
 .feat-dot.c{background:#2C2C2C}
 .feat-text{
-  font-size:12px;font-weight:500;
-  color:rgba(44,44,44,.6);
+  font-size:11px;font-weight:500;
+  color:rgba(44,44,44,.55);
+  font-family:Inter,-apple-system,sans-serif;
 }
 
 /* SVG art layers — decorative, can be cropped */
@@ -91,22 +107,18 @@ h1 em{
 
   <!-- Left art: abstract document pages fanning out -->
   <svg class="art" style="left:-10px;top:30px" width="260" height="320" viewBox="0 0 260 320" fill="none">
-    <!-- stacked pages, rotated -->
     <g opacity=".06">
       <rect x="60" y="40" width="120" height="160" rx="8" stroke="#2C2C2C" stroke-width="2" transform="rotate(-12 120 120)"/>
       <rect x="70" y="35" width="120" height="160" rx="8" stroke="#2C2C2C" stroke-width="2" transform="rotate(-6 130 115)"/>
       <rect x="80" y="30" width="120" height="160" rx="8" fill="#F7F3EE" stroke="#2C2C2C" stroke-width="2"/>
-      <!-- text lines on front page -->
       <line x1="100" y1="70" x2="170" y2="70" stroke="#C0785A" stroke-width="3" stroke-linecap="round"/>
       <line x1="100" y1="90" x2="180" y2="90" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
       <line x1="100" y1="105" x2="165" y2="105" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
       <line x1="100" y1="120" x2="175" y2="120" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
       <line x1="100" y1="135" x2="140" y2="135" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round"/>
     </g>
-    <!-- floating circles -->
     <circle cx="40" cy="260" r="20" fill="none" stroke="#C0785A" stroke-width="1.5" opacity=".08"/>
     <circle cx="55" cy="280" r="8" fill="#C0785A" opacity=".06"/>
-    <!-- arrow pointing right -->
     <g opacity=".05">
       <path d="M160 240 L220 240" stroke="#8B7355" stroke-width="2" stroke-linecap="round"/>
       <path d="M212 234 L222 240 L212 246" stroke="#8B7355" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -115,14 +127,10 @@ h1 em{
 
   <!-- Right art: abstract image/camera frame + geometric shapes -->
   <svg class="art" style="right:-10px;top:20px" width="260" height="340" viewBox="0 0 260 340" fill="none">
-    <!-- image frame with mountain/sun scene -->
     <g opacity=".06">
       <rect x="60" y="60" width="150" height="110" rx="10" stroke="#2C2C2C" stroke-width="2"/>
-      <!-- sun -->
       <circle cx="170" cy="95" r="12" stroke="#C0785A" stroke-width="1.5"/>
-      <!-- mountains -->
       <path d="M60 150 L105 100 L135 130 L160 95 L210 150" stroke="#8B7355" stroke-width="2" stroke-linejoin="round"/>
-      <!-- camera aperture icon below -->
       <circle cx="135" cy="210" r="24" stroke="#2C2C2C" stroke-width="2"/>
       <circle cx="135" cy="210" r="10" stroke="#2C2C2C" stroke-width="1.5"/>
       <line x1="135" y1="186" x2="135" y2="196" stroke="#2C2C2C" stroke-width="1.5"/>
@@ -130,11 +138,9 @@ h1 em{
       <line x1="111" y1="210" x2="121" y2="210" stroke="#2C2C2C" stroke-width="1.5"/>
       <line x1="149" y1="210" x2="159" y2="210" stroke="#2C2C2C" stroke-width="1.5"/>
     </g>
-    <!-- scattered dots -->
     <circle cx="200" cy="50" r="4" fill="#C0785A" opacity=".07"/>
     <circle cx="220" cy="70" r="2.5" fill="#8B7355" opacity=".06"/>
     <circle cx="50" cy="280" r="3" fill="#C0785A" opacity=".06"/>
-    <!-- diamond shapes -->
     <g opacity=".05">
       <path d="M80 290 L92 278 L104 290 L92 302 Z" stroke="#8B7355" stroke-width="1.5"/>
       <path d="M180 270 L188 262 L196 270 L188 278 Z" stroke="#C0785A" stroke-width="1.5"/>
@@ -143,8 +149,9 @@ h1 em{
 
   <div class="safe">
     <div class="badge">Open Source CLI</div>
-    <h1>Page<em>Press</em></h1>
-    <p class="sub">一个命令行工具，将 Markdown 和 HTML<br>转换为精美的 PDF 文档与 PNG 图片</p>
+    <h1><span class="page">Page</span><span class="press">Press</span></h1>
+    <div class="tagline">Documents & Images, beautifully crafted.</div>
+    <p class="sub">将 Markdown 和 HTML 转换为精美的 PDF 与 PNG</p>
     <div class="features">
       <div class="feat">
         <div class="feat-dot a"></div>
