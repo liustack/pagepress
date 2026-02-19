@@ -103,7 +103,10 @@ pagepress shot -i https://example.com -o screenshot.png
 
 ## 🤖 AI Agent Integration
 
-This project includes a detailed [SKILL.md](skills/pagepress/SKILL.md) to help AI Agents (such as Claude, ChatGPT) understand how to use this tool.
+This project includes two skill guides for AI Agents (such as Claude, ChatGPT):
+
+- [web-to-pdf/SKILL.md](skills/web-to-pdf/SKILL.md) — PDF generation (Markdown beautification, templates, HTML/URL printing)
+- [web-to-png/SKILL.md](skills/web-to-png/SKILL.md) — PNG generation (OG cards, infographics, posters, banners, screenshots)
 
 Agents can automatically choose the appropriate commands and parameters based on natural language instructions (for example, "generate a poster" or "convert this document to PDF").
 

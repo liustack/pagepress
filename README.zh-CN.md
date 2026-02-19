@@ -101,9 +101,12 @@ pagepress shot -i https://example.com -o screenshot.png
 
 ## 🤖 AI Agent 集成
 
-本项目包含详细的 [SKILL.md](skills/pagepress/SKILL.md)，旨在帮助 AI Agent（如 Claude, ChatGPT）理解如何使用此工具。
+本项目包含两份 AI Agent 技能指南（适用于 Claude、ChatGPT 等）：
 
-Agent 可以根据用户的自然语言指令（如“生成一张海报”、“把这个文档转成 PDF”）自动选择合适的命令和参数。
+- [web-to-pdf/SKILL.md](skills/web-to-pdf/SKILL.md) — PDF 生成（Markdown 美化、模板、HTML/URL 打印）
+- [web-to-png/SKILL.md](skills/web-to-png/SKILL.md) — PNG 生成（OG 卡片、信息图、海报、横幅、网页截图）
+
+Agent 可以根据用户的自然语言指令（如"生成一张海报"、"把这个文档转成 PDF"）自动选择合适的命令和参数。
 
 ## 📄 License
 

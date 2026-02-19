@@ -1,6 +1,6 @@
 ---
 name: web-to-png
-description: "Capture screenshots and generate OG images, social cards, posters, banners, and infographics as PNG. Use when user mentions 'screenshot', 'capture webpage', 'OG image', 'link preview', 'social card', 'poster', 'banner', 'cover image', 'infographic', 'cheat sheet', 'web to image', or 'generate visual asset'. Supports preset dimensions and design-guided HTML-to-PNG rendering."
+description: "Use PagePress CLI to render HTML into PNG screenshots with preset dimensions (OG 1200x630, infographic 1080x1350, poster 1200x1500, banner 1600x900). Use when user wants to convert HTML to image, take a webpage screenshot, or generate a PNG from an HTML template. Trigger phrases: 'pagepress shot', 'HTML to PNG', 'HTML to image', 'screenshot this page', 'capture webpage', 'render HTML as image'. NOT for AI-generated illustrations — this tool screenshots existing HTML, it does not create images from text prompts."
 ---
 
 # PagePress — PNG
