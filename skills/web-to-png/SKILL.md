@@ -24,7 +24,7 @@ npx playwright install chromium
 > [!CAUTION]
 > **The output is a static visual asset** — a poster or card, **not a web page**.
 >
-> **Do not use**: navigation menus, buttons, links, forms, hamburger icons, badges/chips/pills/tags, or any elements that imply clickability or look like a web UI component.
+> **Do not use**: navigation menus, buttons, links, forms, hamburger icons, badges/chips/pills/tags, emoji, or any elements that imply clickability or look like a web UI component. Avoid or minimize emoji — use SVG icons or typographic symbols instead for a polished, professional look.
 >
 > **Should use**: titles, taglines, decorative graphics, SVG illustrations, icons, statistics, brand marks.
 
