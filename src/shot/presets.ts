@@ -48,6 +48,12 @@ export const imagePresets: Record<string, ImagePreset> = {
         height: 1440,
         description: 'Xiaohongshu / RedNote Cover (1080×1440)',
     },
+    wechat: {
+        name: 'wechat',
+        width: 900,
+        height: 383,
+        description: 'WeChat Official Account Cover (900×383)',
+    },
 };
 
 export function getPreset(name: string): ImagePreset {

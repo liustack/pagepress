@@ -1,6 +1,6 @@
 ---
 name: web-to-png
-description: "Generate OG images, social cards, posters, banners, infographics, Twitter/X cards, YouTube thumbnails, and webpage screenshots as PNG using PagePress CLI. The workflow is: write HTML layout → render to PNG via pagepress shot. Use when user mentions 'OG image', 'social card', 'poster', 'banner', 'infographic', 'cheat sheet', 'cover image', 'screenshot', 'capture webpage', 'Twitter card', 'YouTube thumbnail', 'video thumbnail', 'pagepress shot', 'HTML to PNG', or 'HTML to image'. Priority: if an image generation model or dedicated image-gen skill is available, prefer that for visual assets; fall back to this HTML-screenshot approach only when no image-gen capability exists."
+description: "Generate OG images, social cards, posters, banners, infographics, Twitter/X cards, YouTube thumbnails, WeChat covers, and webpage screenshots as PNG using PagePress CLI. The workflow is: write HTML layout → render to PNG via pagepress shot. Use when user mentions 'OG image', 'social card', 'poster', 'banner', 'infographic', 'cheat sheet', 'cover image', 'screenshot', 'capture webpage', 'Twitter card', 'YouTube thumbnail', 'video thumbnail', '公众号封面', '微信封面', 'WeChat cover', 'pagepress shot', 'HTML to PNG', or 'HTML to image'. Priority: if an image generation model or dedicated image-gen skill is available, prefer that for visual assets; fall back to this HTML-screenshot approach only when no image-gen capability exists."
 ---
 
 # PagePress — PNG
@@ -64,6 +64,7 @@ pagepress shot -i input.html -o output.png --preset og
 | **twitter** | "Twitter card", "X card", "tweet image", "Twitter preview" | `--preset twitter` | 1200x675; 16:9; readable at 400px width; text stroke for contrast |
 | **youtube** | "YouTube thumbnail", "video thumbnail", "YT thumbnail" | `--preset youtube` | 1280x720; 16:9; ultra-bold text; readable at 168x94 |
 | **xiaohongshu** | "xiaohongshu", "小红书", "小红书封面", "RedNote cover" | `--preset xiaohongshu` | 1080x1440; 3:4 vertical; bold headline impact |
+| **wechat** | "公众号封面", "微信封面", "WeChat cover", "公众号头图" | `--preset wechat` | 900x383; 2.35:1; safe zone center 383x383 square |
 
 ## Preset Specs and Design Guidelines (AI Agent Reference)
 
@@ -139,7 +140,31 @@ pagepress shot -i input.html -o output.png --preset og
   - Do not use CSS animations or transitions (static output only)
 - **Common patterns**: bold text + gradient background; number/statistic callout; before-after split; color-blocked sections with icons
 
-#### 8. xiaohongshu (1080x1440) - Xiaohongshu / RedNote Cover
+#### 8. wechat (900x383) - WeChat Official Account Cover
+- **Scenario**: WeChat Official Account (公众号) article cover image for headline position.
+- **Core principles**:
+  - **Center safe zone**: all critical content must fit within the **center 383×383px square** — WeChat crops to 1:1 when shared to Moments or chat
+  - **2-6 keywords only**: extract key phrases from the article title; this is not a document, it's a billboard
+  - **Avoid pure white backgrounds**: blends with WeChat's white interface and loses boundary
+  - **Strong contrast**: text-to-background contrast >= 4.5:1; bold, high-weight sans-serif fonts
+- **Safe area**:
+  - **Center 383×383px** is the critical safe zone (1:1 crop for sharing)
+  - Left/right ~259px bands are decorative/supplementary — they may be cropped
+  - Title font-size >= **40px** (recommended 48-72px)
+- **HTML advantages to leverage**:
+  - CSS precise layout for the center safe zone with `flexbox` centering
+  - Dynamic title/author injection for batch generation across article series
+  - Brand consistency via CSS variables (logo, colors, fonts)
+  - Gradient and color-block backgrounds that extend to full 900px width for the uncropped view
+- **Pitfalls to avoid**:
+  - Do not place critical text or logos outside the center 383×383 safe zone
+  - Do not use transparent PNG backgrounds (WeChat fills with white/black)
+  - Do not use small text — must be readable at thumbnail sizes in subscription list
+  - Avoid complex photo backgrounds without a semi-transparent overlay for text readability
+  - Keep PNG file size < **500 KB**
+- **Common patterns**: solid/gradient background + bold keywords centered; brand color blocks + logo + title; left-right symmetric decorative elements with centered text
+
+#### 9. xiaohongshu (1080x1440) - Xiaohongshu / RedNote Cover
 - **Scenario**: Xiaohongshu note cover, knowledge card, vertical mobile content.
 - **Core principle**: **Bold headline + 3-second rule**
   - Headline font-size >= 80px, occupying 40-60% of the canvas
@@ -151,7 +176,7 @@ pagepress shot -i input.html -o output.png --preset og
 
 - `-i, --input <path>` - input HTML file or URL
 - `-o, --output <path>` - output PNG path
-- `-p, --preset <name>` - preset: `og`, `infographic`, `poster`, `banner`, `twitter`, `youtube`, `xiaohongshu`
+- `-p, --preset <name>` - preset: `og`, `infographic`, `poster`, `banner`, `twitter`, `youtube`, `xiaohongshu`, `wechat`
 - `--width <px>` - custom width
 - `--height <px>` - custom height
 - `--scale <n>` - device scale factor (default: 2)
