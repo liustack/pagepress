@@ -191,9 +191,9 @@ pagepress shot -i input.html -o output.png --preset og
 > [!CAUTION]
 > **No interactive elements** — the output is a **static visual asset**, not a web page.
 >
-> **Do not use**: navigation menus, buttons, links, forms, hamburger icons, or any elements that imply clickability.
+> **Do not use**: navigation menus, buttons, links, forms, hamburger icons, badges/chips/pills/tags, or any elements that imply clickability or look like a web UI component. The image should feel like a **poster or card**, not a screenshot of a webpage.
 >
-> **Should use**: titles, taglines, decorative graphics, icons, statistics, brand marks.
+> **Should use**: titles, taglines, decorative graphics, SVG illustrations, icons, statistics, brand marks.
 
 ## Examples
 
