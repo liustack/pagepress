@@ -1,11 +1,11 @@
 ---
-name: pagepress
-description: "Render web pages and Markdown to PDF, generate PDF reports, capture screenshots, and generate OG images, social cards, posters, banners, and infographics. Use when user mentions 'convert to PDF', 'save as PDF', 'generate a PDF report', 'summarize into PDF', 'print to PDF', 'screenshot', 'capture webpage', 'OG image', 'link preview', 'social card', 'poster', 'banner', 'cover image', 'infographic', 'cheat sheet', or 'web to image'. Supports beautiful Markdown formatting and visual assets."
+name: web-to-png
+description: "Capture screenshots and generate OG images, social cards, posters, banners, and infographics as PNG. Use when user mentions 'screenshot', 'capture webpage', 'OG image', 'link preview', 'social card', 'poster', 'banner', 'cover image', 'infographic', 'cheat sheet', 'web to image', or 'generate visual asset'. Supports preset dimensions and design-guided HTML-to-PNG rendering."
 ---
 
-# PagePress
+# PagePress — PNG
 
-CLI tool to convert HTML/Markdown into PDF documents or PNG images.
+CLI tool to capture HTML or URL as PNG images with preset dimensions.
 
 ## Installation
 
@@ -22,45 +22,7 @@ npx playwright install chromium
 - **references/color-theory.md** — Color palette selection, 60-30-10 rule, 4-hue limit, harmony methods, ready-to-use palettes. **Always apply**, regardless of whether brand colors exist.
 - **references/design-principles.md** — Typography scale, visual hierarchy, Gestalt principles, Japanese aesthetics, Apple HIG. Apply to every layout decision.
 
-## PDF Output
-
-```bash
-pagepress pdf -i input.md -o output.pdf --template default
-```
-
-### Core Strategy
-
-PagePress provides two PDF generation modes:
-1. **Markdown Beautification**: input Markdown and use built-in templates (default/github/magazine) for layout and styling.
-2. **HTML/URL Print As-is**: input HTML or a URL and print directly without extra styles. The Agent should finish the HTML layout first.
-If the user asks to summarize or generate a report, the Agent should first create the Markdown content, then render it to PDF.
-
-### Scenario Routing Table (PDF)
-
-| Scenario | Trigger Phrases | Input Method | Template/Options |
-|---|---|---|---|
-| **Markdown to document** | "convert to PDF", "save as PDF", "export PDF", "generate a PDF report", "summarize into PDF", "convert Markdown to PDF" | `-i file.md` | `--template default` (or other templates) |
-| **Web page print** | "print web page", "print to PDF", "save page as PDF", "export page to PDF", "render this page to PDF" | `-i https://...` | Default (no template) |
-| **HTML print** | "print HTML", "render HTML to PDF", "HTML to PDF" | `-i file.html` | Default (no template) |
-
-**Supported templates (Markdown only)**:
-- `default` - Apple style, clean and elegant
-- `github` - GitHub style
-- `magazine` - VOGUE/WIRED magazine layout
-
-**Options**:
-- `-i, --input <path>` - input Markdown or HTML file
-- `-o, --output <path>` - output PDF path
-- `-t, --template <name>` - template (default: default)
-- `--wait-until <state>` - navigation waitUntil: load, domcontentloaded, networkidle
-- `--timeout <ms>` - navigation timeout in milliseconds
-- `--safe` - disable external network requests and JavaScript execution
-
-**Safe mode notes** (applies to pdf and shot):
-- Remote URL input is not allowed.
-- External network requests and JavaScript execution are disabled.
-
-## Image Output
+## Usage
 
 ```bash
 pagepress shot -i input.html -o output.png --preset og
@@ -68,20 +30,20 @@ pagepress shot -i input.html -o output.png --preset og
 
 > PNG output requires a `#container` element. Rendering fails if it is missing.
 
-### Assets Directory (AI Agent Guidance)
+## Assets Directory (AI Agent Guidance)
 
 - Ask the user where generated assets should be stored.
 - Remember the answer as `$ASSETS_DIR` for the session.
 - If the user does not reply or accepts the default, use `${workspaceRoot}/assets` (workspace root `assets/`).
 
-### Workspace Visual & Brand Resources (AI Agent Guidance)
+## Workspace Visual & Brand Resources (AI Agent Guidance)
 
 - For OG cards, posters, and banners, **always** base the design on workspace visual/brand resources.
 - Check the workspace for existing assets such as logos, color tokens, fonts, and brand imagery (commonly in `assets/`, `public/`, `src/assets/`, `docs/`, or any `brand/`-named folders).
 - Also inspect project stylesheets and font usage (e.g., `*.css`, `*.scss`, `*.tailwind.css`) to infer the color palette and visual style when explicit brand assets are incomplete.
 - If no brand resources are available, ask the user to provide them (logo, font preference) before generating visuals.
 
-### Temporary HTML Cleanup (AI Agent Guidance)
+## Temporary HTML Cleanup (AI Agent Guidance)
 
 - If the AI Agent generates temporary HTML for rendering, use the system temporary directory:
   - If the agent provides its own session temp directory, prefer that.
@@ -90,7 +52,7 @@ pagepress shot -i input.html -o output.png --preset og
 - After a successful render, delete only the temporary HTML it generated.
 - If the user asks to keep inputs for debugging or reuse, copy the file into `$ASSETS_DIR` and report its path.
 
-### Scenario Routing Table (AI Agent Decision Guide)
+## Scenario Routing Table (AI Agent Decision Guide)
 
 | Scenario | Trigger Phrases | Parameters | Layout Guidelines |
 |---|---|---|---|
@@ -100,7 +62,7 @@ pagepress shot -i input.html -o output.png --preset og
 | **poster** | "poster", "event poster", "promo poster", "vertical promo" | `--preset poster` | 1200x1500; minimal text, strong visual impact |
 | **banner** | "banner", "cover image", "header image", "hero image", "cover" | `--preset banner` | 1600x900; horizontal layout |
 
-### Preset Specs and Design Guidelines (AI Agent Reference)
+## Preset Specs and Design Guidelines (AI Agent Reference)
 
 > These guidelines help the AI Agent generate high-quality HTML. Reuse the user's brand assets (colors, fonts, logo).
 
@@ -129,7 +91,8 @@ pagepress shot -i input.html -o output.png --preset og
 - **Scenario**: Blog covers, Twitter/LinkedIn header backgrounds.
 - **Layout**: horizontal composition, content centered or left-text-right-image.
 
-### Options
+## Options
+
 - `-i, --input <path>` - input HTML file or URL
 - `-o, --output <path>` - output PNG path
 - `-p, --preset <name>` - preset: `og`, `infographic`, `poster`, `banner`
@@ -155,6 +118,9 @@ pagepress shot -i input.html -o output.png --preset og
 # Generate an OG image
 pagepress shot -i card.html -o og.png --preset og
 
-# Generate a PDF report
-pagepress pdf -i report.md -o report.pdf --template github
+# Capture a full-page screenshot
+pagepress shot -i https://example.com -o screenshot.png
+
+# Generate a poster
+pagepress shot -i poster.html -o poster.png --preset poster
 ```

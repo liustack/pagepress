@@ -43,10 +43,12 @@ src/
 ## Skills Directory
 ```
 skills/
-└── pagepress/
-    ├── SKILL.md             # tool usage guide (commands, options, presets)
-    └── references/              # design reference documents for AI Agent
-        ├── color-theory.md      # color palette guidance (fallback when no brand colors)
+├── web-to-pdf/
+│   └── SKILL.md                 # PDF generation (commands, templates, options)
+└── web-to-png/
+    ├── SKILL.md                 # PNG generation (presets, scenarios, design guidelines)
+    └── references/
+        ├── color-theory.md      # color palette guidance
         └── design-principles.md # typography, visual hierarchy, Gestalt, Japanese aesthetics, Apple HIG
 ```
 
