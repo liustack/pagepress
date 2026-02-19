@@ -14,12 +14,19 @@ npm install -g @liustack/pagepress
 npx playwright install chromium
 ```
 
-## Design References
+## Design References & Visual Rules
 
 > [!IMPORTANT]
-> **Read before generating any visual asset (PNG).** These references are mandatory, not optional.
+> **Read before generating any visual asset (PNG).** These rules are mandatory, not optional.
 >
 > **Priority**: If the user provides their own color palette, design guidelines, or style references, **use the user's** and skip the built-in references below. The built-in references are defaults, not overrides.
+
+> [!CAUTION]
+> **The output is a static visual asset** — a poster or card, **not a web page**.
+>
+> **Do not use**: navigation menus, buttons, links, forms, hamburger icons, badges/chips/pills/tags, or any elements that imply clickability or look like a web UI component.
+>
+> **Should use**: titles, taglines, decorative graphics, SVG illustrations, icons, statistics, brand marks.
 
 - **references/color-theory.md** — Color theory rules (60-30-10 ratio, 4-hue limit, harmony methods) **always apply** to every design. Ready-to-use palettes are provided as **fallback only** — use them when no workspace brand colors exist. When brand colors exist, use them as the starting palette and apply the color theory rules on top.
 - **references/design-principles.md** — Typography scale, visual hierarchy, Gestalt principles, Japanese aesthetics, Apple HIG. Apply to every layout decision.
@@ -185,15 +192,6 @@ pagepress shot -i input.html -o output.png --preset og
 - `--wait-until <state>` - navigation waitUntil: load, domcontentloaded, networkidle
 - `--timeout <ms>` - navigation timeout in milliseconds
 - `--safe` - disable external network requests and JavaScript execution
-
-## Image Design Guidelines
-
-> [!CAUTION]
-> **No interactive elements** — the output is a **static visual asset**, not a web page.
->
-> **Do not use**: navigation menus, buttons, links, forms, hamburger icons, badges/chips/pills/tags, or any elements that imply clickability or look like a web UI component. The image should feel like a **poster or card**, not a screenshot of a webpage.
->
-> **Should use**: titles, taglines, decorative graphics, SVG illustrations, icons, statistics, brand marks.
 
 ## Examples
 
