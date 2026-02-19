@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200, height=675">
+<style>
+/* Arctic Frost: minimal crisp, monochromatic + single accent */
+/* Palette: #F0EEE9 dominant / #819FA7 secondary / #0A1A3C accent / #5B6E74 text */
+/* Z-pattern: top-left logo → top-right chip → bottom-left heading → bottom-right command */
+*{margin:0;padding:0;box-sizing:border-box}
+#container{
+  width:1200px;height:675px;
+  background:#F0EEE9;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  position:relative;overflow:hidden;
+  padding:56px 80px;
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+}
+
+/* subtle diagonal gradient — depth without noise */
+#container::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(10,26,60,.03) 0%,transparent 40%,rgba(129,159,167,.04) 100%);
+  pointer-events:none;
+}
+
+/* decorative geometric: two offset rectangles — Swiss grid nod */
+.deco{
+  position:absolute;top:90px;right:80px;
+  width:160px;height:160px;z-index:0;
+}
+.deco-a{
+  position:absolute;top:0;left:0;
+  width:120px;height:120px;
+  border:2px solid rgba(10,26,60,.06);
+  border-radius:4px;
+}
+.deco-b{
+  position:absolute;top:30px;left:30px;
+  width:120px;height:120px;
+  background:rgba(129,159,167,.06);
+  border-radius:4px;
+}
+
+/* top row */
+.top{
+  display:flex;justify-content:space-between;
+  align-items:center;position:relative;z-index:1;
+}
+.logo{
+  font-size:15px;font-weight:600;
+  color:#0A1A3C;letter-spacing:-.5px;
+}
+.logo em{font-style:normal;color:#819FA7}
+.chip{
+  font-size:11px;font-weight:500;
+  color:#5B6E74;
+  background:rgba(10,26,60,.04);
+  border:1px solid rgba(10,26,60,.08);
+  padding:6px 14px;border-radius:6px;
+  display:flex;align-items:center;gap:6px;
+}
+
+/* bottom row */
+.bottom{
+  display:flex;justify-content:space-between;
+  align-items:flex-end;position:relative;z-index:1;
+}
+.bottom-left{max-width:520px}
+h1{
+  font-size:52px;font-weight:700;
+  color:#0A1A3C;line-height:1.08;
+  letter-spacing:-2px;margin-bottom:14px;
+}
+h1 em{font-style:normal;color:#819FA7}
+.desc{
+  font-size:15px;font-weight:400;
+  color:#5B6E74;
+  line-height:1.65;max-width:400px;
+}
+
+/* right: feature list */
+.features{
+  display:flex;flex-direction:column;gap:10px;
+  width:340px;
+}
+.feat{
+  background:rgba(10,26,60,.03);
+  border:1px solid rgba(10,26,60,.06);
+  border-radius:10px;
+  padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+}
+.feat-icon{
+  width:32px;height:32px;flex-shrink:0;
+  background:#0A1A3C;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.feat-name{font-size:13px;font-weight:600;color:#0A1A3C;margin-bottom:1px}
+.feat-desc{font-size:11px;color:#5B6E74}
+
+/* command bar */
+.cmd{
+  background:#0A1A3C;
+  border-radius:8px;
+  padding:12px 16px;
+  font-family:'SF Mono',ui-monospace,monospace;
+  font-size:11px;
+  display:flex;align-items:center;gap:6px;
+}
+.c-p{color:rgba(240,238,233,.2)}
+.c-c{color:#819FA7}
+.c-f{color:rgba(240,238,233,.3)}
+.c-v{color:rgba(240,238,233,.6)}
+</style>
+</head>
+<body>
+<div id="container">
+  <div class="deco"><div class="deco-a"></div><div class="deco-b"></div></div>
+
+  <div class="top">
+    <div class="logo">Page<em>Press</em></div>
+    <div class="chip">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 3l5-2 5 2v6l-5 2-5-2V3z" stroke="#5B6E74" stroke-width="1" stroke-linejoin="round"/></svg>
+      Open Source CLI
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="bottom-left">
+      <h1>Documents &<br><em>Images</em>, One CLI</h1>
+      <p class="desc">Render Markdown, HTML, or any URL into polished PDFs and pixel-perfect PNGs with presets for every platform.</p>
+    </div>
+
+    <div class="features">
+      <div class="feat">
+        <div class="feat-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="9" height="12" rx="1.5" stroke="#819FA7" stroke-width="1.2"/><path d="M5 5h3M5 7h5M5 9h2" stroke="#819FA7" stroke-width=".8" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="feat-name">PDF Export</div>
+          <div class="feat-desc">3 templates · Apple-quality typography</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="#819FA7" stroke-width="1.2"/><circle cx="8" cy="8" r="2.5" stroke="#819FA7" stroke-width="1.2"/></svg>
+        </div>
+        <div>
+          <div class="feat-name">Image Capture</div>
+          <div class="feat-desc">8 presets · OG, poster, banner, and more</div>
+        </div>
+      </div>
+      <div class="cmd">
+        <span class="c-p">$</span>
+        <span class="c-c">pagepress</span>
+        <span class="c-f">shot</span>
+        <span class="c-f">--preset</span>
+        <span class="c-v">twitter</span>
+        <span class="c-f">-i</span>
+        <span class="c-v">card.html</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

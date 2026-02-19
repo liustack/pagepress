@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=900, height=383">
+<style>
+/* Luminous Tech: neon on dark, complementary harmony */
+/* Palette: #101014 dominant / #8A00FF secondary / #00E8FF accent / #3B3B3D neutral */
+/* Center safe zone 383x383 — all critical content inside */
+*{margin:0;padding:0;box-sizing:border-box}
+#container{
+  width:900px;height:383px;
+  background:#101014;
+  font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Inter,sans-serif;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+  justify-content:center;
+}
+
+/* ambient glow — center focal point */
+#container::before{
+  content:'';position:absolute;
+  width:500px;height:500px;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(138,0,255,.1) 0%,rgba(0,232,255,.04) 40%,transparent 70%);
+  pointer-events:none;
+}
+
+/* side decorative strips — can be cropped safely */
+.side-left,.side-right{
+  position:absolute;top:0;bottom:0;width:200px;z-index:0;
+}
+.side-left{
+  left:0;
+  background:linear-gradient(90deg,rgba(138,0,255,.06),transparent);
+}
+.side-right{
+  right:0;
+  background:linear-gradient(270deg,rgba(0,232,255,.06),transparent);
+}
+
+/* thin grid lines — subtle tech feel */
+.grid-h,.grid-v{
+  position:absolute;
+  background:rgba(255,255,255,.02);
+}
+.grid-h{width:100%;height:1px;top:50%}
+.grid-v{height:100%;width:1px;left:50%}
+
+/* center safe zone content */
+.safe{
+  width:383px;
+  text-align:center;
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  align-items:center;
+}
+
+.logo{
+  font-size:13px;font-weight:500;
+  color:rgba(255,255,255,.2);
+  letter-spacing:1px;
+  margin-bottom:24px;
+}
+
+h1{
+  font-size:56px;font-weight:700;
+  color:#fff;line-height:1.1;
+  letter-spacing:-2px;
+  margin-bottom:12px;
+}
+h1 em{
+  font-style:normal;
+  background:linear-gradient(135deg,#8A00FF,#00E8FF);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.sub{
+  font-size:16px;font-weight:400;
+  color:rgba(255,255,255,.35);
+  line-height:1.6;
+  max-width:320px;
+  margin-bottom:24px;
+}
+
+/* pills */
+.pills{
+  display:flex;gap:8px;flex-wrap:wrap;
+  justify-content:center;
+}
+.pill{
+  font-size:11px;font-weight:500;
+  color:rgba(255,255,255,.5);
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  padding:5px 12px;border-radius:20px;
+}
+.pill.accent{
+  color:#00E8FF;
+  background:rgba(0,232,255,.06);
+  border-color:rgba(0,232,255,.15);
+}
+</style>
+</head>
+<body>
+<div id="container">
+  <div class="side-left"></div>
+  <div class="side-right"></div>
+  <div class="grid-h"></div>
+  <div class="grid-v"></div>
+
+  <div class="safe">
+    <div class="logo">PAGEPRESS</div>
+    <h1>Markdown 转<br><em>PDF & 图片</em></h1>
+    <p class="sub">开源 CLI · AI Agent 友好<br>三套模板 · 八种图片预设</p>
+    <div class="pills">
+      <div class="pill accent">PDF</div>
+      <div class="pill accent">OG 卡片</div>
+      <div class="pill">海报</div>
+      <div class="pill">横幅</div>
+      <div class="pill">信息图</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

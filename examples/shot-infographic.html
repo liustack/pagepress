@@ -4,45 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080, height=1350">
 <style>
-/* Earthbound Warmth palette: #F4EBD2 dominant / #C18A63 secondary / #7E9C76 accent / #4A3F36 text */
+/* Luminous Tech Neon: deep dark + violet + cyan, complementary harmony */
+/* Palette: #101014 dominant / #8A00FF secondary / #00E8FF accent / #E0E0E6 text */
 /* F-pattern, high info density, Gestalt proximity grouping */
 *{margin:0;padding:0;box-sizing:border-box}
 #container{
   width:1080px;height:1350px;
-  background:#F4EBD2;
+  background:#101014;
   padding:80px;
   font-family:Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
-  color:#4A3F36;
+  color:#E0E0E6;
 }
 
 .header{
   display:flex;justify-content:space-between;align-items:center;
   margin-bottom:48px;padding-bottom:24px;
-  border-bottom:2px solid #4A3F36;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 .logo{font-size:20px;font-weight:600;letter-spacing:-.5px}
-.logo em{font-style:normal;color:#C18A63}
-.ver{font-size:12px;font-weight:500;color:#8B7D6B;letter-spacing:.5px}
+.logo em{font-style:normal;color:#00E8FF}
+.ver{font-size:12px;font-weight:500;color:rgba(255,255,255,.25);letter-spacing:.5px}
 
 h1{
   font-size:38px;font-weight:600;
   letter-spacing:-1px;line-height:1.2;margin-bottom:8px;
 }
 .subtitle{
-  font-size:15px;color:#8B7D6B;
+  font-size:15px;color:rgba(255,255,255,.35);
   line-height:1.5;margin-bottom:44px;
 }
 .section-label{
   font-size:11px;font-weight:600;
   letter-spacing:1.5px;text-transform:uppercase;
-  color:#C18A63;margin-bottom:16px;
+  color:#8A00FF;margin-bottom:16px;
 }
 
 /* command cards */
 .commands{display:flex;flex-direction:column;gap:10px;margin-bottom:40px}
 .cmd{
-  background:#FFFDF7;
-  border:1px solid rgba(74,63,54,.1);
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
   border-radius:12px;padding:20px 24px;
   display:flex;align-items:center;gap:16px;
 }
@@ -51,51 +52,53 @@ h1{
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
 }
-.cmd-dot.pdf{background:#C18A63}
-.cmd-dot.shot{background:#7E9C76}
+.cmd-dot.pdf{background:#8A00FF}
+.cmd-dot.shot{background:rgba(0,232,255,.8)}
 .cmd-name{font-size:15px;font-weight:600;margin-bottom:2px}
-.cmd-desc{font-size:13px;color:#8B7D6B}
+.cmd-desc{font-size:13px;color:rgba(255,255,255,.35)}
 .cmd-code{
   margin-left:auto;
   font-family:'SF Mono',ui-monospace,monospace;
-  font-size:11px;color:#C18A63;
-  background:rgba(193,138,99,.1);
+  font-size:11px;color:#00E8FF;
+  background:rgba(0,232,255,.06);
   padding:6px 12px;border-radius:6px;white-space:nowrap;
 }
 
-/* presets grid */
+/* presets grid — 2x4 to show all 8 */
 .presets{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:40px}
 .preset{
-  background:#FFFDF7;
-  border:1px solid rgba(74,63,54,.1);
-  border-radius:12px;padding:20px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;padding:16px 18px;
 }
-.preset-name{font-size:15px;font-weight:600;margin-bottom:3px}
+.preset-name{font-size:14px;font-weight:600;margin-bottom:2px}
 .preset-size{
   font-family:'SF Mono',ui-monospace,monospace;
-  font-size:11px;color:#8B7D6B;margin-bottom:8px;
+  font-size:10px;color:rgba(255,255,255,.3);margin-bottom:6px;
 }
-.preset-desc{font-size:12px;color:#8B7D6B;line-height:1.5}
+.preset-desc{font-size:11px;color:rgba(255,255,255,.3);line-height:1.5}
 
 /* stats bar */
 .stats{display:flex;gap:10px;margin-bottom:40px}
 .stat{
-  flex:1;background:#4A3F36;color:#F4EBD2;
+  flex:1;
+  background:linear-gradient(135deg,rgba(138,0,255,.15),rgba(0,232,255,.08));
+  border:1px solid rgba(255,255,255,.06);
   border-radius:12px;padding:20px;text-align:center;
 }
-.stat-val{font-size:26px;font-weight:600;margin-bottom:4px}
+.stat-val{font-size:26px;font-weight:600;margin-bottom:4px;color:#00E8FF}
 .stat-label{
   font-size:10px;font-weight:600;
   letter-spacing:1px;text-transform:uppercase;
-  color:#8B7D6B;
+  color:rgba(255,255,255,.25);
 }
 
 .footer{
-  padding-top:24px;border-top:1.5px solid rgba(74,63,54,.15);
+  padding-top:24px;border-top:1px solid rgba(255,255,255,.06);
   display:flex;justify-content:space-between;align-items:center;
 }
-.footer-text{font-size:12px;color:#8B7D6B}
-.footer-link{font-size:12px;color:#C18A63;font-weight:500}
+.footer-text{font-size:12px;color:rgba(255,255,255,.2)}
+.footer-link{font-size:12px;color:#8A00FF;font-weight:500}
 </style>
 </head>
 <body>
@@ -112,7 +115,7 @@ h1{
   <div class="commands">
     <div class="cmd">
       <div class="cmd-dot pdf">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="1" width="12" height="16" rx="2" stroke="#FFFDF7" stroke-width="1.5"/><path d="M6 7h4M6 10h6M6 13h3" stroke="#FFFDF7" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="1" width="12" height="16" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M6 7h4M6 10h6M6 13h3" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg>
       </div>
       <div>
         <div class="cmd-name">pdf</div>
@@ -122,7 +125,7 @@ h1{
     </div>
     <div class="cmd">
       <div class="cmd-dot shot">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#FFFDF7" stroke-width="1.5"/><circle cx="10" cy="10" r="3" stroke="#FFFDF7" stroke-width="1.5"/></svg>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#101014" stroke-width="1.5"/><circle cx="10" cy="10" r="3" stroke="#101014" stroke-width="1.5"/></svg>
       </div>
       <div>
         <div class="cmd-name">shot</div>
@@ -137,22 +140,42 @@ h1{
     <div class="preset">
       <div class="preset-name">og</div>
       <div class="preset-size">1200 x 630</div>
-      <div class="preset-desc">Social sharing cards for Twitter, LinkedIn, Facebook</div>
+      <div class="preset-desc">Social cards for Twitter, LinkedIn, Facebook</div>
     </div>
     <div class="preset">
       <div class="preset-name">infographic</div>
       <div class="preset-size">1080 x 1350</div>
-      <div class="preset-desc">Data visualization, cheat sheets, reference cards</div>
+      <div class="preset-desc">Data visualization, cheat sheets</div>
     </div>
     <div class="preset">
       <div class="preset-name">poster</div>
       <div class="preset-size">1200 x 1500</div>
-      <div class="preset-desc">Event announcements, product launches, promos</div>
+      <div class="preset-desc">Events, launches, vertical promos</div>
     </div>
     <div class="preset">
       <div class="preset-name">banner</div>
       <div class="preset-size">1600 x 900</div>
-      <div class="preset-desc">Blog headers, hero sections, cover images</div>
+      <div class="preset-desc">Blog headers, hero sections</div>
+    </div>
+    <div class="preset">
+      <div class="preset-name">twitter</div>
+      <div class="preset-size">1200 x 675</div>
+      <div class="preset-desc">Twitter/X card previews</div>
+    </div>
+    <div class="preset">
+      <div class="preset-name">youtube</div>
+      <div class="preset-size">1280 x 720</div>
+      <div class="preset-desc">Video thumbnails</div>
+    </div>
+    <div class="preset">
+      <div class="preset-name">xiaohongshu</div>
+      <div class="preset-size">1080 x 1440</div>
+      <div class="preset-desc">RedNote / 小红书 covers</div>
+    </div>
+    <div class="preset">
+      <div class="preset-name">wechat</div>
+      <div class="preset-size">900 x 383</div>
+      <div class="preset-desc">WeChat / 公众号 covers</div>
     </div>
   </div>
 
@@ -163,7 +186,7 @@ h1{
       <div class="stat-label">PDF Templates</div>
     </div>
     <div class="stat">
-      <div class="stat-val">4</div>
+      <div class="stat-val">8</div>
       <div class="stat-label">Image Presets</div>
     </div>
     <div class="stat">
