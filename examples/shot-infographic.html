@@ -16,61 +16,58 @@
 /* ── banner ── */
 .banner{
   background:#DA7756;
-  padding:44px 64px 40px;
+  padding:40px 64px 36px;
   position:relative;overflow:hidden;
 }
 .banner-tag{
   display:inline-block;
   font-size:11px;font-weight:600;
   color:#DA7756;background:#FFF8F3;
-  padding:5px 14px;border-radius:20px;
-  margin-bottom:16px;
+  padding:4px 14px;border-radius:20px;
+  margin-bottom:14px;
 }
 .banner h1{
-  font-size:38px;font-weight:800;
+  font-size:36px;font-weight:800;
   color:#FFF8F3;letter-spacing:-1px;
-  line-height:1.2;margin-bottom:8px;
+  line-height:1.2;margin-bottom:6px;
 }
 .banner .sub{
-  font-size:15px;color:rgba(255,248,243,.6);line-height:1.5;
+  font-size:14px;color:rgba(255,248,243,.55);line-height:1.5;
 }
 
-/* ── content area ── */
-.content{padding:32px 64px 32px}
+/* ── content ── */
+.content{padding:28px 64px 28px}
 
-/* section header */
 .sh{
   font-size:10px;font-weight:700;
   letter-spacing:2px;text-transform:uppercase;
   color:#DA7756;margin-bottom:4px;
 }
 .st{
-  font-size:26px;font-weight:700;
+  font-size:24px;font-weight:700;
   letter-spacing:-.5px;line-height:1.3;
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
-.st small{font-size:15px;font-weight:400;color:#6B6B6B}
 
 /* ── concept card ── */
 .concept{
   background:#fff;border:1px solid rgba(0,0,0,.06);
-  border-radius:14px;padding:24px 28px;
-  display:flex;align-items:flex-start;gap:20px;
-  margin-bottom:12px;
+  border-radius:12px;padding:20px 24px;
+  display:flex;align-items:flex-start;gap:18px;
+  margin-bottom:10px;
 }
 .concept-icon{
-  width:48px;height:48px;flex-shrink:0;
-  background:rgba(218,119,86,.08);border-radius:12px;
+  width:44px;height:44px;flex-shrink:0;
+  background:rgba(218,119,86,.08);border-radius:10px;
   display:flex;align-items:center;justify-content:center;
 }
-.concept-text{font-size:14px;line-height:1.7;color:#333}
+.concept-text{font-size:13px;line-height:1.7;color:#333}
 .concept-text strong{color:#DA7756;font-weight:600}
 
-/* tags row */
-.tags{display:flex;gap:8px;margin-bottom:28px}
+.tags{display:flex;gap:8px;margin-bottom:24px}
 .tag{
   font-size:11px;font-weight:600;
-  padding:5px 14px;border-radius:8px;
+  padding:4px 12px;border-radius:8px;
   border:1px solid rgba(0,0,0,.08);
   background:#fff;color:#1A1A1A;
 }
@@ -80,71 +77,72 @@
   color:#DA7756;
 }
 
-/* ── 2x3 grid cards ── */
-.grid6{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px}
+/* ── 2x4 preset grid ── */
+.grid8{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
 .g-card{
   background:#fff;border:1px solid rgba(0,0,0,.06);
-  border-radius:12px;padding:20px;
+  border-radius:10px;padding:14px 16px;
+  display:flex;align-items:flex-start;gap:12px;
 }
 .g-num{
   display:inline-flex;align-items:center;justify-content:center;
-  width:24px;height:24px;border-radius:6px;
+  width:22px;height:22px;border-radius:6px;
   background:#DA7756;color:#FFF8F3;
-  font-size:11px;font-weight:700;
-  margin-bottom:10px;
+  font-size:10px;font-weight:700;flex-shrink:0;
+  margin-top:1px;
 }
-.g-title{font-size:14px;font-weight:700;margin-bottom:4px}
-.g-desc{font-size:12px;color:#6B6B6B;line-height:1.5}
+.g-title{font-size:13px;font-weight:700;margin-bottom:1px}
+.g-meta{font-size:10px;color:#6B6B6B;font-family:'SF Mono',ui-monospace,monospace}
 
 /* ── 3-col level cards ── */
-.levels{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px}
+.levels{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px}
 .lv{
   background:#fff;border:1px solid rgba(0,0,0,.06);
-  border-radius:12px;padding:20px;
+  border-radius:10px;padding:16px;
 }
 .lv-tag{
   display:inline-block;
-  font-size:10px;font-weight:700;
-  padding:3px 10px;border-radius:6px;
-  margin-bottom:10px;
+  font-size:9px;font-weight:700;
+  padding:3px 9px;border-radius:5px;
+  margin-bottom:8px;letter-spacing:.5px;
 }
 .lv-tag.t1{background:rgba(218,119,86,.1);color:#DA7756}
 .lv-tag.t2{background:rgba(218,119,86,.2);color:#DA7756}
 .lv-tag.t3{background:rgba(218,119,86,.35);color:#fff}
-.lv-title{font-size:15px;font-weight:700;margin-bottom:4px}
-.lv-desc{font-size:12px;color:#6B6B6B;line-height:1.5}
-.lv-example{font-size:11px;color:#999;margin-top:6px;font-style:italic}
+.lv-title{font-size:14px;font-weight:700;margin-bottom:3px}
+.lv-desc{font-size:11px;color:#6B6B6B;line-height:1.5}
 
-/* ── highlight bar (3 cols) ── */
-.highlights{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px}
+/* ── highlight bar ── */
+.highlights{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px}
 .hl{
   background:rgba(26,26,26,.03);
   border:1px solid rgba(0,0,0,.05);
-  border-radius:12px;padding:20px;
+  border-radius:10px;padding:16px;
 }
-.hl-title{font-size:14px;font-weight:700;margin-bottom:4px}
-.hl-desc{font-size:12px;color:#6B6B6B;line-height:1.5}
+.hl-title{font-size:13px;font-weight:700;margin-bottom:3px}
+.hl-desc{font-size:11px;color:#6B6B6B;line-height:1.5}
 
-/* ── 2x3 numbered list ── */
-.grid-bp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+/* ── 2x3 best practices ── */
+.grid-bp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
 .bp{
   background:rgba(218,119,86,.03);
   border:1px solid rgba(218,119,86,.1);
-  border-radius:12px;padding:18px 20px;
-  display:flex;align-items:flex-start;gap:14px;
+  border-radius:10px;padding:14px 16px;
+  display:flex;align-items:flex-start;gap:12px;
 }
 .bp-num{
   display:inline-flex;align-items:center;justify-content:center;
-  width:26px;height:26px;border-radius:8px;
+  width:22px;height:22px;border-radius:6px;
   background:#DA7756;color:#FFF8F3;
-  font-size:12px;font-weight:700;flex-shrink:0;
+  font-size:10px;font-weight:700;flex-shrink:0;
+  margin-top:1px;
 }
-.bp-title{font-size:13px;font-weight:700;margin-bottom:2px}
-.bp-desc{font-size:11px;color:#6B6B6B;line-height:1.5}
+.bp-title{font-size:12px;font-weight:700;margin-bottom:1px}
+.bp-desc{font-size:11px;color:#6B6B6B;line-height:1.4}
 
 /* ── footer ── */
 .footer{
-  padding-top:16px;border-top:1px solid rgba(0,0,0,.06);
+  padding-top:14px;border-top:1px solid rgba(0,0,0,.06);
   display:flex;justify-content:space-between;align-items:center;
 }
 .footer-src{font-size:11px;color:#6B6B6B}
@@ -155,7 +153,6 @@
 <body>
 <div id="container">
 
-  <!-- banner -->
   <div class="banner">
     <div class="banner-tag">CLI Quick Reference</div>
     <h1>PagePress 完全指南</h1>
@@ -169,7 +166,7 @@
     <div class="st">PagePress 是什么？</div>
     <div class="concept">
       <div class="concept-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="1" width="14" height="19" rx="2.5" stroke="#DA7756" stroke-width="1.5"/><path d="M7 7h6M7 10h8M7 13h4" stroke="#DA7756" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="1" width="14" height="19" rx="2.5" stroke="#DA7756" stroke-width="1.5"/><path d="M7 7h6M7 10h8M7 13h4" stroke="#DA7756" stroke-width="1.2" stroke-linecap="round"/></svg>
       </div>
       <div class="concept-text">
         PagePress 是一个 <strong>Node.js CLI 工具</strong>。输入 Markdown / HTML / URL，输出精美 PDF 或高清 PNG。内置 3 套 PDF 模板、8 种图片预设，2x Retina 输出，开箱即用。
@@ -182,63 +179,38 @@
       <span class="tag">8 种预设</span>
     </div>
 
-    <!-- S2: presets -->
+    <!-- S2: 8 presets -->
     <div class="sh">IMAGE PRESETS</div>
     <div class="st">8 种图片预设</div>
-    <div class="grid6">
-      <div class="g-card">
-        <div class="g-num">1</div>
-        <div class="g-title">og</div>
-        <div class="g-desc">1200×630，社交分享卡片</div>
-      </div>
-      <div class="g-card">
-        <div class="g-num">2</div>
-        <div class="g-title">infographic</div>
-        <div class="g-desc">1080×1350，信息图 / 速查表</div>
-      </div>
-      <div class="g-card">
-        <div class="g-num">3</div>
-        <div class="g-title">poster</div>
-        <div class="g-desc">1200×1500，活动海报</div>
-      </div>
-      <div class="g-card">
-        <div class="g-num">4</div>
-        <div class="g-title">banner</div>
-        <div class="g-desc">1600×900，博客 / Hero 横幅</div>
-      </div>
-      <div class="g-card">
-        <div class="g-num">5</div>
-        <div class="g-title">twitter</div>
-        <div class="g-desc">1200×675，Twitter/X 卡片</div>
-      </div>
-      <div class="g-card">
-        <div class="g-num">6</div>
-        <div class="g-title">youtube</div>
-        <div class="g-desc">1280×720，视频封面缩略图</div>
-      </div>
+    <div class="grid8">
+      <div class="g-card"><div class="g-num">1</div><div><div class="g-title">og</div><div class="g-meta">1200×630</div></div></div>
+      <div class="g-card"><div class="g-num">2</div><div><div class="g-title">infographic</div><div class="g-meta">1080×1350</div></div></div>
+      <div class="g-card"><div class="g-num">3</div><div><div class="g-title">poster</div><div class="g-meta">1200×1500</div></div></div>
+      <div class="g-card"><div class="g-num">4</div><div><div class="g-title">banner</div><div class="g-meta">1600×900</div></div></div>
+      <div class="g-card"><div class="g-num">5</div><div><div class="g-title">twitter</div><div class="g-meta">1200×675</div></div></div>
+      <div class="g-card"><div class="g-num">6</div><div><div class="g-title">youtube</div><div class="g-meta">1280×720</div></div></div>
+      <div class="g-card"><div class="g-num">7</div><div><div class="g-title">xiaohongshu</div><div class="g-meta">1080×1440</div></div></div>
+      <div class="g-card"><div class="g-num">8</div><div><div class="g-title">wechat</div><div class="g-meta">900×383</div></div></div>
     </div>
 
-    <!-- S3: workflow levels -->
+    <!-- S3: workflow -->
     <div class="sh">WORKFLOW</div>
-    <div class="st">三种使用方式 <small>— 从简单到进阶</small></div>
+    <div class="st">三种使用方式</div>
     <div class="levels">
       <div class="lv">
         <div class="lv-tag t1">L1 基础</div>
         <div class="lv-title">命令行直出</div>
         <div class="lv-desc">一行命令，Markdown 直接转 PDF 或截图</div>
-        <div class="lv-example">pagepress pdf -i doc.md</div>
       </div>
       <div class="lv">
         <div class="lv-tag t2">L2 定制</div>
         <div class="lv-title">HTML 模板</div>
-        <div class="lv-desc">手写 HTML 布局，用 shot 命令渲染为高清 PNG</div>
-        <div class="lv-example">pagepress shot -i card.html</div>
+        <div class="lv-desc">手写 HTML 布局，shot 命令渲染高清 PNG</div>
       </div>
       <div class="lv">
         <div class="lv-tag t3">L3 自动化</div>
-        <div class="lv-title">AI + 批量生成</div>
-        <div class="lv-desc">结合 Claude Skill，自然语言描述即可批量生成</div>
-        <div class="lv-example">配合 web-to-png Skill</div>
+        <div class="lv-title">AI 批量生成</div>
+        <div class="lv-desc">结合 Skill，自然语言描述即可批量输出</div>
       </div>
     </div>
 
@@ -254,7 +226,7 @@
       </div>
       <div class="hl">
         <div class="hl-title">跨平台</div>
-        <div class="hl-desc">macOS / Linux / Windows 全支持</div>
+        <div class="hl-desc">macOS / Linux / Windows</div>
       </div>
     </div>
 
@@ -262,33 +234,14 @@
     <div class="sh">BEST PRACTICES</div>
     <div class="st">六条使用建议</div>
     <div class="grid-bp">
-      <div class="bp">
-        <div class="bp-num">1</div>
-        <div><div class="bp-title">先写好 HTML 再截图</div><div class="bp-desc">布局在浏览器调好，shot 命令一键输出</div></div>
-      </div>
-      <div class="bp">
-        <div class="bp-num">2</div>
-        <div><div class="bp-title">善用 --preset 参数</div><div class="bp-desc">8 种预设自动设定宽高和缩放</div></div>
-      </div>
-      <div class="bp">
-        <div class="bp-num">3</div>
-        <div><div class="bp-title">--wait-until networkidle</div><div class="bp-desc">加载 Web 字体时，等网络空闲再截图</div></div>
-      </div>
-      <div class="bp">
-        <div class="bp-num">4</div>
-        <div><div class="bp-title">PDF 选对模板</div><div class="bp-desc">default / github / magazine 各有适用场景</div></div>
-      </div>
-      <div class="bp">
-        <div class="bp-num">5</div>
-        <div><div class="bp-title">图片设计避免 Web 元素</div><div class="bp-desc">不用按钮、徽章、链接，保持海报感</div></div>
-      </div>
-      <div class="bp">
-        <div class="bp-num">6</div>
-        <div><div class="bp-title">结合 Skill 提效</div><div class="bp-desc">安装 web-to-png Skill，AI 自动生成 HTML</div></div>
-      </div>
+      <div class="bp"><div class="bp-num">1</div><div><div class="bp-title">先写好 HTML 再截图</div><div class="bp-desc">布局在浏览器调好，shot 一键输出</div></div></div>
+      <div class="bp"><div class="bp-num">2</div><div><div class="bp-title">善用 --preset 参数</div><div class="bp-desc">8 种预设自动设定宽高缩放</div></div></div>
+      <div class="bp"><div class="bp-num">3</div><div><div class="bp-title">--wait-until networkidle</div><div class="bp-desc">加载 Web 字体时等网络空闲</div></div></div>
+      <div class="bp"><div class="bp-num">4</div><div><div class="bp-title">PDF 选对模板</div><div class="bp-desc">default / github / magazine</div></div></div>
+      <div class="bp"><div class="bp-num">5</div><div><div class="bp-title">避免 Web 元素</div><div class="bp-desc">不用按钮、徽章，保持海报感</div></div></div>
+      <div class="bp"><div class="bp-num">6</div><div><div class="bp-title">结合 Skill 提效</div><div class="bp-desc">AI 自动生成 HTML 再截图</div></div></div>
     </div>
 
-    <!-- footer -->
     <div class="footer">
       <div class="footer-src">npm i -g <a>@liustack/pagepress</a></div>
       <div class="footer-handle">@liustack</div>
