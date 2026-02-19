@@ -11,7 +11,7 @@ A web content rendering toolkit (CLI) designed for **AI Agents**, converting HTM
 - **Multiple inputs**: Local HTML, Markdown files, or remote URLs
 - **Rich templates**:
   - **PDF**: Apple style, GitHub style, magazine layout (Magazine)
-  - **Image**: OG cards, infographics, posters, banners
+  - **Image**: 8 presets — OG cards, infographics, posters, banners, Twitter/X cards, YouTube thumbnails, Xiaohongshu covers, WeChat covers
 - **Brand-aware visuals**: OG / poster / banner outputs are generated based on workspace visual & brand assets (commonly in `assets/`, `public/`, `src/assets/`)
 - **Consistency guarantees**: Deterministic rendering, font waiting, network idle detection, syntax highlighting
 
@@ -88,6 +88,10 @@ pagepress shot -i https://example.com -o screenshot.png
 - `infographic` (1080x1350) - Infographic
 - `poster` (1200x1500) - Poster
 - `banner` (1600x900) - Banner
+- `twitter` (1200x675) - Twitter/X card
+- `youtube` (1280x720) - YouTube thumbnail
+- `xiaohongshu` (1080x1440) - Xiaohongshu / RedNote cover
+- `wechat` (900x383) - WeChat Official Account cover
 
 ## 🖼️ Examples
 
@@ -100,6 +104,14 @@ pagepress shot -i https://example.com -o screenshot.png
 | Poster (1200×1500) | Banner (1600×900) |
 |:---:|:---:|
 | ![Poster](examples/shot-poster.png) | ![Banner](examples/shot-banner.png) |
+
+| Twitter/X Card (1200×675) | YouTube Thumbnail (1280×720) |
+|:---:|:---:|
+| ![Twitter Card](examples/shot-twitter.png) | ![YouTube Thumbnail](examples/shot-youtube.png) |
+
+| Xiaohongshu Cover (1080×1440) | WeChat Cover (900×383) |
+|:---:|:---:|
+| ![Xiaohongshu Cover](examples/shot-xiaohongshu.png) | ![WeChat Cover](examples/shot-wechat.png) |
 
 ## 🤖 AI Agent Integration
 
