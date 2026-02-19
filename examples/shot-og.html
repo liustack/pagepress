@@ -71,6 +71,7 @@ h1 em{font-style:normal;color:#A885FF}
 .right{
   display:grid;grid-template-columns:1fr 1fr;
   gap:10px;width:380px;
+  position:relative;z-index:2;
 }
 .card{
   background:rgba(122,61,226,.08);
@@ -113,8 +114,8 @@ h1 em{font-style:normal;color:#A885FF}
 </head>
 <body>
 <div id="container">
-  <!-- decorative: large geometric ring — pushed to top-right corner, behind cards -->
-  <svg class="art" style="top:-120px;right:-160px" width="520" height="520" viewBox="0 0 520 520" fill="none">
+  <!-- decorative: large geometric ring — centered behind cards, below z-index:2 -->
+  <svg class="art" style="top:-60px;right:-60px" width="520" height="520" viewBox="0 0 520 520" fill="none">
     <!-- large outer ring -->
     <circle cx="260" cy="260" r="220" stroke="#7A3DE2" stroke-width="1.5" opacity=".2"/>
     <!-- inner ring -->
