@@ -14,6 +14,14 @@ npm install -g @liustack/pagepress
 npx playwright install chromium
 ```
 
+## Design References
+
+> [!IMPORTANT]
+> **Read before generating any visual asset (PNG).** These references are mandatory, not optional.
+
+- **references/color-theory.md** — Color palette selection, 60-30-10 rule, 4-hue limit, harmony methods, ready-to-use palettes. **Always apply**, regardless of whether brand colors exist.
+- **references/design-principles.md** — Typography scale, visual hierarchy, Gestalt principles, Japanese aesthetics, Apple HIG. Apply to every layout decision.
+
 ## PDF Output
 
 ```bash
@@ -71,7 +79,7 @@ pagepress shot -i input.html -o output.png --preset og
 - For OG cards, posters, and banners, **always** base the design on workspace visual/brand resources.
 - Check the workspace for existing assets such as logos, color tokens, fonts, and brand imagery (commonly in `assets/`, `public/`, `src/assets/`, `docs/`, or any `brand/`-named folders).
 - Also inspect project stylesheets and font usage (e.g., `*.css`, `*.scss`, `*.tailwind.css`) to infer the color palette and visual style when explicit brand assets are incomplete.
-- If no brand resources are available, ask the user to provide them (logo, palette, font preference) before generating visuals.
+- If no brand resources are available, ask the user to provide them (logo, font preference) before generating visuals.
 
 ### Temporary HTML Cleanup (AI Agent Guidance)
 

@@ -1,229 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200, height=630">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200, height=630">
+<style>
+/* Galaxy Purple: deep cosmos depth, analogous violet spectrum */
+/* Palette: #1A1035 dominant / #7A3DE2 secondary / #A885FF accent / #E8DFFF text */
+/* Z-pattern: top-left version → top-right chips → bottom-left heading → bottom-right grid */
+*{margin:0;padding:0;box-sizing:border-box}
+#container{
+  width:1200px;height:630px;
+  background:#1A1035;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  position:relative;overflow:hidden;
+  padding:56px 80px;
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+}
 
-        #container {
-            width: 1200px;
-            height: 630px;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 120px;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-            position: relative;
-            overflow: hidden;
-        }
+/* subtle radial glow — cosmic depth */
+#container::before{
+  content:'';position:absolute;
+  width:700px;height:700px;
+  top:-200px;right:-150px;
+  background:radial-gradient(circle,rgba(122,61,226,.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+#container::after{
+  content:'';position:absolute;
+  width:500px;height:500px;
+  bottom:-150px;left:-100px;
+  background:radial-gradient(circle,rgba(168,133,255,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
 
-        /* Decorative gradient orbs */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-        }
+/* top row */
+.top{
+  display:flex;justify-content:space-between;
+  align-items:center;position:relative;z-index:1;
+}
+.ver{
+  font-size:12px;font-weight:500;
+  color:rgba(232,223,255,.25);letter-spacing:.5px;
+}
+.chips{display:flex;gap:8px}
+.chip{
+  font-size:11px;font-weight:500;
+  color:rgba(232,223,255,.5);
+  background:rgba(122,61,226,.12);
+  border:1px solid rgba(122,61,226,.2);
+  padding:6px 14px;border-radius:6px;
+  display:flex;align-items:center;gap:6px;
+}
 
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            top: -150px;
-            right: -100px;
-        }
+/* bottom row */
+.bottom{
+  display:flex;justify-content:space-between;
+  align-items:flex-end;position:relative;z-index:1;
+}
+.bottom-left{max-width:480px}
+h1{
+  font-size:52px;font-weight:600;
+  color:#E8DFFF;line-height:1.1;
+  letter-spacing:-2px;margin-bottom:14px;
+}
+h1 em{font-style:normal;color:#A885FF}
+.desc{
+  font-size:15px;font-weight:400;
+  color:rgba(232,223,255,.4);
+  line-height:1.65;max-width:380px;
+}
 
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            bottom: -100px;
-            left: -50px;
-        }
+/* right: output cards 2x2 + command bar */
+.right{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;width:380px;
+}
+.card{
+  background:rgba(122,61,226,.08);
+  border:1px solid rgba(122,61,226,.15);
+  border-radius:10px;
+  padding:16px 14px;
+}
+.card-icon{
+  width:32px;height:32px;
+  margin-bottom:10px;
+}
+.card-name{
+  font-family:'SF Mono',ui-monospace,monospace;
+  font-size:12px;font-weight:500;
+  color:rgba(232,223,255,.8);margin-bottom:2px;
+}
+.card-meta{
+  font-size:10px;color:rgba(232,223,255,.25);
+}
 
-        .orb-3 {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0.3;
-        }
-
-        .content {
-            position: relative;
-            z-index: 10;
-            max-width: 600px;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px 16px;
-            border-radius: 100px;
-            margin-bottom: 24px;
-        }
-
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            background: #00d4aa;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        .badge-text {
-            font-size: 13px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            font-size: 64px;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-        }
-
-        h1 span {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .description {
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            font-weight: 400;
-        }
-
-        .visual {
-            position: relative;
-            z-index: 10;
-        }
-
-        .code-window {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 24px 28px;
-            width: 380px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .window-header {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .window-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot-red {
-            background: #ff5f57;
-        }
-
-        .dot-yellow {
-            background: #febc2e;
-        }
-
-        .dot-green {
-            background: #28c840;
-        }
-
-        .code {
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .code-comment {
-            color: #6b7280;
-        }
-
-        .code-command {
-            color: #a78bfa;
-        }
-
-        .code-flag {
-            color: #60a5fa;
-        }
-
-        .code-value {
-            color: #34d399;
-        }
-    </style>
+/* command bar */
+.cmd-row{grid-column:1/-1}
+.cmd-bar{
+  background:rgba(0,0,0,.3);
+  border:1px solid rgba(122,61,226,.15);
+  border-radius:8px;
+  padding:12px 16px;
+  font-family:'SF Mono',ui-monospace,monospace;
+  font-size:11px;
+  display:flex;align-items:center;gap:6px;
+}
+.c-p{color:rgba(232,223,255,.2)}
+.c-c{color:#A885FF}
+.c-f{color:rgba(232,223,255,.3)}
+.c-v{color:rgba(232,223,255,.6)}
+</style>
 </head>
-
 <body>
-    <div id="container">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-
-        <div class="content">
-            <div class="badge">
-                <div class="badge-dot"></div>
-                <span class="badge-text">Open Source CLI Tool</span>
-            </div>
-            <h1>PDF. <span>Shot.</span><br>Ship.</h1>
-            <p class="description">Transform Markdown and HTML into beautiful PDFs and images with one command.</p>
-        </div>
-
-        <div class="visual">
-            <div class="code-window">
-                <div class="window-header">
-                    <div class="window-dot dot-red"></div>
-                    <div class="window-dot dot-yellow"></div>
-                    <div class="window-dot dot-green"></div>
-                </div>
-                <div class="code">
-                    <div><span class="code-comment"># Generate PDF</span></div>
-                    <div><span class="code-command">pagepress pdf</span> <span class="code-flag">-i</span> <span
-                            class="code-value">doc.md</span></div>
-                    <div style="height: 12px;"></div>
-                    <div><span class="code-comment"># Capture OG image</span></div>
-                    <div><span class="code-command">pagepress shot</span> <span class="code-flag">--preset</span> <span
-                            class="code-value">og</span></div>
-                </div>
-            </div>
-        </div>
+<div id="container">
+  <div class="top">
+    <div class="ver">PagePress v0.4.0</div>
+    <div class="chips">
+      <div class="chip">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="7" height="9" rx="1.5" stroke="#A885FF" stroke-width="1"/><path d="M3.5 4.5h2.5M3.5 6h3.5M3.5 7.5h1.5" stroke="#A885FF" stroke-width=".7" stroke-linecap="round"/></svg>
+        PDF
+      </div>
+      <div class="chip">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="8" rx="1.5" stroke="#A885FF" stroke-width="1"/><circle cx="6" cy="6" r="2" stroke="#A885FF" stroke-width="1"/></svg>
+        Image
+      </div>
+      <div class="chip">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="4" height="4" rx=".8" stroke="#A885FF" stroke-width="1"/><rect x="7" y="1" width="4" height="4" rx=".8" stroke="#A885FF" stroke-width="1"/><rect x="1" y="7" width="4" height="4" rx=".8" stroke="#A885FF" stroke-width="1"/><rect x="7" y="7" width="4" height="4" rx=".8" stroke="#A885FF" stroke-width="1"/></svg>
+        4 Presets
+      </div>
     </div>
-</body>
+  </div>
 
+  <div class="bottom">
+    <div class="bottom-left">
+      <h1>Markdown to<br><em>PDF & Image</em></h1>
+      <p class="desc">One CLI to render Markdown and HTML into polished PDFs, OG cards, posters, and infographics.</p>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="2" width="18" height="24" rx="3" stroke="#7A3DE2" stroke-width="1.5"/>
+          <path d="M9 10h8M9 14h12M9 18h6" stroke="#A885FF" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <div class="card-name">report.pdf</div>
+        <div class="card-meta">Apple style template</div>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 32 32" fill="none">
+          <rect x="2" y="5" width="28" height="16" rx="3" stroke="#7A3DE2" stroke-width="1.5"/>
+          <circle cx="11" cy="13" r="2.5" stroke="#A885FF" stroke-width="1.2"/>
+          <path d="M2 18l7-4 4 2.5 6-4 11 6" stroke="#A885FF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="card-name">og-card.png</div>
+        <div class="card-meta">1200 x 630 @2x</div>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 32 32" fill="none">
+          <rect x="5" y="8" width="5" height="16" rx="1" fill="#7A3DE2" opacity=".4"/>
+          <rect x="13" y="13" width="5" height="11" rx="1" fill="#7A3DE2" opacity=".6"/>
+          <rect x="21" y="5" width="5" height="19" rx="1" fill="#A885FF" opacity=".8"/>
+          <line x1="3" y1="26" x2="29" y2="26" stroke="#7A3DE2" stroke-width="1.2"/>
+        </svg>
+        <div class="card-name">infographic.png</div>
+        <div class="card-meta">1080 x 1350 @2x</div>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="2" width="17" height="24" rx="3" stroke="#7A3DE2" stroke-width="1.5"/>
+          <circle cx="12.5" cy="11" r="4" stroke="#A885FF" stroke-width="1.2"/>
+          <path d="M7 20h10M9 24h6" stroke="#A885FF" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <div class="card-name">poster.png</div>
+        <div class="card-meta">1200 x 1500 @2x</div>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-bar">
+          <span class="c-p">$</span>
+          <span class="c-c">pagepress</span>
+          <span class="c-f">pdf</span>
+          <span class="c-f">-i</span>
+          <span class="c-v">doc.md</span>
+          <span class="c-f">-o</span>
+          <span class="c-v">report.pdf</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
 </html>

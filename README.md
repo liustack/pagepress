@@ -95,11 +95,11 @@ pagepress shot -i https://example.com -o screenshot.png
 
 | OG Card (1200×630) | Infographic (1080×1350) |
 |:---:|:---:|
-| ![OG Card](docs/images/shot-og.png) | ![Infographic](docs/images/shot-infographic.png) |
+| ![OG Card](examples/shot-og.png) | ![Infographic](examples/shot-infographic.png) |
 
 | Poster (1200×1500) | Banner (1600×900) |
 |:---:|:---:|
-| ![Poster](docs/images/shot-poster.png) | ![Banner](docs/images/shot-banner.png) |
+| ![Poster](examples/shot-poster.png) | ![Banner](examples/shot-banner.png) |
 
 ## 🤖 AI Agent Integration
 

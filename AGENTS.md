@@ -43,7 +43,11 @@ src/
 ## Skills Directory
 ```
 skills/
-└── pagepress/SKILL.md    # the only skill; see that file for details
+└── pagepress/
+    ├── SKILL.md             # tool usage guide (commands, options, presets)
+    └── references/              # design reference documents for AI Agent
+        ├── color-theory.md      # color palette guidance (fallback when no brand colors)
+        └── design-principles.md # typography, visual hierarchy, Gestalt, Japanese aesthetics, Apple HIG
 ```
 
 The main program source lives in `src/`, and the CLI is exposed via `dist/cli.js`.

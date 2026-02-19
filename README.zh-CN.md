@@ -93,11 +93,11 @@ pagepress shot -i https://example.com -o screenshot.png
 
 | OG 卡片 (1200×630) | 信息图 (1080×1350) |
 |:---:|:---:|
-| ![OG 卡片](docs/images/shot-og.png) | ![信息图](docs/images/shot-infographic.png) |
+| ![OG 卡片](examples/shot-og.png) | ![信息图](examples/shot-infographic.png) |
 
 | 海报 (1200×1500) | 横幅 (1600×900) |
 |:---:|:---:|
-| ![海报](docs/images/shot-poster.png) | ![横幅](docs/images/shot-banner.png) |
+| ![海报](examples/shot-poster.png) | ![横幅](examples/shot-banner.png) |
 
 ## 🤖 AI Agent 集成
 

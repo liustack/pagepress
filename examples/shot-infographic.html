@@ -1,253 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=1080, height=1350">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1350">
+<style>
+/* Earthbound Warmth palette: #F4EBD2 dominant / #C18A63 secondary / #7E9C76 accent / #4A3F36 text */
+/* F-pattern, high info density, Gestalt proximity grouping */
+*{margin:0;padding:0;box-sizing:border-box}
+#container{
+  width:1080px;height:1350px;
+  background:#F4EBD2;
+  padding:80px;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  color:#4A3F36;
+}
 
-        #container {
-            width: 1080px;
-            height: 1350px;
-            background: #0f0f0f;
-            padding: 80px;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-            color: #ffffff;
-        }
+.header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:48px;padding-bottom:24px;
+  border-bottom:2px solid #4A3F36;
+}
+.logo{font-size:20px;font-weight:600;letter-spacing:-.5px}
+.logo em{font-style:normal;color:#C18A63}
+.ver{font-size:12px;font-weight:500;color:#8B7D6B;letter-spacing:.5px}
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 48px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+h1{
+  font-size:38px;font-weight:600;
+  letter-spacing:-1px;line-height:1.2;margin-bottom:8px;
+}
+.subtitle{
+  font-size:15px;color:#8B7D6B;
+  line-height:1.5;margin-bottom:44px;
+}
+.section-label{
+  font-size:11px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:#C18A63;margin-bottom:16px;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
+/* command cards */
+.commands{display:flex;flex-direction:column;gap:10px;margin-bottom:40px}
+.cmd{
+  background:#FFFDF7;
+  border:1px solid rgba(74,63,54,.1);
+  border-radius:12px;padding:20px 24px;
+  display:flex;align-items:center;gap:16px;
+}
+.cmd-dot{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.cmd-dot.pdf{background:#C18A63}
+.cmd-dot.shot{background:#7E9C76}
+.cmd-name{font-size:15px;font-weight:600;margin-bottom:2px}
+.cmd-desc{font-size:13px;color:#8B7D6B}
+.cmd-code{
+  margin-left:auto;
+  font-family:'SF Mono',ui-monospace,monospace;
+  font-size:11px;color:#C18A63;
+  background:rgba(193,138,99,.1);
+  padding:6px 12px;border-radius:6px;white-space:nowrap;
+}
 
-        .logo span {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+/* presets grid */
+.presets{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:40px}
+.preset{
+  background:#FFFDF7;
+  border:1px solid rgba(74,63,54,.1);
+  border-radius:12px;padding:20px;
+}
+.preset-name{font-size:15px;font-weight:600;margin-bottom:3px}
+.preset-size{
+  font-family:'SF Mono',ui-monospace,monospace;
+  font-size:11px;color:#8B7D6B;margin-bottom:8px;
+}
+.preset-desc{font-size:12px;color:#8B7D6B;line-height:1.5}
 
-        .version {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 6px 12px;
-            border-radius: 6px;
-        }
+/* stats bar */
+.stats{display:flex;gap:10px;margin-bottom:40px}
+.stat{
+  flex:1;background:#4A3F36;color:#F4EBD2;
+  border-radius:12px;padding:20px;text-align:center;
+}
+.stat-val{font-size:26px;font-weight:600;margin-bottom:4px}
+.stat-label{
+  font-size:10px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+  color:#8B7D6B;
+}
 
-        h1 {
-            font-size: 42px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-
-        .subtitle {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 48px;
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section-title {
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-
-        .command-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .command-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .command-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        .icon-print {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .icon-snap {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .command-info h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .command-info p {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .command-code {
-            font-family: 'SF Mono', monospace;
-            font-size: 13px;
-            color: #a78bfa;
-            background: rgba(167, 139, 250, 0.1);
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin-left: auto;
-        }
-
-        .preset-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .preset-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 20px;
-        }
-
-        .preset-name {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .preset-size {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.4);
-            font-family: 'SF Mono', monospace;
-        }
-
-        .preset-desc {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 12px;
-            line-height: 1.5;
-        }
-
-        .footer {
-            margin-top: 48px;
-            padding-top: 32px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-text {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .footer-link {
-            font-size: 14px;
-            color: #667eea;
-        }
-    </style>
+.footer{
+  padding-top:24px;border-top:1.5px solid rgba(74,63,54,.15);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-text{font-size:12px;color:#8B7D6B}
+.footer-link{font-size:12px;color:#C18A63;font-weight:500}
+</style>
 </head>
-
 <body>
-    <div id="container">
-        <div class="header">
-            <div class="logo">Page<span>Press</span></div>
-            <div class="version">v0.1.0</div>
-        </div>
+<div id="container">
+  <div class="header">
+    <div class="logo">Page<em>Press</em></div>
+    <div class="ver">v0.4.0</div>
+  </div>
 
-        <h1>CLI Commands<br>Quick Reference</h1>
-        <p class="subtitle">Convert web content to PDF and images</p>
+  <h1>CLI Quick Reference</h1>
+  <p class="subtitle">Convert Markdown, HTML, and URLs into PDF documents and PNG images.</p>
 
-        <div class="section">
-            <div class="section-title">Commands</div>
-            <div class="command-grid">
-                <div class="command-card">
-                    <div class="command-icon icon-print">📄</div>
-                    <div class="command-info">
-                        <h3>pdf</h3>
-                        <p>Markdown/HTML → PDF</p>
-                    </div>
-                    <div class="command-code">pagepress pdf</div>
-                </div>
-                <div class="command-card">
-                    <div class="command-icon icon-snap">📸</div>
-                    <div class="command-info">
-                        <h3>shot</h3>
-                        <p>HTML/URL → PNG</p>
-                    </div>
-                    <div class="command-code">pagepress shot</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title">Image Presets</div>
-            <div class="preset-grid">
-                <div class="preset-card">
-                    <div class="preset-name">og</div>
-                    <div class="preset-size">1200 × 630</div>
-                    <div class="preset-desc">Social sharing cards for Twitter, LinkedIn, Facebook</div>
-                </div>
-                <div class="preset-card">
-                    <div class="preset-name">infographic</div>
-                    <div class="preset-size">1080 × 1350</div>
-                    <div class="preset-desc">Data visualization, cheat sheets, quick references</div>
-                </div>
-                <div class="preset-card">
-                    <div class="preset-name">poster</div>
-                    <div class="preset-size">1200 × 1500</div>
-                    <div class="preset-desc">Event posters, announcements, promos</div>
-                </div>
-                <div class="preset-card">
-                    <div class="preset-name">banner</div>
-                    <div class="preset-size">1600 × 900</div>
-                    <div class="preset-desc">Blog headers, cover images, hero sections</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class="footer-text">MIT License • Made with ❤️</div>
-            <div class="footer-link">github.com/liustack/pagepress</div>
-        </div>
+  <div class="section-label">Commands</div>
+  <div class="commands">
+    <div class="cmd">
+      <div class="cmd-dot pdf">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="1" width="12" height="16" rx="2" stroke="#FFFDF7" stroke-width="1.5"/><path d="M6 7h4M6 10h6M6 13h3" stroke="#FFFDF7" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="cmd-name">pdf</div>
+        <div class="cmd-desc">Markdown / HTML to PDF document</div>
+      </div>
+      <div class="cmd-code">pagepress pdf -i doc.md</div>
     </div>
-</body>
+    <div class="cmd">
+      <div class="cmd-dot shot">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#FFFDF7" stroke-width="1.5"/><circle cx="10" cy="10" r="3" stroke="#FFFDF7" stroke-width="1.5"/></svg>
+      </div>
+      <div>
+        <div class="cmd-name">shot</div>
+        <div class="cmd-desc">HTML / URL to PNG image</div>
+      </div>
+      <div class="cmd-code">pagepress shot -i card.html</div>
+    </div>
+  </div>
 
+  <div class="section-label">Image Presets</div>
+  <div class="presets">
+    <div class="preset">
+      <div class="preset-name">og</div>
+      <div class="preset-size">1200 x 630</div>
+      <div class="preset-desc">Social sharing cards for Twitter, LinkedIn, Facebook</div>
+    </div>
+    <div class="preset">
+      <div class="preset-name">infographic</div>
+      <div class="preset-size">1080 x 1350</div>
+      <div class="preset-desc">Data visualization, cheat sheets, reference cards</div>
+    </div>
+    <div class="preset">
+      <div class="preset-name">poster</div>
+      <div class="preset-size">1200 x 1500</div>
+      <div class="preset-desc">Event announcements, product launches, promos</div>
+    </div>
+    <div class="preset">
+      <div class="preset-name">banner</div>
+      <div class="preset-size">1600 x 900</div>
+      <div class="preset-desc">Blog headers, hero sections, cover images</div>
+    </div>
+  </div>
+
+  <div class="section-label">At a Glance</div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-val">3</div>
+      <div class="stat-label">PDF Templates</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">4</div>
+      <div class="stat-label">Image Presets</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">2x</div>
+      <div class="stat-label">Retina Scale</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">MIT License</div>
+    <div class="footer-link">npm i @liustack/pagepress</div>
+  </div>
+</div>
+</body>
 </html>

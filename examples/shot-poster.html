@@ -1,214 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200, height=1500">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200, height=1500">
+<style>
+/* Wabi-sabi: asymmetric balance, restraint, subtle texture */
+/* Palette: #1C1917 (warm dark) / #F5F0EB (warm light) / #C18A63 (terracotta accent) */
+/* Off-center layout, generous Ma */
+*{margin:0;padding:0;box-sizing:border-box}
+#container{
+  width:1200px;height:1500px;
+  background:#1C1917;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  position:relative;overflow:hidden;
+  padding:160px;
+}
 
-        #container {
-            width: 1200px;
-            height: 1500px;
-            background: linear-gradient(180deg, #0f0f0f 0%, #1a1a2e 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-            position: relative;
-            overflow: hidden;
-            padding: 120px;
-        }
+/* subtle paper grain texture via CSS */
+#container::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
 
-        /* Animated gradient background */
-        .bg-gradient {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(102, 126, 234, 0.3), transparent),
-                radial-gradient(ellipse 60% 40% at 50% 100%, rgba(240, 147, 251, 0.2), transparent);
-        }
+/* asymmetric: content sits left-aligned, not centered */
+.content{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;
+  height:100%;
+}
 
-        /* Floating elements */
-        .float-element {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(240, 147, 251, 0.8));
-            filter: blur(1px);
-        }
+/* top: small version mark */
+.mark{
+  font-size:12px;font-weight:500;
+  color:rgba(245,240,235,.2);letter-spacing:.5px;
+  margin-bottom:auto;
+}
 
-        .float-1 {
-            width: 200px;
-            height: 200px;
-            top: 10%;
-            left: 10%;
-            animation: float 8s ease-in-out infinite;
-        }
+/* main: pushed to vertical golden ratio (~61.8% from top) */
+.main{margin-top:auto;margin-bottom:200px}
 
-        .float-2 {
-            width: 120px;
-            height: 120px;
-            top: 20%;
-            right: 15%;
-            animation: float 6s ease-in-out infinite 1s;
-        }
+/* icon: hand-drawn feel — simple geometric, not slick */
+.icon-wrap{
+  width:88px;height:88px;
+  border:2px solid rgba(245,240,235,.12);
+  border-radius:24px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:56px;
+}
 
-        .float-3 {
-            width: 80px;
-            height: 80px;
-            bottom: 30%;
-            left: 20%;
-            animation: float 7s ease-in-out infinite 2s;
-        }
+h1{
+  font-size:80px;font-weight:600;
+  color:#F5F0EB;
+  letter-spacing:-3px;line-height:1.05;
+  margin-bottom:24px;
+}
+h1 em{
+  font-style:normal;color:#C18A63;
+}
 
-        .float-4 {
-            width: 150px;
-            height: 150px;
-            bottom: 15%;
-            right: 10%;
-            animation: float 9s ease-in-out infinite 0.5s;
-        }
+.tagline{
+  font-size:20px;font-weight:400;
+  color:rgba(245,240,235,.35);
+  max-width:420px;line-height:1.6;
+}
 
-        @keyframes float {
+/* bottom: minimal stats, separated by generous space */
+.bottom{
+  position:absolute;bottom:160px;left:160px;right:160px;
+  display:flex;align-items:flex-end;
+  justify-content:space-between;
+}
+.stats{display:flex;gap:48px}
+.stat-val{
+  font-family:'SF Mono',ui-monospace,monospace;
+  font-size:16px;font-weight:500;
+  color:rgba(245,240,235,.5);margin-bottom:4px;
+}
+.stat-label{
+  font-size:11px;font-weight:500;
+  color:rgba(245,240,235,.15);
+  letter-spacing:1px;text-transform:uppercase;
+}
+.license{
+  font-size:11px;color:rgba(245,240,235,.12);
+  letter-spacing:2px;text-transform:uppercase;
+}
 
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.6;
-            }
-
-            50% {
-                transform: translateY(-30px) rotate(180deg);
-                opacity: 0.8;
-            }
-        }
-
-        .content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .icon-container {
-            width: 160px;
-            height: 160px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 60px;
-            box-shadow:
-                0 30px 60px -12px rgba(102, 126, 234, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.1);
-        }
-
-        .icon {
-            font-size: 80px;
-        }
-
-        h1 {
-            font-size: 96px;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: -4px;
-            line-height: 1;
-            margin-bottom: 32px;
-        }
-
-        h1 .gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .tagline {
-            font-size: 28px;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 400;
-            max-width: 600px;
-            line-height: 1.5;
-        }
-
-        .cta {
-            margin-top: 80px;
-            display: flex;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 20px 48px;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 600;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 20px 40px -12px rgba(102, 126, 234, 0.5);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-        }
-
-        .bottom-text {
-            position: absolute;
-            bottom: 60px;
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.4);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-    </style>
+/* decorative: single thin horizontal line — wabi-sabi imperfection */
+.line{
+  position:absolute;right:160px;top:380px;
+  width:200px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(193,138,99,.2),transparent);
+}
+</style>
 </head>
-
 <body>
-    <div id="container">
-        <div class="bg-gradient"></div>
-        <div class="float-element float-1"></div>
-        <div class="float-element float-2"></div>
-        <div class="float-element float-3"></div>
-        <div class="float-element float-4"></div>
+<div id="container">
+  <div class="line"></div>
 
-        <div class="content">
-            <div class="icon-container">
-                <span class="icon">⚡</span>
-            </div>
+  <div class="content">
+    <div class="mark">PagePress v0.4.0</div>
 
-            <h1>Page<span class="gradient">Press</span></h1>
-            <p class="tagline">The CLI tool that transforms your web content into stunning PDFs and images.</p>
-
-            <div class="cta">
-                <a href="#" class="btn btn-primary">
-                    <span>Get Started</span>
-                    <span>→</span>
-                </a>
-                <a href="#" class="btn btn-secondary">
-                    View on GitHub
-                </a>
-            </div>
-        </div>
-
-        <div class="bottom-text">Open Source • MIT License</div>
+    <div class="main">
+      <div class="icon-wrap">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M8 32V8h16l8 8v16H8z" stroke="#C18A63" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M24 8v8h8" stroke="#C18A63" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M14 20h12M14 25h8" stroke="rgba(245,240,235,.3)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h1>Page<em>Press</em></h1>
+      <p class="tagline">Transform Markdown and HTML into beautiful documents and images.</p>
     </div>
-</body>
+  </div>
 
+  <div class="bottom">
+    <div class="stats">
+      <div>
+        <div class="stat-val">pdf</div>
+        <div class="stat-label">Documents</div>
+      </div>
+      <div>
+        <div class="stat-val">shot</div>
+        <div class="stat-label">Visual Assets</div>
+      </div>
+      <div>
+        <div class="stat-val">4</div>
+        <div class="stat-label">Presets</div>
+      </div>
+    </div>
+    <div class="license">Open Source</div>
+  </div>
+</div>
+</body>
 </html>
