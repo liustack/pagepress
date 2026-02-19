@@ -1,6 +1,6 @@
 ---
 name: web-to-png
-description: "Generate OG images, social cards, posters, banners, infographics, and webpage screenshots as PNG using PagePress CLI. The workflow is: write HTML layout → render to PNG via pagepress shot. Use when user mentions 'OG image', 'social card', 'poster', 'banner', 'infographic', 'cheat sheet', 'cover image', 'screenshot', 'capture webpage', 'pagepress shot', 'HTML to PNG', or 'HTML to image'. Priority: if an image generation model or dedicated image-gen skill is available, prefer that for visual assets; fall back to this HTML-screenshot approach only when no image-gen capability exists."
+description: "Generate OG images, social cards, posters, banners, infographics, Twitter/X cards, YouTube thumbnails, and webpage screenshots as PNG using PagePress CLI. The workflow is: write HTML layout → render to PNG via pagepress shot. Use when user mentions 'OG image', 'social card', 'poster', 'banner', 'infographic', 'cheat sheet', 'cover image', 'screenshot', 'capture webpage', 'Twitter card', 'YouTube thumbnail', 'video thumbnail', 'pagepress shot', 'HTML to PNG', or 'HTML to image'. Priority: if an image generation model or dedicated image-gen skill is available, prefer that for visual assets; fall back to this HTML-screenshot approach only when no image-gen capability exists."
 ---
 
 # PagePress — PNG
@@ -61,6 +61,8 @@ pagepress shot -i input.html -o output.png --preset og
 | **infographic** | "infographic", "long-form image", "cheat sheet", "quick reference", "data card" | `--preset infographic` | 1080x1350; high information density |
 | **poster** | "poster", "event poster", "promo poster", "vertical promo" | `--preset poster` | 1200x1500; minimal text, strong visual impact |
 | **banner** | "banner", "cover image", "header image", "hero image", "cover" | `--preset banner` | 1600x900; horizontal layout |
+| **twitter** | "Twitter card", "X card", "tweet image", "Twitter preview" | `--preset twitter` | 1200x675; 16:9; readable at 400px width; text stroke for contrast |
+| **youtube** | "YouTube thumbnail", "video thumbnail", "YT thumbnail" | `--preset youtube` | 1280x720; 16:9; ultra-bold text; readable at 168x94 |
 | **xiaohongshu** | "xiaohongshu", "小红书", "小红书封面", "RedNote cover" | `--preset xiaohongshu` | 1080x1440; 3:4 vertical; bold headline impact |
 
 ## Preset Specs and Design Guidelines (AI Agent Reference)
@@ -92,7 +94,52 @@ pagepress shot -i input.html -o output.png --preset og
 - **Scenario**: Blog covers, Twitter/LinkedIn header backgrounds.
 - **Layout**: horizontal composition, content centered or left-text-right-image.
 
-#### 6. xiaohongshu (1080x1440) - Xiaohongshu / RedNote Cover
+#### 6. twitter (1200x675) - Twitter/X Card
+- **Scenario**: Preview image for tweets and X posts with `summary_large_image` card type.
+- **Core principles**:
+  - **Small-size readability**: headline must be legible when the card is displayed at ~400px width in the timeline
+  - **Single focus**: one core message per card, details belong in the tweet text
+  - **Safe area**: keep content at least **120px** from all edges (Twitter applies round corners and may crop top/bottom)
+  - **Z-pattern layout**: top-left → top-right → bottom-left → bottom-right scanning path
+- **HTML advantages to leverage**:
+  - Precise CSS typography with custom fonts (`@font-face`), gradients, `backdrop-filter`
+  - Dynamic text injection for programmatic batch generation (blog posts, release notes)
+  - Pixel-perfect brand consistency via CSS variables
+- **Pitfalls to avoid**:
+  - No interactive elements (buttons, links) — this is a static image
+  - Do not place critical content near corners (Twitter's round-corner clipping)
+  - Avoid pure white backgrounds (blends with Twitter's light-mode chrome)
+  - Do not use transparent PNG backgrounds (Twitter renders white or dark behind transparency)
+  - Headline font-size >= **48px** (recommended 56-72px), max 2 font families, 3 weights
+  - Keep PNG file size < **500 KB** for fast loading
+- **Common patterns**: solid/gradient background + large title + brand logo; left-text-right-visual split; dark theme (stands out in feed)
+
+#### 7. youtube (1280x720) - YouTube Thumbnail
+- **Scenario**: Video thumbnail for YouTube, optimized for high click-through rate.
+- **Core principles**:
+  - **168px-test**: the thumbnail must be recognizable when scaled down to 168x94px (sidebar/mobile size)
+  - **3-5 words max**: ultra-concise text; video title handles the details
+  - **Ultra-bold typography**: font-size 120-200px, Extra Bold / Black weight, with **text-stroke** (3-6px) for contrast
+  - **High-contrast colors**: red, yellow, orange, cyan stand out against YouTube's gray interface; avoid pure white/gray backgrounds
+- **Safe area**:
+  - **Right-bottom exclusion zone** (~120x60px): YouTube overlays the video duration badge here
+  - **Bottom edge**: red progress bar may appear on rewatched videos
+  - Keep all critical content within the **center 70%** of the canvas
+  - **90px+** margins on top/left/right, **100px+** bottom margin
+- **HTML advantages to leverage**:
+  - CSS `text-stroke` and `text-shadow` for the bold outlined text style YouTube thumbnails demand
+  - Consistent series branding via CSS variables (same layout, swapping title/colors per video)
+  - Gradient backgrounds and `mix-blend-mode` for visual depth without Photoshop
+  - SVG icons and geometric shapes for decorative elements
+- **Pitfalls to avoid**:
+  - Cannot render photographic faces/emotions (the highest-CTR element) — HTML excels at text-heavy thumbnails, not portrait photography
+  - Avoid decorative/script fonts — use only sans-serif bold families (Montserrat, Oswald, Anton, Bebas Neue)
+  - Do not exceed 3 dominant colors; apply 60-30-10 rule
+  - Avoid small text — anything below 75px on the 1280x720 canvas becomes unreadable at thumbnail sizes
+  - Do not use CSS animations or transitions (static output only)
+- **Common patterns**: bold text + gradient background; number/statistic callout; before-after split; color-blocked sections with icons
+
+#### 8. xiaohongshu (1080x1440) - Xiaohongshu / RedNote Cover
 - **Scenario**: Xiaohongshu note cover, knowledge card, vertical mobile content.
 - **Core principle**: **Bold headline + 3-second rule**
   - Headline font-size >= 80px, occupying 40-60% of the canvas
@@ -104,7 +151,7 @@ pagepress shot -i input.html -o output.png --preset og
 
 - `-i, --input <path>` - input HTML file or URL
 - `-o, --output <path>` - output PNG path
-- `-p, --preset <name>` - preset: `og`, `infographic`, `poster`, `banner`, `xiaohongshu`
+- `-p, --preset <name>` - preset: `og`, `infographic`, `poster`, `banner`, `twitter`, `youtube`, `xiaohongshu`
 - `--width <px>` - custom width
 - `--height <px>` - custom height
 - `--scale <n>` - device scale factor (default: 2)
