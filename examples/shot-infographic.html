@@ -35,12 +35,12 @@
 
   /* ===== HERO ===== */
   .hero {
-    height: 180px;
+    height: 190px;
     background: var(--accent);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 64px 28px;
+    padding: 0 64px 32px;
     position: relative;
     overflow: hidden;
   }
@@ -70,7 +70,7 @@
   }
 
   .hero h1 {
-    font-size: 44px;
+    font-size: 46px;
     font-weight: 800;
     color: #fff;
     line-height: 1.1;
@@ -83,12 +83,12 @@
     color: rgba(255,255,255,0.7);
     letter-spacing: -0.2px;
     display: block;
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   /* ===== SECTION ===== */
   .section {
-    padding: 24px 64px;
+    padding: 28px 64px;
   }
 
   .section-label {
@@ -97,11 +97,11 @@
     color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
   }
 
   .section-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
     color: var(--black);
     letter-spacing: -0.8px;
@@ -116,7 +116,7 @@
 
   /* ===== CORE CONCEPT ===== */
   .core-row {
-    margin-top: 14px;
+    margin-top: 16px;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -124,8 +124,8 @@
 
   .core-icon {
     flex-shrink: 0;
-    width: 68px;
-    height: 68px;
+    width: 72px;
+    height: 72px;
     background: var(--accent-08);
     border-radius: 16px;
     display: flex;
@@ -134,9 +134,9 @@
   }
 
   .core-text p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--gray-600);
-    line-height: 1.6;
+    line-height: 1.55;
   }
 
   .core-text .hl {
@@ -165,7 +165,7 @@
     font-weight: 600;
   }
 
-  /* ===== EIGHT PRESETS — 2x4 grid ===== */
+  /* ===== EIGHT PRESETS ===== */
   .presets {
     margin-top: 14px;
     display: grid;
@@ -176,7 +176,7 @@
   .pre {
     background: var(--gray-50);
     border-radius: 12px;
-    padding: 14px;
+    padding: 16px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -184,7 +184,7 @@
 
   .pre-num {
     flex-shrink: 0;
-    width: 22px; height: 22px;
+    width: 24px; height: 24px;
     border-radius: 6px;
     font-size: 11px;
     font-weight: 700;
@@ -217,7 +217,7 @@
   .lvl {
     flex: 1;
     border-radius: 12px;
-    padding: 16px 14px;
+    padding: 18px 16px;
   }
 
   .lvl.l1 { background: var(--accent-08); }
@@ -241,20 +241,20 @@
   .lvl.l3 .lvl-badge { opacity: 1; }
 
   .lvl h4 {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     letter-spacing: -0.3px;
   }
 
   .lvl p {
-    font-size: 11.5px;
+    font-size: 12px;
     color: var(--gray-600);
     line-height: 1.5;
   }
 
   .lvl .ex {
-    margin-top: 6px;
+    margin-top: 8px;
     font-size: 10.5px;
     color: var(--gray-400);
     font-style: italic;
@@ -263,14 +263,14 @@
   /* ===== INSIGHT (dark) ===== */
   .insight {
     background: var(--black);
-    padding: 24px 64px;
+    padding: 28px 64px;
     display: flex;
-    gap: 14px;
+    gap: 16px;
   }
 
   .insight-card {
     flex: 1;
-    padding: 18px;
+    padding: 20px;
     border-radius: 12px;
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.06);
@@ -280,12 +280,12 @@
     font-size: 14px;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
     letter-spacing: -0.2px;
   }
 
   .insight-card p {
-    font-size: 11.5px;
+    font-size: 12px;
     color: rgba(255,255,255,0.45);
     line-height: 1.55;
   }
@@ -294,53 +294,68 @@
     color: var(--accent);
   }
 
-  /* ===== BEST PRACTICES ===== */
-  .practices {
+  /* ===== STATS ===== */
+  .stats {
     margin-top: 14px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
     gap: 10px;
   }
 
-  .prac {
-    display: flex;
-    gap: 10px;
-    padding: 14px;
+  .stat {
+    flex: 1;
     background: var(--gray-50);
-    border-radius: 10px;
-    align-items: flex-start;
+    border-radius: 12px;
+    padding: 22px 16px;
+    text-align: center;
   }
 
-  .prac-n {
-    flex-shrink: 0;
-    width: 24px; height: 24px;
-    border-radius: 6px;
-    background: var(--accent);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
+  .stat-val {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+    letter-spacing: -1px;
   }
 
-  .prac h5 {
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 2px;
-    letter-spacing: -0.2px;
-    line-height: 1.3;
-  }
-
-  .prac p {
+  .stat-label {
     font-size: 11px;
-    color: var(--gray-600);
-    line-height: 1.5;
+    font-weight: 600;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ===== COMPACT PRESETS ===== */
+  .presets-compact {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .presets-compact span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black);
+    background: var(--gray-50);
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .presets-compact i {
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--gray-400);
+    font-family: 'SF Mono', ui-monospace, monospace;
   }
 
   /* ===== BOTTOM ===== */
   .bottom-bar {
-    padding: 14px 64px;
+    padding: 18px 64px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -375,7 +390,7 @@
 </div>
 
 <!-- CORE CONCEPT -->
-<div class="section" style="padding-bottom: 18px;">
+<div class="section" style="padding-bottom: 20px;">
   <div class="section-label">Core Concept</div>
   <div class="section-title">PagePress 是什么？</div>
   <div class="core-row">
@@ -399,26 +414,26 @@
 
 <div class="divider"></div>
 
-<!-- EIGHT PRESETS -->
-<div class="section" style="padding-bottom: 18px;">
+<!-- IMAGE PRESETS (compact) -->
+<div class="section" style="padding-bottom: 20px;">
   <div class="section-label">Image Presets</div>
   <div class="section-title">8 种图片预设</div>
-  <div class="presets">
-    <div class="pre"><div class="pre-num">1</div><div><h4>og</h4><div class="dim">1200 × 630</div></div></div>
-    <div class="pre"><div class="pre-num">2</div><div><h4>infographic</h4><div class="dim">1080 × 1350</div></div></div>
-    <div class="pre"><div class="pre-num">3</div><div><h4>poster</h4><div class="dim">1200 × 1500</div></div></div>
-    <div class="pre"><div class="pre-num">4</div><div><h4>banner</h4><div class="dim">1600 × 900</div></div></div>
-    <div class="pre"><div class="pre-num">5</div><div><h4>twitter</h4><div class="dim">1200 × 675</div></div></div>
-    <div class="pre"><div class="pre-num">6</div><div><h4>youtube</h4><div class="dim">1280 × 720</div></div></div>
-    <div class="pre"><div class="pre-num">7</div><div><h4>xiaohongshu</h4><div class="dim">1080 × 1440</div></div></div>
-    <div class="pre"><div class="pre-num">8</div><div><h4>wechat</h4><div class="dim">900 × 383</div></div></div>
+  <div class="presets-compact">
+    <span>og <i>1200×630</i></span>
+    <span>infographic <i>1080×1350</i></span>
+    <span>poster <i>1200×1500</i></span>
+    <span>banner <i>1600×900</i></span>
+    <span>twitter <i>1200×675</i></span>
+    <span>youtube <i>1280×720</i></span>
+    <span>xiaohongshu <i>1080×1440</i></span>
+    <span>wechat <i>900×383</i></span>
   </div>
 </div>
 
 <div class="divider"></div>
 
 <!-- THREE LEVELS -->
-<div class="section" style="padding-bottom: 18px;">
+<div class="section" style="padding-bottom: 20px;">
   <div class="section-label">Workflow</div>
   <div class="section-title">三种使用方式 <span style="font-size: 14px; font-weight: 400; color: var(--gray-400);">&mdash; 从简单到进阶</span></div>
   <div class="levels">
@@ -451,60 +466,34 @@
   </div>
   <div class="insight-card">
     <h4>2x Retina 输出</h4>
-    <p>默认 <span class="ic-accent">deviceScaleFactor: 2</span>，告别模糊截图</p>
+    <p>默认 <span class="ic-accent">deviceScaleFactor: 2</span>，高清锐利</p>
   </div>
   <div class="insight-card">
-    <h4>跨平台 &amp; 全兼容</h4>
-    <p><span class="ic-accent">macOS / Linux / Windows</span> 全平台支持</p>
+    <h4>跨平台全兼容</h4>
+    <p><span class="ic-accent">macOS / Linux / Windows</span> 全支持</p>
   </div>
 </div>
 
-<!-- BEST PRACTICES -->
-<div class="section" style="padding-top: 22px; padding-bottom: 10px;">
-  <div class="section-label">Best Practices</div>
-  <div class="section-title">六条使用建议</div>
-  <div class="practices">
-    <div class="prac">
-      <div class="prac-n">1</div>
-      <div>
-        <h5>先写好 HTML 再截图</h5>
-        <p>布局在浏览器调好，shot 命令一键输出</p>
-      </div>
+<!-- AT A GLANCE -->
+<div class="section" style="padding-bottom: 16px;">
+  <div class="section-label">At a Glance</div>
+  <div class="section-title">数字一览</div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-val">2</div>
+      <div class="stat-label">Commands</div>
     </div>
-    <div class="prac">
-      <div class="prac-n">2</div>
-      <div>
-        <h5>善用 --preset 参数</h5>
-        <p>8 种预设自动设定宽高和缩放</p>
-      </div>
+    <div class="stat">
+      <div class="stat-val">3</div>
+      <div class="stat-label">PDF Templates</div>
     </div>
-    <div class="prac">
-      <div class="prac-n">3</div>
-      <div>
-        <h5>--wait-until networkidle</h5>
-        <p>加载 Web 字体时，等网络空闲再截图</p>
-      </div>
+    <div class="stat">
+      <div class="stat-val">8</div>
+      <div class="stat-label">Image Presets</div>
     </div>
-    <div class="prac">
-      <div class="prac-n">4</div>
-      <div>
-        <h5>PDF 选对模板</h5>
-        <p>default / github / magazine 各有适用场景</p>
-      </div>
-    </div>
-    <div class="prac">
-      <div class="prac-n">5</div>
-      <div>
-        <h5>图片避免 Web 元素</h5>
-        <p>不用按钮、徽章、链接，保持海报感</p>
-      </div>
-    </div>
-    <div class="prac">
-      <div class="prac-n">6</div>
-      <div>
-        <h5>结合 Skill 提效</h5>
-        <p>安装 web-to-png Skill，AI 自动生成</p>
-      </div>
+    <div class="stat">
+      <div class="stat-val">2x</div>
+      <div class="stat-label">Retina Scale</div>
     </div>
   </div>
 </div>
