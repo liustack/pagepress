@@ -113,8 +113,8 @@ h1 em{font-style:normal;color:#A885FF}
 </head>
 <body>
 <div id="container">
-  <!-- decorative: large geometric ring + constellation grid — VISIBLE -->
-  <svg class="art" style="top:-60px;right:-60px" width="520" height="520" viewBox="0 0 520 520" fill="none">
+  <!-- decorative: large geometric ring — pushed to top-right corner, behind cards -->
+  <svg class="art" style="top:-120px;right:-160px" width="520" height="520" viewBox="0 0 520 520" fill="none">
     <!-- large outer ring -->
     <circle cx="260" cy="260" r="220" stroke="#7A3DE2" stroke-width="1.5" opacity=".2"/>
     <!-- inner ring -->
@@ -123,19 +123,27 @@ h1 em{font-style:normal;color:#A885FF}
     <circle cx="260" cy="260" r="110" stroke="#7A3DE2" stroke-width=".8" opacity=".1"/>
     <!-- cross-hair radial lines -->
     <line x1="260" y1="40" x2="260" y2="140" stroke="#A885FF" stroke-width="1" opacity=".18"/>
-    <line x1="40" y1="260" x2="140" y2="260" stroke="#A885FF" stroke-width="1" opacity=".18"/>
     <line x1="400" y1="120" x2="340" y2="180" stroke="#7A3DE2" stroke-width="1" opacity=".2"/>
-    <line x1="120" y1="400" x2="180" y2="340" stroke="#7A3DE2" stroke-width=".8" opacity=".14"/>
-    <!-- bright dots at intersections -->
+    <!-- bright dots -->
     <circle cx="260" cy="40" r="4" fill="#A885FF" opacity=".35"/>
-    <circle cx="40" cy="260" r="3.5" fill="#7A3DE2" opacity=".25"/>
     <circle cx="400" cy="120" r="3" fill="#A885FF" opacity=".4"/>
     <circle cx="440" cy="320" r="5" fill="#7A3DE2" opacity=".12"/>
-    <circle cx="120" cy="400" r="3" fill="#A885FF" opacity=".2"/>
     <!-- scattered star dots -->
     <circle cx="350" cy="60" r="2" fill="#A885FF" opacity=".3"/>
     <circle cx="480" cy="200" r="2.5" fill="#7A3DE2" opacity=".2"/>
-    <circle cx="160" cy="80" r="1.5" fill="#A885FF" opacity=".25"/>
+  </svg>
+  <!-- decorative: left-side constellation lines -->
+  <svg class="art" style="top:60px;left:30px" width="300" height="400" viewBox="0 0 300 400" fill="none">
+    <!-- arc -->
+    <path d="M280 0 Q200 100 220 250 Q240 350 180 400" stroke="#7A3DE2" stroke-width="1" opacity=".12" fill="none"/>
+    <!-- cross lines -->
+    <line x1="0" y1="80" x2="80" y2="80" stroke="#A885FF" stroke-width=".8" opacity=".14"/>
+    <line x1="40" y1="40" x2="40" y2="120" stroke="#A885FF" stroke-width=".8" opacity=".14"/>
+    <!-- dots -->
+    <circle cx="40" cy="80" r="3" fill="#A885FF" opacity=".25"/>
+    <circle cx="220" cy="250" r="2.5" fill="#7A3DE2" opacity=".2"/>
+    <circle cx="260" cy="50" r="2" fill="#A885FF" opacity=".18"/>
+    <circle cx="180" cy="380" r="3" fill="#7A3DE2" opacity=".15"/>
   </svg>
   <!-- bottom-left: flowing wave curves -->
   <svg class="art" style="bottom:-20px;left:-20px" width="500" height="250" viewBox="0 0 500 250" fill="none">
