@@ -1,6 +1,6 @@
 ---
 name: web-to-png
-description: "Generate OG images, social cards, posters, banners, infographics, and webpage screenshots as PNG using PagePress CLI. The workflow is: write HTML layout → render to PNG via pagepress shot. Use when user mentions 'OG image', 'social card', 'poster', 'banner', 'infographic', 'cheat sheet', 'cover image', 'screenshot', 'capture webpage', 'pagepress shot', 'HTML to PNG', or 'HTML to image'. This tool creates images by screenshotting HTML — if the user wants AI-generated artwork or illustrations from a text prompt (not from HTML), use an image generation model instead."
+description: "Generate OG images, social cards, posters, banners, infographics, and webpage screenshots as PNG using PagePress CLI. The workflow is: write HTML layout → render to PNG via pagepress shot. Use when user mentions 'OG image', 'social card', 'poster', 'banner', 'infographic', 'cheat sheet', 'cover image', 'screenshot', 'capture webpage', 'pagepress shot', 'HTML to PNG', or 'HTML to image'. Priority: if an image generation model or dedicated image-gen skill is available, prefer that for visual assets; fall back to this HTML-screenshot approach only when no image-gen capability exists."
 ---
 
 # PagePress — PNG
