@@ -61,6 +61,7 @@ pagepress shot -i input.html -o output.png --preset og
 | **infographic** | "infographic", "long-form image", "cheat sheet", "quick reference", "data card" | `--preset infographic` | 1080x1350; high information density |
 | **poster** | "poster", "event poster", "promo poster", "vertical promo" | `--preset poster` | 1200x1500; minimal text, strong visual impact |
 | **banner** | "banner", "cover image", "header image", "hero image", "cover" | `--preset banner` | 1600x900; horizontal layout |
+| **xiaohongshu** | "xiaohongshu", "小红书", "小红书封面", "RedNote cover" | `--preset xiaohongshu` | 1080x1440; 3:4 vertical; bold headline impact |
 
 ## Preset Specs and Design Guidelines (AI Agent Reference)
 
@@ -91,11 +92,19 @@ pagepress shot -i input.html -o output.png --preset og
 - **Scenario**: Blog covers, Twitter/LinkedIn header backgrounds.
 - **Layout**: horizontal composition, content centered or left-text-right-image.
 
+#### 6. xiaohongshu (1080x1440) - Xiaohongshu / RedNote Cover
+- **Scenario**: Xiaohongshu note cover, knowledge card, vertical mobile content.
+- **Core principle**: **Bold headline + 3-second rule**
+  - Headline font-size >= 80px, occupying 40-60% of the canvas
+  - Highlight keywords with color/size contrast
+  - Convey "high information density" to entice clicks
+  - **90px+** side margins, **80px+** top/bottom padding
+
 ## Options
 
 - `-i, --input <path>` - input HTML file or URL
 - `-o, --output <path>` - output PNG path
-- `-p, --preset <name>` - preset: `og`, `infographic`, `poster`, `banner`
+- `-p, --preset <name>` - preset: `og`, `infographic`, `poster`, `banner`, `xiaohongshu`
 - `--width <px>` - custom width
 - `--height <px>` - custom height
 - `--scale <n>` - device scale factor (default: 2)

@@ -42,6 +42,12 @@ export const imagePresets: Record<string, ImagePreset> = {
         height: 720,
         description: 'YouTube Thumbnail (1280×720)',
     },
+    xiaohongshu: {
+        name: 'xiaohongshu',
+        width: 1080,
+        height: 1440,
+        description: 'Xiaohongshu / RedNote Cover (1080×1440)',
+    },
 };
 
 export function getPreset(name: string): ImagePreset {
