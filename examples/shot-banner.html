@@ -6,7 +6,7 @@
 <style>
 /* Elegant Green: midnight blue-black + forest + muted gold, analogous harmony */
 /* Palette: #192231 dominant / #2A3A2E secondary / #C0B283 accent / #F4F4F4 text */
-/* Z-pattern: top-left label → top-right chips → bottom-left heading → bottom-right terminal */
+/* Z-pattern layout with SVG decorative elements */
 *{margin:0;padding:0;box-sizing:border-box}
 #container{
   width:1600px;height:900px;
@@ -25,14 +25,7 @@
   pointer-events:none;
 }
 
-/* thin decorative horizontal line at golden ratio — wabi-sabi imperfection */
-.divider{
-  position:absolute;left:120px;right:120px;top:45%;
-  height:1px;
-  background:linear-gradient(90deg,rgba(192,178,131,.2),rgba(192,178,131,.06),transparent);
-}
-
-/* top row: label left, feature chips right */
+/* top row */
 .top{
   display:flex;justify-content:space-between;
   align-items:flex-start;position:relative;z-index:1;
@@ -41,14 +34,10 @@
   font-size:13px;font-weight:500;
   color:rgba(244,244,244,.2);letter-spacing:.5px;
 }
-.chips{display:flex;gap:10px}
-.chip{
-  font-size:12px;font-weight:500;
-  color:rgba(244,244,244,.45);
-  background:rgba(192,178,131,.06);
-  border:1px solid rgba(192,178,131,.12);
-  padding:8px 16px;border-radius:8px;
-  display:flex;align-items:center;gap:8px;
+.top-right{
+  font-size:11px;font-weight:400;
+  color:rgba(244,244,244,.15);
+  letter-spacing:1.5px;text-transform:uppercase;
 }
 
 /* bottom row: headline left, terminal right */
@@ -98,32 +87,29 @@ h1 em{font-style:normal;color:#C0B283}
 .c-f{color:rgba(244,244,244,.25)}
 .c-v{color:rgba(244,244,244,.5)}
 .c-ok{color:#7E9C76}
+
+/* decorative SVG */
+.art{position:absolute;pointer-events:none;z-index:0}
 </style>
 </head>
 <body>
 <div id="container">
-  <div class="divider"></div>
+  <!-- decorative: thin golden ratio line + scattered leaf-like curves -->
+  <svg class="art" style="left:120px;right:120px;top:45%;width:calc(100% - 240px)" height="2" viewBox="0 0 1360 2" preserveAspectRatio="none" fill="none">
+    <line x1="0" y1="1" x2="1360" y2="1" stroke="url(#lg)" stroke-width="1"/>
+    <defs><linearGradient id="lg"><stop offset="0%" stop-color="#C0B283" stop-opacity=".2"/><stop offset="50%" stop-color="#C0B283" stop-opacity=".06"/><stop offset="100%" stop-color="#C0B283" stop-opacity="0"/></linearGradient></defs>
+  </svg>
+  <!-- top-right decorative arcs -->
+  <svg class="art" style="top:60px;right:80px" width="200" height="200" viewBox="0 0 200 200" fill="none">
+    <path d="M180 20 Q120 40 100 100" stroke="#C0B283" stroke-width=".6" opacity=".08" fill="none"/>
+    <path d="M160 10 Q100 50 90 120" stroke="#2A3A2E" stroke-width=".8" opacity=".1" fill="none"/>
+    <circle cx="180" cy="20" r="2" fill="#C0B283" opacity=".1"/>
+    <circle cx="100" cy="100" r="1.5" fill="#C0B283" opacity=".06"/>
+  </svg>
 
   <div class="top">
-    <div class="ver">PagePress v0.4.0</div>
-    <div class="chips">
-      <div class="chip">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="8" height="11" rx="1.5" stroke="#C0B283" stroke-width="1.2"/><path d="M4 5h3M4 7h5M4 9h2" stroke="#C0B283" stroke-width="0.8" stroke-linecap="round"/></svg>
-        PDF Export
-      </div>
-      <div class="chip">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2.5" width="12" height="9" rx="1.5" stroke="#C0B283" stroke-width="1.2"/><circle cx="7" cy="7" r="2.5" stroke="#C0B283" stroke-width="1.2"/></svg>
-        Image Capture
-      </div>
-      <div class="chip">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="#C0B283" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="#C0B283" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="#C0B283" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="#C0B283" stroke-width="1.2"/></svg>
-        8 Presets
-      </div>
-      <div class="chip">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 11V3h7l3 3v5H2z" stroke="#C0B283" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 3v3h3" stroke="#C0B283" stroke-width="1.2" stroke-linejoin="round"/></svg>
-        3 Templates
-      </div>
-    </div>
+    <div class="ver">PagePress v0.5.0</div>
+    <div class="top-right">PDF · Image · 8 Presets · 3 Templates</div>
   </div>
 
   <div class="bottom">

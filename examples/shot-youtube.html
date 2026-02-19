@@ -35,7 +35,7 @@
   transform:skewX(-12deg);
 }
 
-/* small decorative corner marks */
+/* corner marks — decorative framing */
 .corner-tl,.corner-br{
   position:absolute;
   width:40px;height:40px;
@@ -53,13 +53,12 @@
 /* left content */
 .content{position:relative;z-index:1;max-width:700px}
 
-.tag{
-  display:inline-flex;align-items:center;gap:8px;
-  background:#D9B648;color:#0D0D0D;
-  font-size:14px;font-weight:700;
-  padding:8px 18px;border-radius:6px;
+/* small label — NOT a badge, just a typographic mark */
+.label{
+  font-size:13px;font-weight:600;
+  color:#D9B648;
+  letter-spacing:2px;text-transform:uppercase;
   margin-bottom:28px;
-  letter-spacing:.5px;text-transform:uppercase;
 }
 
 h1{
@@ -90,9 +89,6 @@ h1 em{
 }
 .rs{
   text-align:center;
-  background:rgba(217,182,72,.06);
-  border:1px solid rgba(217,182,72,.1);
-  border-radius:12px;
   padding:18px 24px;min-width:140px;
 }
 .rs-val{
@@ -105,6 +101,14 @@ h1 em{
   color:rgba(247,235,165,.25);
   letter-spacing:1.5px;text-transform:uppercase;
 }
+/* thin separator between stats */
+.rs+.rs{
+  border-top:1px solid rgba(217,182,72,.08);
+  padding-top:20px;
+}
+
+/* decorative SVG */
+.art{position:absolute;pointer-events:none;z-index:0}
 </style>
 </head>
 <body>
@@ -113,11 +117,15 @@ h1 em{
   <div class="corner-tl"></div>
   <div class="corner-br"></div>
 
+  <!-- decorative: diagonal rays from center -->
+  <svg class="art" style="top:0;left:0;width:100%;height:100%" viewBox="0 0 1280 720" fill="none">
+    <line x1="0" y1="0" x2="640" y2="360" stroke="#D9B648" stroke-width=".5" opacity=".03"/>
+    <line x1="1280" y1="0" x2="640" y2="360" stroke="#D9B648" stroke-width=".5" opacity=".03"/>
+    <line x1="0" y1="720" x2="640" y2="360" stroke="#D9B648" stroke-width=".3" opacity=".02"/>
+  </svg>
+
   <div class="content">
-    <div class="tag">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 3l5-2 5 2v6l-5 2-5-2V3z" stroke="#0D0D0D" stroke-width="1.5" stroke-linejoin="round"/></svg>
-      Open Source
-    </div>
+    <div class="label">Open Source CLI</div>
     <h1>Page<em>Press</em></h1>
     <p class="sub">One command. PDF documents, OG cards, posters, banners — all from Markdown & HTML.</p>
   </div>

@@ -6,7 +6,7 @@
 <style>
 /* Galaxy Purple: deep cosmos depth, analogous violet spectrum */
 /* Palette: #1A1035 dominant / #7A3DE2 secondary / #A885FF accent / #E8DFFF text */
-/* Z-pattern: top-left version → top-right chips → bottom-left heading → bottom-right grid */
+/* Z-pattern layout with SVG decorative lines */
 *{margin:0;padding:0;box-sizing:border-box}
 #container{
   width:1200px;height:630px;
@@ -43,14 +43,10 @@
   font-size:12px;font-weight:500;
   color:rgba(232,223,255,.25);letter-spacing:.5px;
 }
-.chips{display:flex;gap:8px}
-.chip{
-  font-size:11px;font-weight:500;
-  color:rgba(232,223,255,.5);
-  background:rgba(122,61,226,.12);
-  border:1px solid rgba(122,61,226,.2);
-  padding:6px 14px;border-radius:6px;
-  display:flex;align-items:center;gap:6px;
+.top-right{
+  font-size:11px;font-weight:400;
+  color:rgba(232,223,255,.2);
+  letter-spacing:1px;
 }
 
 /* bottom row */
@@ -110,26 +106,26 @@ h1 em{font-style:normal;color:#A885FF}
 .c-c{color:#A885FF}
 .c-f{color:rgba(232,223,255,.3)}
 .c-v{color:rgba(232,223,255,.6)}
+
+/* decorative SVG art */
+.art{position:absolute;pointer-events:none;z-index:0}
 </style>
 </head>
 <body>
 <div id="container">
+  <!-- decorative: constellation dots + arc lines -->
+  <svg class="art" style="top:0;right:0" width="500" height="300" viewBox="0 0 500 300" fill="none">
+    <circle cx="380" cy="60" r="2" fill="#A885FF" opacity=".15"/>
+    <circle cx="420" cy="90" r="1.5" fill="#A885FF" opacity=".1"/>
+    <circle cx="350" cy="120" r="1" fill="#7A3DE2" opacity=".2"/>
+    <circle cx="450" cy="140" r="2.5" fill="#A885FF" opacity=".08"/>
+    <path d="M380 60 L420 90 L350 120" stroke="#7A3DE2" stroke-width=".5" opacity=".08"/>
+    <path d="M100 280 Q250 240 480 260" stroke="#A885FF" stroke-width=".8" opacity=".05" fill="none"/>
+  </svg>
+
   <div class="top">
-    <div class="ver">PagePress v0.4.0</div>
-    <div class="chips">
-      <div class="chip">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="7" height="9" rx="1.5" stroke="#A885FF" stroke-width="1"/><path d="M3.5 4.5h2.5M3.5 6h3.5M3.5 7.5h1.5" stroke="#A885FF" stroke-width=".7" stroke-linecap="round"/></svg>
-        PDF
-      </div>
-      <div class="chip">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="8" rx="1.5" stroke="#A885FF" stroke-width="1"/><circle cx="6" cy="6" r="2" stroke="#A885FF" stroke-width="1"/></svg>
-        Image
-      </div>
-      <div class="chip">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="4" height="4" rx=".8" stroke="#A885FF" stroke-width="1"/><rect x="7" y="1" width="4" height="4" rx=".8" stroke="#A885FF" stroke-width="1"/><rect x="1" y="7" width="4" height="4" rx=".8" stroke="#A885FF" stroke-width="1"/><rect x="7" y="7" width="4" height="4" rx=".8" stroke="#A885FF" stroke-width="1"/></svg>
-        8 Presets
-      </div>
-    </div>
+    <div class="ver">PagePress v0.5.0</div>
+    <div class="top-right">PDF · IMAGE · CLI</div>
   </div>
 
   <div class="bottom">

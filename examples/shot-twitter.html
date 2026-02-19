@@ -6,7 +6,7 @@
 <style>
 /* Luminous Tech Neon: deep dark + violet + cyan, complementary harmony */
 /* Palette: #101014 dominant / #8A00FF secondary / #00E8FF accent / #E0E0E6 text */
-/* Z-pattern: top-left logo → top-right chip → bottom-left heading → bottom-right features */
+/* Z-pattern layout with SVG geometric decorations */
 *{margin:0;padding:0;box-sizing:border-box}
 #container{
   width:1200px;height:675px;
@@ -44,13 +44,10 @@
   color:#E0E0E6;letter-spacing:-.5px;
 }
 .logo em{font-style:normal;color:#00E8FF}
-.chip{
-  font-size:11px;font-weight:500;
-  color:rgba(224,224,230,.45);
-  background:rgba(138,0,255,.08);
-  border:1px solid rgba(138,0,255,.15);
-  padding:6px 14px;border-radius:6px;
-  display:flex;align-items:center;gap:6px;
+.top-label{
+  font-size:11px;font-weight:400;
+  color:rgba(224,224,230,.2);
+  letter-spacing:1.5px;text-transform:uppercase;
 }
 
 /* bottom row */
@@ -111,16 +108,28 @@ h1 em{
 .c-c{color:#00E8FF}
 .c-f{color:rgba(224,224,230,.25)}
 .c-v{color:rgba(224,224,230,.55)}
+
+/* decorative SVG */
+.art{position:absolute;pointer-events:none;z-index:0}
 </style>
 </head>
 <body>
 <div id="container">
+  <!-- decorative: geometric hexagon grid + flowing line -->
+  <svg class="art" style="top:40px;right:60px" width="200" height="200" viewBox="0 0 200 200" fill="none">
+    <polygon points="100,10 170,50 170,130 100,170 30,130 30,50" stroke="#8A00FF" stroke-width=".6" opacity=".06"/>
+    <polygon points="100,40 145,65 145,115 100,140 55,115 55,65" stroke="#00E8FF" stroke-width=".4" opacity=".05"/>
+    <circle cx="100" cy="10" r="2" fill="#00E8FF" opacity=".1"/>
+    <circle cx="170" cy="50" r="1.5" fill="#8A00FF" opacity=".08"/>
+  </svg>
+  <svg class="art" style="bottom:60px;left:40px" width="300" height="100" viewBox="0 0 300 100" fill="none">
+    <path d="M0 80 Q80 20 160 60 Q240 100 300 40" stroke="#8A00FF" stroke-width=".8" opacity=".04" fill="none"/>
+    <path d="M0 90 Q100 40 200 70 Q260 90 300 50" stroke="#00E8FF" stroke-width=".5" opacity=".03" fill="none"/>
+  </svg>
+
   <div class="top">
     <div class="logo">Page<em>Press</em></div>
-    <div class="chip">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 3l5-2 5 2v6l-5 2-5-2V3z" stroke="#00E8FF" stroke-width="1" stroke-linejoin="round"/></svg>
-      Open Source CLI
-    </div>
+    <div class="top-label">Open Source CLI</div>
   </div>
 
   <div class="bottom">

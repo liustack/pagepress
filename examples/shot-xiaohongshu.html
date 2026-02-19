@@ -37,20 +37,14 @@
   opacity:.08;
 }
 
-/* tag */
-.tag{
-  display:inline-flex;
-  align-items:center;gap:8px;
-  background:#D4805A;
-  color:#fff;
-  font-size:22px;font-weight:600;
-  padding:12px 24px;
-  border-radius:8px;
+/* small label — plain text, not a badge */
+.label{
+  font-size:20px;font-weight:600;
+  color:#D4805A;
+  letter-spacing:1px;
   margin-bottom:40px;
-  align-self:flex-start;
   position:relative;z-index:1;
 }
-.tag svg{flex-shrink:0}
 
 /* main title */
 h1{
@@ -82,24 +76,31 @@ h1 em{
   position:relative;z-index:1;
 }
 
-/* keyword pills */
-.keywords{
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
+/* feature list — simple text rows with SVG icons, no pills */
+.features{
+  display:flex;flex-direction:column;
+  gap:20px;
   margin-bottom:56px;
   position:relative;z-index:1;
 }
-.kw{
-  font-size:22px;font-weight:500;
-  color:#4A3F36;
-  background:rgba(212,128,90,.08);
-  border:1.5px solid rgba(212,128,90,.15);
-  padding:12px 24px;
-  border-radius:10px;
-  display:flex;align-items:center;gap:8px;
+.feat-row{
+  display:flex;align-items:center;gap:16px;
 }
-.kw svg{flex-shrink:0}
+.feat-icon{
+  width:44px;height:44px;flex-shrink:0;
+  background:rgba(212,128,90,.08);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+}
+.feat-text{
+  font-size:24px;font-weight:500;
+  color:#4A3F36;
+}
+.feat-detail{
+  font-size:16px;font-weight:400;
+  color:rgba(74,63,54,.35);
+  margin-top:2px;
+}
 
 /* bottom command bar */
 .cmd-wrap{
@@ -125,6 +126,9 @@ h1 em{
   color:rgba(74,63,54,.2);
   text-align:right;
 }
+
+/* decorative SVG */
+.art{position:absolute;pointer-events:none;z-index:0}
 </style>
 </head>
 <body>
@@ -132,35 +136,36 @@ h1 em{
   <div class="deco-circle"></div>
   <div class="deco-dot"></div>
 
-  <div class="tag">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="1" width="12" height="16" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M6 6h4M6 9h6M6 12h3" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg>
-    开源 CLI 工具
-  </div>
+  <!-- decorative: organic curves connecting the circles -->
+  <svg class="art" style="top:0;left:0;width:100%;height:100%" viewBox="0 0 1080 1440" fill="none">
+    <path d="M900 100 Q800 400 500 500 Q200 600 100 1000" stroke="#D4805A" stroke-width="1.5" opacity=".04" fill="none"/>
+    <path d="M1000 300 Q700 500 600 800 Q500 1100 200 1300" stroke="#7E9C76" stroke-width="1" opacity=".03" fill="none"/>
+  </svg>
+
+  <div class="label">开源 CLI 工具</div>
 
   <h1>一行命令<br>Markdown 转<br><em>PDF 和图片</em></h1>
 
   <p class="sub">AI Agent 友好 · 三套精美模板 · 八种图片预设</p>
 
-  <div class="keywords">
-    <div class="kw">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="10" height="14" rx="2" stroke="#D4805A" stroke-width="1.2"/><path d="M5 5h4M5 7.5h6M5 10h3" stroke="#D4805A" stroke-width="1" stroke-linecap="round"/></svg>
-      PDF 报告
+  <div class="features">
+    <div class="feat-row">
+      <div class="feat-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="1" width="12" height="16" rx="2" stroke="#D4805A" stroke-width="1.5"/><path d="M7 6h4M7 9h6M7 12h3" stroke="#D4805A" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="feat-text">PDF 报告</div>
+        <div class="feat-detail">Apple · GitHub · Magazine 三套模板</div>
+      </div>
     </div>
-    <div class="kw">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="3" width="16" height="10" rx="2" stroke="#D4805A" stroke-width="1.2"/><circle cx="6" cy="8" r="2" stroke="#D4805A" stroke-width="1"/></svg>
-      OG 社交卡片
-    </div>
-    <div class="kw">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="1" width="9" height="14" rx="2" stroke="#D4805A" stroke-width="1.2"/><path d="M6 11h3" stroke="#D4805A" stroke-width="1" stroke-linecap="round"/></svg>
-      海报
-    </div>
-    <div class="kw">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="4" width="16" height="8" rx="2" stroke="#D4805A" stroke-width="1.2"/></svg>
-      横幅
-    </div>
-    <div class="kw">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="4" height="10" rx="1" fill="#D4805A" opacity=".3"/><rect x="9" y="6" width="4" height="7" rx="1" fill="#D4805A" opacity=".5"/></svg>
-      信息图
+    <div class="feat-row">
+      <div class="feat-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="1" y="4" width="20" height="12" rx="2" stroke="#D4805A" stroke-width="1.5"/><circle cx="8" cy="10" r="2.5" stroke="#D4805A" stroke-width="1.2"/><path d="M1 14l5-3 3 2 5-4 7 5" stroke="#D4805A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="feat-text">图片预设</div>
+        <div class="feat-detail">OG 卡片 · 海报 · 横幅 · 信息图 等 8 种</div>
+      </div>
     </div>
   </div>
 
@@ -174,7 +179,7 @@ h1 em{
       <span class="c-f">-o</span>
       <span class="c-v">report.pdf</span>
     </div>
-    <div class="ver">PagePress v0.4.0</div>
+    <div class="ver">PagePress v0.5.0</div>
   </div>
 </div>
 </body>
