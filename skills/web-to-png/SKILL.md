@@ -31,13 +31,11 @@ npx playwright install chromium
 > **Should use**: titles, taglines, decorative graphics, SVG illustrations, icons, statistics, brand marks.
 
 > [!IMPORTANT]
-> **Visual-first presets** (og, poster, banner, wechat, twitter, youtube, xiaohongshu) are **images**, not documents.
+> **Visual-heavy presets** (poster, banner, wechat) prioritize **graphics over text**.
 >
-> **SVG is the primary content medium** — use inline SVG for decorative elements (geometric shapes, patterns, gradients), semantic illustrations (icons that convey meaning), and visual storytelling. SVG art should carry 50%+ of the visual weight.
+> Use inline SVG for decorative elements (geometric shapes, patterns, gradients) and semantic illustrations (icons that convey meaning). SVG art should carry **50%+** of the visual weight. Text is limited to 1 headline + 1 optional subtitle — let the visuals speak.
 >
-> **Text must be minimal** — 1 headline + 1 optional subtitle at most. If you need more than ~15 words total, the preset is wrong (use `infographic` instead). Let the visuals speak.
->
-> **Exception**: `infographic` is an **information-density preset** — it favors structured text, grids, lists, and data over decorative graphics.
+> Other presets (og, twitter, youtube, xiaohongshu) still rely on **text as the primary content**, but should use SVG for decorative accents and visual polish.
 
 - **references/color-theory.md** — Color theory rules (60-30-10 ratio, 4-hue limit, harmony methods) **always apply** to every design. Ready-to-use palettes are provided as **fallback only** — use them when no workspace brand colors exist. When brand colors exist, use them as the starting palette and apply the color theory rules on top.
 - **references/design-principles.md** — Typography scale, visual hierarchy, Gestalt principles, Japanese aesthetics, Apple HIG. Apply to every layout decision.
@@ -96,7 +94,6 @@ pagepress shot -i input.html -o output.png --preset og
   - **Small-size readability**: the headline must be clearly legible at 400px width
   - **Single focus**: convey only one core message
   - **Safe area**: keep content at least **120px** from the edges
-  - **Visual-first**: use SVG decorative/semantic graphics to fill space; text limited to title + tagline
 
 #### 3. infographic (1080x1350) - Infographic/Cheat Sheet
 - **Scenario**: Structured presentation of complex information, even code snippets.
@@ -138,7 +135,6 @@ pagepress shot -i input.html -o output.png --preset og
   - Headline font-size >= **48px** (recommended 56-72px), max 2 font families, 3 weights
   - Keep PNG file size < **500 KB** for fast loading
 - **Common patterns**: solid/gradient background + large title + brand logo; left-text-right-visual split; dark theme (stands out in feed)
-- **SVG usage**: use inline SVG for decorative graphics, abstract shapes, and topic-related icons to add visual interest without relying on stock photos
 
 #### 7. youtube (1280x720) - YouTube Thumbnail
 - **Scenario**: Video thumbnail for YouTube, optimized for high click-through rate.
@@ -164,7 +160,6 @@ pagepress shot -i input.html -o output.png --preset og
   - Avoid small text — anything below 75px on the 1280x720 canvas becomes unreadable at thumbnail sizes
   - Do not use CSS animations or transitions (static output only)
 - **Common patterns**: bold text + gradient background; number/statistic callout; before-after split; color-blocked sections with SVG icons
-- **SVG usage**: geometric shapes, arrows, exclamation marks, topic-related icons — use SVG to create the visual punch that photography cannot provide in HTML-rendered thumbnails
 
 #### 8. wechat (900x383) - WeChat Official Account Cover
 - **Scenario**: WeChat Official Account (公众号) article cover image for headline position.
@@ -196,8 +191,7 @@ pagepress shot -i input.html -o output.png --preset og
 - **Core principle**: **Bold headline + 3-second rule**
   - Headline font-size >= 80px, occupying 40-60% of the canvas
   - Highlight keywords with color/size contrast
-  - Use SVG decorative elements (geometric shapes, patterns, topic-related icons) to fill remaining space and create visual richness
-  - Convey "high information density" visually — through graphics and layout, not walls of text
+  - Convey "high information density" to entice clicks
   - **90px+** side margins, **80px+** top/bottom padding
 
 ## Options
