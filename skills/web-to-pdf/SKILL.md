@@ -54,6 +54,15 @@ pagepress pdf -i input.md -o output.pdf --template default
 **Safe mode notes**:
 - External network requests and JavaScript execution are disabled.
 
+## Temporary Files — MUST Use Temp Directory
+
+> [!CAUTION]
+> **NEVER write temporary Markdown or HTML files into the user's workspace.** If the Agent generates intermediate `.md` or `.html` for rendering, write them to the system temp directory only.
+
+1. **Write to system temp directory ONLY**: `$TMPDIR/pagepress/` (macOS/Linux) or `/tmp/pagepress/`. Create if needed: `mkdir -p "$TMPDIR/pagepress"`.
+2. **Clean up after render**: delete the temporary file immediately after a successful `pagepress pdf` run.
+3. **Keep only if asked**: if the user explicitly asks to keep the source file, copy it to a location the user specifies — but never leave it in the workspace root or source tree.
+
 ## Examples
 
 ```bash
