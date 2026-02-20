@@ -1,5 +1,3 @@
-docs/
-
 # build output
 dist/
 # generated types
@@ -38,3 +36,4 @@ bun.lock
 .wrangler
 test-output
 .agent/
+.issues/
