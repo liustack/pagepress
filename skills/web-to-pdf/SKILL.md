@@ -32,6 +32,12 @@ If the user asks to summarize or generate a report, the Agent should first creat
 | **Markdown to document** | "convert to PDF", "save as PDF", "export PDF", "generate a PDF report", "summarize into PDF", "convert Markdown to PDF" | `-i file.md` | `--template default` (or other templates) |
 | **HTML print** | "print HTML", "render HTML to PDF", "HTML to PDF" | `-i file.html` | Default (no template) |
 
+## Assets Directory (AI Agent Guidance)
+
+- Ask the user where generated PDFs should be stored.
+- Remember the answer as `$ASSETS_DIR` for the session.
+- If the user does not reply or accepts the default, use `${workspaceRoot}/assets` (workspace root `assets/`).
+
 ## Supported Templates (Markdown only)
 
 - `default` - Apple style, clean and elegant
@@ -54,14 +60,14 @@ pagepress pdf -i input.md -o output.pdf --template default
 **Safe mode notes**:
 - External network requests and JavaScript execution are disabled.
 
-## Temporary Files — Write to Output Directory
+## Temporary Files — Write to Assets Directory
 
 > [!CAUTION]
-> **NEVER scatter generated Markdown or HTML files across the user's project.** All intermediate files must go into the same directory as the output PDF.
+> **NEVER scatter generated Markdown or HTML files across the user's project.** All intermediate files must go into `$ASSETS_DIR` (the same directory where output PDFs are stored).
 
-1. **Write temporary files next to the output**: place intermediate `.md` or `.html` in the same directory as the `-o` output path. This avoids permission prompts.
+1. **Write temporary files to `$ASSETS_DIR`**: this avoids permission prompts and keeps intermediate files alongside their output.
 2. **Clean up after render**: delete the temporary file immediately after a successful `pagepress pdf` run.
-3. **Keep only if asked**: if the user explicitly asks to keep the source file, leave it in place and report its path.
+3. **Keep only if asked**: if the user explicitly asks to keep the source file, leave it in `$ASSETS_DIR` and report its path.
 
 ## Examples
 
