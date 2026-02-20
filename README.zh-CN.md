@@ -1,12 +1,12 @@
 # PagePress
 
-一套专为 **AI Agent** 设计的 Web 内容渲染工具集（CLI），可将 HTML、Markdown、URL 转换为高质量的 **PDF** 或 **PNG** 图像。
+一套专为 **AI Agent** 设计的 Web 内容渲染工具集（CLI），可将本地 HTML、Markdown 文件转换为高质量的 **PDF** 或 **PNG** 图像。
 
 ## ✨ 特性
 
 - **统一 CLI**：一个工具 (`pagepress`) 搞定 PDF 和 Image 生成
 - **AI Agent 友好**：包含详细的 SKILL.md 指南，支持场景路由
-- **多种输入**：支持本地 HTML、Markdown 文件或远程 URL
+- **仅本地文件**：支持本地 HTML、Markdown 文件（出于安全考虑不支持远程 URL）
 - **丰富模板**：
   - **PDF**: Apple 风格、GitHub 风格、杂志排版 (Magazine)
   - **Image**: 8 种预设 — OG 卡片、信息图、海报、横幅、Twitter/X 卡片、YouTube 缩略图、小红书封面、微信公众号封面
@@ -42,8 +42,6 @@ pagepress pdf -i document.md -o output.pdf --template default
 # 本地 HTML 文件转 PDF
 pagepress pdf -i page.html -o output.pdf
 
-# 网页打印（原样渲染）
-pagepress pdf -i https://example.com -o webpage.pdf
 ```
 
 **支持的模板**：
@@ -53,7 +51,7 @@ pagepress pdf -i https://example.com -o webpage.pdf
 
 ### 2. 生成图像
 
-将 HTML/URL 渲染为 PNG 图像，适合社交分享卡片、海报、长图截屏。
+将本地 HTML 渲染为 PNG 图像，适合社交分享卡片、海报、信息图。
 
 对于 OG 卡片、海报、横幅，视觉应基于工作区的品牌资源（logo、颜色、字体、素材）生成，常见目录包括 `assets/`、`public/`、`src/assets/`。
 
@@ -77,8 +75,6 @@ pagepress shot -i card.html -o og.png --preset og
 # 生成信息长图
 pagepress shot -i stats.html -o infographic.png --preset infographic
 
-# 网页截图
-pagepress shot -i https://example.com -o screenshot.png
 ```
 
 **支持的预设**：
@@ -115,8 +111,8 @@ pagepress shot -i https://example.com -o screenshot.png
 
 本项目包含两份 AI Agent 技能指南（适用于 Claude、ChatGPT 等）：
 
-- [web-to-pdf/SKILL.md](skills/web-to-pdf/SKILL.md) — PDF 生成（Markdown 美化、模板、HTML/URL 打印）
-- [web-to-png/SKILL.md](skills/web-to-png/SKILL.md) — PNG 生成（OG 卡片、信息图、海报、横幅、网页截图）
+- [web-to-pdf/SKILL.md](skills/web-to-pdf/SKILL.md) — PDF 生成（Markdown 美化、模板、HTML 打印）
+- [web-to-png/SKILL.md](skills/web-to-png/SKILL.md) — PNG 生成（OG 卡片、信息图、海报、横幅、社交卡片）
 
 Agent 可以根据用户的自然语言指令（如"生成一张海报"、"把这个文档转成 PDF"）自动选择合适的命令和参数。
 

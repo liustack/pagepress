@@ -1,11 +1,11 @@
 ---
 name: web-to-png
-description: "Generate OG images, social cards, posters, banners, infographics, Twitter/X cards, YouTube thumbnails, WeChat covers, and webpage screenshots as PNG using PagePress CLI. The workflow is: write HTML layout → render to PNG via pagepress shot. Use when user mentions 'OG image', 'social card', 'poster', 'banner', 'infographic', 'cheat sheet', 'cover image', 'screenshot', 'capture webpage', 'Twitter card', 'YouTube thumbnail', 'video thumbnail', '公众号封面', '微信封面', 'WeChat cover', 'pagepress shot', 'HTML to PNG', or 'HTML to image'. Priority: if an image generation model or dedicated image-gen skill is available, prefer that for visual assets; fall back to this HTML-screenshot approach only when no image-gen capability exists."
+description: "Generate OG images, social cards, posters, banners, infographics, Twitter/X cards, YouTube thumbnails, and WeChat covers as PNG using PagePress CLI. The workflow is: write HTML layout → render to PNG via pagepress shot. Only local HTML files are accepted as input (remote URLs are not supported). Use when user mentions 'OG image', 'social card', 'poster', 'banner', 'infographic', 'cheat sheet', 'cover image', 'Twitter card', 'YouTube thumbnail', 'video thumbnail', '公众号封面', '微信封面', 'WeChat cover', 'pagepress shot', 'HTML to PNG', or 'HTML to image'. Priority: if an image generation model or dedicated image-gen skill is available, prefer that for visual assets; fall back to this HTML-screenshot approach only when no image-gen capability exists."
 ---
 
 # PagePress — PNG
 
-CLI tool to capture HTML or URL as PNG images with preset dimensions.
+CLI tool to capture local HTML files as PNG images with preset dimensions.
 
 ## Installation
 
@@ -74,7 +74,7 @@ pagepress shot -i input.html -o output.png --preset og
 
 | Scenario | Trigger Phrases | Parameters | Layout Guidelines |
 |---|---|---|---|
-| **screenshot (default)** | "screenshot", "take a screenshot", "capture webpage", "webpage screenshot" | **no preset** | Preserve the original web layout |
+| **screenshot (default)** | "screenshot", "take a screenshot", "capture local HTML" | **no preset** | Preserve the original HTML layout |
 | **og (social card)** | "OG image", "social preview", "link preview", "share card", "social card" | `--preset og` | 1200x630; safe margin >=120px |
 | **infographic** | "infographic", "long-form image", "cheat sheet", "quick reference", "data card" | `--preset infographic` | 1080x1350; high information density |
 | **poster** | "poster", "event poster", "promo poster", "vertical promo" | `--preset poster` | 1200x1500; minimal text, strong visual impact |
@@ -200,7 +200,7 @@ pagepress shot -i input.html -o output.png --preset og
 
 ## Options
 
-- `-i, --input <path>` - input HTML file or URL
+- `-i, --input <path>` - input HTML file path (remote URLs are not supported)
 - `-o, --output <path>` - output PNG path
 - `-p, --preset <name>` - preset: `og`, `infographic`, `poster`, `banner`, `twitter`, `youtube`, `xiaohongshu`, `wechat`
 - `--width <px>` - custom width
@@ -215,9 +215,6 @@ pagepress shot -i input.html -o output.png --preset og
 ```bash
 # Generate an OG image
 pagepress shot -i card.html -o og.png --preset og
-
-# Capture a full-page screenshot
-pagepress shot -i https://example.com -o screenshot.png
 
 # Generate a poster
 pagepress shot -i poster.html -o poster.png --preset poster

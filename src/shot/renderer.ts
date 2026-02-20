@@ -94,10 +94,7 @@ export async function render(options: Options): Promise<Result> {
 
         const inputPath = path.resolve(options.input);
         if (options.input.startsWith('http://') || options.input.startsWith('https://')) {
-            if (safeMode) {
-                throw new Error('Safe mode does not allow remote URL inputs.');
-            }
-            await page.goto(options.input, { waitUntil, timeout });
+            throw new Error('Remote URL inputs are not supported. Please provide a local HTML file path.');
         } else if (fs.existsSync(inputPath)) {
             const content = fs.readFileSync(inputPath, 'utf-8');
             await page.setContent(content, { waitUntil, timeout });

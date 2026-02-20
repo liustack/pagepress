@@ -86,11 +86,8 @@ export async function render(options: Options): Promise<Result> {
     let htmlContent: string;
     let hasMermaid = false;
 
-    if (options.input.startsWith('http')) {
-        if (safeMode) {
-            throw new Error('Safe mode does not allow remote URL inputs.');
-        }
-        htmlContent = '';
+    if (options.input.startsWith('http://') || options.input.startsWith('https://')) {
+        throw new Error('Remote URL inputs are not supported. Please provide a local Markdown or HTML file path.');
     } else if (options.input.endsWith('.md')) {
         const raw = fs.readFileSync(inputPath, 'utf-8');
         const { data: frontmatter, content } = matter(raw);
@@ -187,11 +184,7 @@ export async function render(options: Options): Promise<Result> {
         }
         const page = await context.newPage();
 
-        if (options.input.startsWith('http')) {
-            await page.goto(options.input, { waitUntil, timeout });
-        } else {
-            await page.setContent(htmlContent, { waitUntil, timeout });
-        }
+        await page.setContent(htmlContent, { waitUntil, timeout });
 
         // Inject local fonts for magazine template
         const fontCSS = getFontCSS(template.name);

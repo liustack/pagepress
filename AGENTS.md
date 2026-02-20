@@ -1,7 +1,7 @@
 # Project Overview (for AI Agent)
 
 ## Goal
-Provide the `pagepress` CLI tool to render Markdown / HTML / URL into consistent, polished web documents, then export them as **PDF or PNG**.
+Provide the `pagepress` CLI tool to render local Markdown / HTML files into consistent, polished web documents, then export them as **PDF or PNG**. Remote URLs are not supported for security reasons.
 
 ## Technical Approach
 - **Playwright + Chromium** as the rendering and export engine
@@ -60,11 +60,9 @@ The main program source lives in `src/`, and the CLI is exposed via `dist/cli.js
 # PDF rendering
 pagepress pdf -i document.md -o output.pdf --template default
 pagepress pdf -i page.html -o output.pdf
-pagepress pdf -i https://example.com -o webpage.pdf
 
 # PNG shots
 pagepress shot -i card.html -o og.png --preset og
-pagepress shot -i https://example.com -o screenshot.png
 ```
 
 ## Git Commit Conventions

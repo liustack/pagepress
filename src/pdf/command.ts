@@ -3,7 +3,7 @@ import { render, Options } from './renderer.ts';
 
 export const command = new Command('pdf')
     .description('Render Markdown or HTML to PDF')
-    .requiredOption('-i, --input <path>', 'Input file path or URL')
+    .requiredOption('-i, --input <path>', 'Input Markdown or HTML file path')
     .requiredOption('-o, --output <path>', 'Output PDF file path')
     .option('-t, --template <name>', 'PDF template (default, github, magazine)', 'default')
     .option('--wait-until <state>', 'Navigation waitUntil (load, domcontentloaded, networkidle)', 'networkidle')

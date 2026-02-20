@@ -1,6 +1,6 @@
 # PagePress
 
-A web content rendering toolkit (CLI) designed for **AI Agents**, converting HTML, Markdown, and URLs into high-quality **PDF** or **PNG** images.
+A web content rendering toolkit (CLI) designed for **AI Agents**, converting local HTML and Markdown files into high-quality **PDF** or **PNG** images.
 
 中文说明请见：[README.zh-CN.md](README.zh-CN.md)
 
@@ -8,7 +8,7 @@ A web content rendering toolkit (CLI) designed for **AI Agents**, converting HTM
 
 - **Unified CLI**: One tool (`pagepress`) for both PDF and image generation
 - **AI Agent friendly**: Includes a detailed SKILL.md guide with scenario routing
-- **Multiple inputs**: Local HTML, Markdown files, or remote URLs
+- **Local files only**: Accepts local HTML and Markdown files (remote URLs are not supported for security)
 - **Rich templates**:
   - **PDF**: Apple style, GitHub style, magazine layout (Magazine)
   - **Image**: 8 presets — OG cards, infographics, posters, banners, Twitter/X cards, YouTube thumbnails, Xiaohongshu covers, WeChat covers
@@ -44,8 +44,6 @@ pagepress pdf -i document.md -o output.pdf --template default
 # Local HTML file to PDF
 pagepress pdf -i page.html -o output.pdf
 
-# Render a web page (as-is)
-pagepress pdf -i https://example.com -o webpage.pdf
 ```
 
 **Supported templates**:
@@ -55,7 +53,7 @@ pagepress pdf -i https://example.com -o webpage.pdf
 
 ### 2. Generate Images
 
-Render HTML/URLs into PNG images, suitable for social share cards, posters, and long screenshots.
+Render local HTML into PNG images, suitable for social share cards, posters, and infographics.
 
 For OG cards, posters, and banners, the visuals should be generated based on workspace brand assets (logo, colors, fonts, imagery), commonly located in `assets/`, `public/`, or `src/assets/`.
 
@@ -79,8 +77,6 @@ pagepress shot -i card.html -o og.png --preset og
 # Generate a long infographic
 pagepress shot -i stats.html -o infographic.png --preset infographic
 
-# Webpage screenshot
-pagepress shot -i https://example.com -o screenshot.png
 ```
 
 **Supported presets**:
@@ -117,8 +113,8 @@ pagepress shot -i https://example.com -o screenshot.png
 
 This project includes two skill guides for AI Agents (such as Claude, ChatGPT):
 
-- [web-to-pdf/SKILL.md](skills/web-to-pdf/SKILL.md) — PDF generation (Markdown beautification, templates, HTML/URL printing)
-- [web-to-png/SKILL.md](skills/web-to-png/SKILL.md) — PNG generation (OG cards, infographics, posters, banners, screenshots)
+- [web-to-pdf/SKILL.md](skills/web-to-pdf/SKILL.md) — PDF generation (Markdown beautification, templates, HTML printing)
+- [web-to-png/SKILL.md](skills/web-to-png/SKILL.md) — PNG generation (OG cards, infographics, posters, banners, social cards)
 
 Agents can automatically choose the appropriate commands and parameters based on natural language instructions (for example, "generate a poster" or "convert this document to PDF").
 

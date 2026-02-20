@@ -3,7 +3,7 @@ import { render, Options } from './renderer.ts';
 
 export const command = new Command('shot')
     .description('Capture HTML to PNG image')
-    .requiredOption('-i, --input <path>', 'Input HTML file path or URL')
+    .requiredOption('-i, --input <path>', 'Input HTML file path')
     .requiredOption('-o, --output <path>', 'Output PNG file path')
     .option('-p, --preset <name>', 'Image preset (og, infographic, poster, banner, twitter, youtube, xiaohongshu, wechat)', 'og')
     .option('--width <number>', 'Custom width in pixels')
