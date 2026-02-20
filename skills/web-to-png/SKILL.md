@@ -10,9 +10,11 @@ CLI tool to capture HTML or URL as PNG images with preset dimensions.
 ## Installation
 
 ```bash
-npm install -g @liustack/pagepress
+npm install -g @liustack/pagepress@latest
 npx playwright install chromium
 ```
+
+> **Version check**: Before generating images, run `pagepress --version`. If the command is not found or the version is outdated, re-run the install command above to get the latest release.
 
 ## Design References & Visual Rules
 
