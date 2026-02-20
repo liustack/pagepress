@@ -61,17 +61,14 @@ pagepress shot -i input.html -o output.png --preset og
 - Also inspect project stylesheets and font usage (e.g., `*.css`, `*.scss`, `*.tailwind.css`) to infer the color palette and visual style when explicit brand assets are incomplete.
 - If no brand resources are available, ask the user to provide them (logo, font preference) before generating visuals.
 
-## Temporary HTML — MUST Use Temp Directory
+## Temporary HTML — Write to Assets Directory
 
 > [!CAUTION]
-> **NEVER write temporary HTML files into the user's workspace.** The workspace must stay clean — no generated `.html` artifacts should appear in project directories.
+> **NEVER scatter generated HTML files across the user's project.** All intermediate HTML must go into `$ASSETS_DIR` (the same directory where output images are stored).
 
-1. **Write to system temp directory ONLY**:
-   - If the agent runtime provides a session temp directory, use that.
-   - Otherwise: `$TMPDIR/pagepress/` (macOS/Linux) or `/tmp/pagepress/`.
-   - Create the directory if it doesn't exist: `mkdir -p "$TMPDIR/pagepress"`.
+1. **Write temporary HTML to `$ASSETS_DIR`**: this avoids permission prompts and keeps intermediate files alongside their output.
 2. **Clean up after render**: delete the temporary HTML immediately after a successful `pagepress shot` run.
-3. **Keep only if asked**: if the user explicitly asks to keep the HTML source for debugging, copy it into `$ASSETS_DIR` and report its path — but never leave it in the workspace root or source tree.
+3. **Keep only if asked**: if the user explicitly asks to keep the HTML source for debugging, leave it in `$ASSETS_DIR` and report its path.
 
 ## Scenario Routing Table (AI Agent Decision Guide)
 
