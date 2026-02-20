@@ -30,6 +30,15 @@ npx playwright install chromium
 >
 > **Should use**: titles, taglines, decorative graphics, SVG illustrations, icons, statistics, brand marks.
 
+> [!IMPORTANT]
+> **Visual-first presets** (og, poster, banner, wechat, twitter, youtube, xiaohongshu) are **images**, not documents.
+>
+> **SVG is the primary content medium** — use inline SVG for decorative elements (geometric shapes, patterns, gradients), semantic illustrations (icons that convey meaning), and visual storytelling. SVG art should carry 50%+ of the visual weight.
+>
+> **Text must be minimal** — 1 headline + 1 optional subtitle at most. If you need more than ~15 words total, the preset is wrong (use `infographic` instead). Let the visuals speak.
+>
+> **Exception**: `infographic` is an **information-density preset** — it favors structured text, grids, lists, and data over decorative graphics.
+
 - **references/color-theory.md** — Color theory rules (60-30-10 ratio, 4-hue limit, harmony methods) **always apply** to every design. Ready-to-use palettes are provided as **fallback only** — use them when no workspace brand colors exist. When brand colors exist, use them as the starting palette and apply the color theory rules on top.
 - **references/design-principles.md** — Typography scale, visual hierarchy, Gestalt principles, Japanese aesthetics, Apple HIG. Apply to every layout decision.
 
@@ -87,6 +96,7 @@ pagepress shot -i input.html -o output.png --preset og
   - **Small-size readability**: the headline must be clearly legible at 400px width
   - **Single focus**: convey only one core message
   - **Safe area**: keep content at least **120px** from the edges
+  - **Visual-first**: use SVG decorative/semantic graphics to fill space; text limited to title + tagline
 
 #### 3. infographic (1080x1350) - Infographic/Cheat Sheet
 - **Scenario**: Structured presentation of complex information, even code snippets.
@@ -98,13 +108,16 @@ pagepress shot -i input.html -o output.png --preset og
 #### 4. poster (1200x1500) - Poster
 - **Scenario**: Vertical mobile visual impact (events, launches).
 - **Core principle**: **Minimal text, maximum visual**
-  - Text: only 1 main title + 1 subtitle
-  - Main visual occupies 50%+
+  - Text: only 1 main title + 1 subtitle — **no paragraphs, no bullet lists**
+  - SVG illustrations / geometric art should occupy **50%+** of the canvas
+  - Use SVG for both decorative elements (patterns, shapes) and semantic content (icons that convey the topic)
   - **120px+** margins
 
 #### 5. banner (1600x900) - Banner
 - **Scenario**: Blog covers, Twitter/LinkedIn header backgrounds.
 - **Layout**: horizontal composition, content centered or left-text-right-image.
+- **Visual-first**: SVG art / geometric decoration should fill the majority of the canvas; text limited to 1 headline + optional subtitle
+- Use inline SVG for abstract patterns, brand-related illustrations, or semantic icons that reinforce the topic
 
 #### 6. twitter (1200x675) - Twitter/X Card
 - **Scenario**: Preview image for tweets and X posts with `summary_large_image` card type.
@@ -125,6 +138,7 @@ pagepress shot -i input.html -o output.png --preset og
   - Headline font-size >= **48px** (recommended 56-72px), max 2 font families, 3 weights
   - Keep PNG file size < **500 KB** for fast loading
 - **Common patterns**: solid/gradient background + large title + brand logo; left-text-right-visual split; dark theme (stands out in feed)
+- **SVG usage**: use inline SVG for decorative graphics, abstract shapes, and topic-related icons to add visual interest without relying on stock photos
 
 #### 7. youtube (1280x720) - YouTube Thumbnail
 - **Scenario**: Video thumbnail for YouTube, optimized for high click-through rate.
@@ -149,13 +163,15 @@ pagepress shot -i input.html -o output.png --preset og
   - Do not exceed 3 dominant colors; apply 60-30-10 rule
   - Avoid small text — anything below 75px on the 1280x720 canvas becomes unreadable at thumbnail sizes
   - Do not use CSS animations or transitions (static output only)
-- **Common patterns**: bold text + gradient background; number/statistic callout; before-after split; color-blocked sections with icons
+- **Common patterns**: bold text + gradient background; number/statistic callout; before-after split; color-blocked sections with SVG icons
+- **SVG usage**: geometric shapes, arrows, exclamation marks, topic-related icons — use SVG to create the visual punch that photography cannot provide in HTML-rendered thumbnails
 
 #### 8. wechat (900x383) - WeChat Official Account Cover
 - **Scenario**: WeChat Official Account (公众号) article cover image for headline position.
 - **Core principles**:
   - **Center safe zone**: all critical content must fit within the **center 383×383px square** — WeChat crops to 1:1 when shared to Moments or chat
   - **2-6 keywords only**: extract key phrases from the article title; this is not a document, it's a billboard
+  - **SVG visual storytelling**: use inline SVG illustrations/icons to convey the article's theme — the left/right decorative bands and center safe zone should all leverage SVG art, not text
   - **Avoid pure white backgrounds**: blends with WeChat's white interface and loses boundary
   - **Strong contrast**: text-to-background contrast >= 4.5:1; bold, high-weight sans-serif fonts
 - **Safe area**:
@@ -180,7 +196,8 @@ pagepress shot -i input.html -o output.png --preset og
 - **Core principle**: **Bold headline + 3-second rule**
   - Headline font-size >= 80px, occupying 40-60% of the canvas
   - Highlight keywords with color/size contrast
-  - Convey "high information density" to entice clicks
+  - Use SVG decorative elements (geometric shapes, patterns, topic-related icons) to fill remaining space and create visual richness
+  - Convey "high information density" visually — through graphics and layout, not walls of text
   - **90px+** side margins, **80px+** top/bottom padding
 
 ## Options
