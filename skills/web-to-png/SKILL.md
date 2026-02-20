@@ -94,6 +94,7 @@ pagepress shot -i input.html -o output.png --preset og
   - **Small-size readability**: the headline must be clearly legible at 400px width
   - **Single focus**: convey only one core message
   - **Safe area**: keep content at least **120px** from the edges
+  - **SVG accents**: use inline SVG for decorative graphics and semantic icons to enrich the visual composition
 
 #### 3. infographic (1080x1350) - Infographic/Cheat Sheet
 - **Scenario**: Structured presentation of complex information, even code snippets.
@@ -135,6 +136,7 @@ pagepress shot -i input.html -o output.png --preset og
   - Headline font-size >= **48px** (recommended 56-72px), max 2 font families, 3 weights
   - Keep PNG file size < **500 KB** for fast loading
 - **Common patterns**: solid/gradient background + large title + brand logo; left-text-right-visual split; dark theme (stands out in feed)
+- **SVG accents**: use inline SVG for decorative shapes, abstract graphics, and topic-related icons to add visual interest
 
 #### 7. youtube (1280x720) - YouTube Thumbnail
 - **Scenario**: Video thumbnail for YouTube, optimized for high click-through rate.
@@ -160,6 +162,7 @@ pagepress shot -i input.html -o output.png --preset og
   - Avoid small text — anything below 75px on the 1280x720 canvas becomes unreadable at thumbnail sizes
   - Do not use CSS animations or transitions (static output only)
 - **Common patterns**: bold text + gradient background; number/statistic callout; before-after split; color-blocked sections with SVG icons
+- **SVG accents**: geometric shapes, arrows, exclamation marks, topic-related icons — use SVG to create visual punch alongside bold typography
 
 #### 8. wechat (900x383) - WeChat Official Account Cover
 - **Scenario**: WeChat Official Account (公众号) article cover image for headline position.
@@ -191,6 +194,7 @@ pagepress shot -i input.html -o output.png --preset og
 - **Core principle**: **Bold headline + 3-second rule**
   - Headline font-size >= 80px, occupying 40-60% of the canvas
   - Highlight keywords with color/size contrast
+  - Use SVG decorative elements and topic-related icons to fill remaining space and create visual richness
   - Convey "high information density" to entice clicks
   - **90px+** side margins, **80px+** top/bottom padding
 
