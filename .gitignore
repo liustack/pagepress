@@ -37,3 +37,5 @@ bun.lock
 test-output
 .agent/
 .issues/
+
+.claude/settings.local.json

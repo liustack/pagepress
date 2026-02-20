@@ -47,7 +47,7 @@ If the user asks to summarize or generate a report, the Agent should first creat
 ## Options
 
 ```bash
-pagepress pdf -i input.md -o output.pdf --template default
+pagepress -i input.md -o output.pdf --template default
 ```
 
 - `-i, --input <path>` - input Markdown or HTML file path (remote URLs are not supported)
@@ -66,15 +66,15 @@ pagepress pdf -i input.md -o output.pdf --template default
 > **NEVER scatter generated Markdown or HTML files across the user's project.** All intermediate files must go into `$ASSETS_DIR` (the same directory where output PDFs are stored).
 
 1. **Write temporary files to `$ASSETS_DIR`**: this avoids permission prompts and keeps intermediate files alongside their output.
-2. **Clean up after render**: delete the temporary file immediately after a successful `pagepress pdf` run.
+2. **Clean up after render**: delete the temporary file immediately after a successful `pagepress` run.
 3. **Keep only if asked**: if the user explicitly asks to keep the source file, leave it in `$ASSETS_DIR` and report its path.
 
 ## Examples
 
 ```bash
 # Generate a PDF report from Markdown
-pagepress pdf -i report.md -o report.pdf --template default
+pagepress -i report.md -o report.pdf --template default
 
 # Render HTML to PDF
-pagepress pdf -i layout.html -o output.pdf
+pagepress -i layout.html -o output.pdf
 ```

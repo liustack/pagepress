@@ -1,7 +1,7 @@
 {
   "name": "@liustack/pagepress",
-  "version": "0.6.1",
-  "description": "CLI tool to convert web pages and Markdown to PDF and images",
+  "version": "0.7.0",
+  "description": "CLI tool to render local Markdown and HTML files into PDF",
   "type": "module",
   "bin": {
     "pagepress": "./dist/main.js"
@@ -19,17 +19,8 @@
   ],
   "keywords": [
     "pdf",
-    "png",
-    "screenshot",
-    "og-image",
-    "social-card",
-    "banner",
-    "poster",
-    "infographic",
     "markdown-to-pdf",
     "html-to-pdf",
-    "html-to-image",
-    "web-to-png",
     "pdf-report",
     "cli",
     "playwright",
