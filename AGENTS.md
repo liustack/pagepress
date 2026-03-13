@@ -1,12 +1,11 @@
 # Project Overview (for AI Agent)
 
 ## Goal
-Provide the `pagepress` CLI tool to render local Markdown / HTML files into polished documents and export them as **PDF**. Remote URLs are not supported for security reasons.
+Provide the `pagepress` CLI tool to render local HTML files into **PDF**. Remote URLs are not supported for security reasons.
 
 ## Technical Approach
 - **Playwright + Chromium** as the rendering and export engine
 - **PDF**: use the browser print engine (`Page.printToPDF`), with `-webkit-print-color-adjust: exact`
-- **Theme design**: emphasize whitespace and breathing room; avoid cramped layout
 
 ```bash
 cd /path/to/pagepress
@@ -14,18 +13,12 @@ pnpm install
 pnpm exec playwright install chromium
 ```
 
-> [!NOTE]
-> **Mermaid diagrams**: built-in support, no preprocessing needed. The ` ```mermaid ` code block in Markdown will automatically render into SVG graphics.
-
 ## Code Organization
 
 ```
 src/
 ├── main.ts         # CLI entry
-├── renderer.ts     # PDF rendering logic
-├── templates.ts    # template definitions
-├── fonts.ts        # font injection
-└── templates/      # HTML template files
+└── renderer.ts     # PDF rendering logic
 ```
 
 ## Skills Directory
@@ -41,7 +34,6 @@ The CLI is exposed via `dist/main.js`.
 ## CLI Usage
 
 ```bash
-pagepress -i document.md -o output.pdf --template default
 pagepress -i page.html -o output.pdf
 ```
 

@@ -1,7 +1,7 @@
 {
   "name": "@liustack/pagepress",
   "version": "0.9.0",
-  "description": "CLI tool to render local Markdown and HTML files into PDF",
+  "description": "CLI tool to render local HTML files into PDF",
   "type": "module",
   "bin": {
     "pagepress": "./dist/main.js"
@@ -17,17 +17,14 @@
     "docs:list": "node scripts/docs-list.js"
   },
   "files": [
-    "dist",
-    "src/templates"
+    "dist"
   ],
   "keywords": [
     "pdf",
-    "markdown-to-pdf",
     "html-to-pdf",
     "pdf-report",
     "cli",
-    "playwright",
-    "mermaid"
+    "playwright"
   ],
   "author": "Leon Liu",
   "license": "MIT",
@@ -43,15 +40,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@fontsource/bebas-neue": "^5.2.7",
-    "@fontsource/cormorant-garamond": "^5.2.11",
-    "@fontsource/inter": "^5.2.8",
     "commander": "^13.1.0",
-    "gray-matter": "^4.0.3",
-    "highlight.js": "^11.11.1",
-    "marked": "^15.0.12",
-    "marked-highlight": "^2.2.3",
-    "mermaid": "^11.12.2",
     "playwright": "^1.58.1"
   },
   "devDependencies": {

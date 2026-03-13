@@ -16,14 +16,6 @@ export default defineConfig({
             external: [
                 'commander',
                 'playwright',
-                'marked',
-                'gray-matter',
-                'highlight.js',
-                'marked-highlight',
-                'mermaid',
-                '@fontsource/bebas-neue',
-                '@fontsource/cormorant-garamond',
-                '@fontsource/inter',
                 // Node.js built-ins
                 'fs',
                 'path',

@@ -9,11 +9,10 @@ const program = new Command();
 
 program
     .name('pagepress')
-    .description('Render local Markdown and HTML files to PDF')
+    .description('Render local HTML files to PDF')
     .version(__APP_VERSION__)
-    .requiredOption('-i, --input <path>', 'Input Markdown or HTML file path')
+    .requiredOption('-i, --input <path>', 'Input HTML file path')
     .requiredOption('-o, --output <path>', 'Output PDF file path')
-    .option('-t, --template <name>', 'PDF template (default, github, magazine)', 'default')
     .option('--wait-until <state>', 'Navigation waitUntil (load, domcontentloaded, networkidle)', 'networkidle')
     .option('--timeout <ms>', 'Navigation timeout in milliseconds', '30000')
     .option('--safe', 'Disable external network requests and JavaScript execution')
@@ -27,7 +26,6 @@ program
             const result = await render({
                 input: options.input,
                 output: options.output,
-                template: options.template,
                 waitUntil: options.waitUntil,
                 timeout,
                 safe: options.safe,
