@@ -1,14 +1,14 @@
 # Project Overview (for AI Agent)
 
 ## Goal
-Provide the `pagepress` CLI tool to render local HTML files into **PDF**. Remote URLs are not supported for security reasons.
+Provide the `infopress` CLI tool to render local HTML files into **PDF**. Remote URLs are not supported for security reasons.
 
 ## Technical Approach
 - **Playwright + Chromium** as the rendering and export engine
 - **PDF**: use the browser print engine (`Page.printToPDF`), with `-webkit-print-color-adjust: exact`
 
 ```bash
-cd /path/to/pagepress
+cd /path/to/infopress
 pnpm install
 pnpm exec playwright install chromium
 ```
@@ -25,7 +25,7 @@ src/
 
 ```
 skills/
-└── pagepress/
+└── infopress/
     └── SKILL.md
 ```
 
@@ -34,7 +34,7 @@ The CLI is exposed via `dist/main.js`.
 ## CLI Usage
 
 ```bash
-pagepress -i page.html -o output.pdf
+infopress -i page.html -o output.pdf
 ```
 
 ## Operational Docs (`docs/`)
